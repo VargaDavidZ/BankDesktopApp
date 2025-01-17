@@ -1,5 +1,8 @@
 package hu.petrik.bankdesktopapp;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
@@ -8,6 +11,8 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+
 
 public class MainPage {
     @javafx.fxml.FXML
@@ -26,6 +31,13 @@ public class MainPage {
     private HBox myhbox;
     @FXML
     private LineChart EurChart;
+
+    private Integer eurIndex = 5;
+    private Integer eurValue = 500;
+
+
+
+
 
 
     public void initialize() {
@@ -55,6 +67,18 @@ public class MainPage {
         myList.getItems().add(new Transactions("-1000"));
         myList.getItems().add(new Transactions("-1000"));
         myList.getItems().add(new Transactions("1000"));
+
+
+
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10), ev -> {
+            series2.getData().add(new XYChart.Data(Integer.toString(eurIndex), eurValue));
+            eurIndex += 1;
+            eurValue +=100;
+
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
 
 
 

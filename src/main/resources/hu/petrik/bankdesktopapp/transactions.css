@@ -1,0 +1,25 @@
+.transactionContainer{
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-border-color: transparent transparent #ff8e47 transparent;
+    -fx-background-radius: 6px;
+    -fx-background-color: #1c1d30;
+
+}
+
+
+.typeIndicator{
+    /* top-left, top-right, bottom-right, and bottom-left corners, in that order. */
+    -fx-border-radius: 100;
+    -fx-background-radius: 100;
+    /* -fx-border-width: 1 0 1 1 ; */
+    /*-fx-border-color: white transparent white white; */
+}
+
+
+.amountIndicator
+{
+
+}
+
+

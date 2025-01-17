@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<!--Külső BorderPane-re kellett rakni egy VGROW="ALWAYS"-t hogy növekedjen minden irányba  -->
+
+<VBox fx:id="mainLoginBox" alignment="CENTER" maxHeight="Infinity" minHeight="400.0" minWidth="800.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.MainController">
+    <BorderPane maxHeight="Infinity" stylesheets="@loginDesign.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/">
+        <left>
+            <VBox alignment="CENTER" maxHeight="Infinity" maxWidth="400.0" styleClass="left-form">
+                <!--
+                <FontAwesomeIcon fill="WHITE" glyphName="STETHOSCOPE" size="12em" tabSize="0" />
+                -->
+                <Label maxWidth="250.0" prefHeight="400.0" prefWidth="250.0" text="placeholder" textFill="WHITE">
+                    <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                    </font>
+                </Label>
+            </VBox>
+        </left>
+        <center>
+            <BorderPane styleClass="right-form">
+                <center>
+                    <VBox alignment="CENTER" fillWidth="true" maxHeight="Infinity" prefWidth="400.0" spacing="20">
+                        <TextField fx:id="usernameInput" maxWidth="Infinity" promptText="Username" styleClass="text-field" />
+                        <PasswordField maxWidth="Infinity" promptText="Password" styleClass="text-field" />
+                        <Button fx:id="loginBtn" maxWidth="Infinity" onAction="#loadSecondFxml" styleClass="login-button" text="Login" />
+                        <!--
+                        <FontAwesomeIcon fill="#14b8a6" glyphName="USER_MD" size="7em" />
+                        -->
+                    </VBox>
+                </center>
+            </BorderPane>
+        </center>
+    </BorderPane>
+
+</VBox>

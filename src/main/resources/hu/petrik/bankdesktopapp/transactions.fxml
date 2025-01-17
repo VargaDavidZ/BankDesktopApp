@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<fx:root fx:id="container" maxHeight="25.0" maxWidth="450" minHeight="50.0" minWidth="350.0" prefHeight="25.0" prefWidth="350.0" styleClass="transactionContainer" stylesheets="@transactions.css" type="AnchorPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <VBox alignment="CENTER" maxHeight="50.0" maxWidth="450" minHeight="50.0" minWidth="350.0" prefHeight="50.0" prefWidth="350.0">
+         <children>
+              <BorderPane maxHeight="50.0" maxWidth="450.0" minHeight="50.0" minWidth="350.0" prefHeight="50.0" prefWidth="350.0" VBox.vgrow="ALWAYS">
+                  <center>
+                      <Text fx:id="type" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" BorderPane.alignment="CENTER_LEFT">
+                          <font>
+                              <Font size="25.0" />
+                          </font>
+                      </Text>
+                  </center>
+                  <left>
+                      <Pane fx:id="circle" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" prefHeight="40.0" prefWidth="40.0" styleClass="typeIndicator" BorderPane.alignment="CENTER">
+                          <children>
+                              <Text layoutX="19.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="|">
+                                  <font>
+                                      <Font size="5.0" />
+                                  </font>
+                              </Text>
+                          </children>
+                      </Pane>
+                  </left>
+                  <right>
+                      <Text fx:id="amount" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="amountIndicator" text="+amount" BorderPane.alignment="CENTER_RIGHT">
+                          <font>
+                              <Font size="25.0" />
+                          </font>
+                      </Text>
+                  </right>
+              </BorderPane>
+         </children>
+      </VBox>
+    </children>
+</fx:root>

@@ -1,0 +1,126 @@
+.card_image{
+    -fx-border-radius: 10;
+
+    -fx-effect: dropshadow(three-pass-box, red, 10, 0, 4, 4);
+    -fx-background-insets: 12;
+    -fx-background-radius: 6;
+    -fx-background-color: red;
+}
+
+.top_side_main{
+    -fx-border-color: transparent transparent #ff8000 transparent;
+
+}
+
+.mainPageBorderPane{
+    -fx-background-color: #25273E;
+
+}
+
+.bankBalance{
+
+}
+
+.myList
+{
+    -fx-background-color: #1c1d30;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-alignment: center;
+
+}
+
+.list-cell:odd{
+
+    -fx-alignment: center;
+    -fx-background-color: #1c1d30;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.list-cell:even{
+    -fx-alignment: center;
+    -fx-background-color: #1c1d30;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+
+}
+
+.list-cell
+{
+    -fx-alignment: center;
+}
+
+
+.scroll-bar:vertical {
+    -fx-background-color: #25273E;
+
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #ff8000;
+
+}
+
+.currencyType
+{
+    -fx-border-radius: 10px;
+    -fx-border-width: 1px;
+    -fx-border-color: white white white white;
+    -fx-background-radius: 11px;
+    -fx-background-color: #25273E;
+}
+
+.currencyType:hover
+{
+
+    -fx-background-color: #1a1e35;
+}
+
+.sidePane
+{
+    /* top-left, top-right, bottom-right, and bottom-left corners, in that order. */
+    -fx-border-radius: 10 0 0 10;
+    -fx-border-color: white transparent white white;
+    -fx-border-width: 1px;
+
+    -fx-background-radius: 11 0 0 11;
+    -fx-background-color: green;
+}
+
+
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-plot-background{
+    -fx-border-width: 2px;
+    -fx-border-color: white;
+    -fx-border-radius: 1px;
+}
+
+.axis {
+    -fx-font-size: 1.4em;
+    -fx-tick-label-fill: white;
+    -fx-tick-length: 0;
+    -fx-minor-tick-length: 0;
+
+}
+
+.chart{
+    -fx-horizontal-grid-lines-visible: false;
+    -fx-vertical-grid-lines-visible: false;
+    -fx-vertical-zero-line-visible: false;
+    -fx-horizontal-zero-line-visible: false;
+}
+
+.default-color0.chart-series-line { -fx-stroke: #16ff00; }
+
+.default-color0.chart-line-symbol { -fx-background-color: #16ff00, #16ff00; }
+
+.leftSide{
+    -fx-background-color: #1c1d30;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}

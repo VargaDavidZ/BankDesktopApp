@@ -1,8 +1,15 @@
 package hu.petrik.bankdesktopapp;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
@@ -12,6 +19,17 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
 
 
 public class MainPage {
@@ -35,12 +53,24 @@ public class MainPage {
     private Integer eurIndex = 5;
     private Integer eurValue = 500;
 
+    RestApi api = new RestApi();
 
 
 
 
 
-    public void initialize() {
+
+
+    public void initialize() throws IOException, InterruptedException {
+
+
+        //System.out.printf(api.GetOneUser("678a363ecdb04bd08a6ad434").toString());
+
+        //System.out.println(api.CreateUser("David","Varga","MyEmail","TestPass"));
+
+
+
+
 
 
 

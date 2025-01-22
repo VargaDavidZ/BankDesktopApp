@@ -78,4 +78,7 @@ Stylus a bankártyának
 }
 
 
-/*main page*/
+.registerText:hover{
+    -fx-cursor: pointer;
+}
+

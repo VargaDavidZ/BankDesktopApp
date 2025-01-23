@@ -15,21 +15,25 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="mainPage" maxHeight="Infinity" minHeight="400.0" minWidth="1000.0" prefHeight="400.0" prefWidth="1000.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.MainPage">
+<VBox fx:id="mainPage" maxHeight="Infinity" minHeight="600" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.MainPage">
     <children>
-      <HBox alignment="CENTER_RIGHT" maxWidth="1000.0" minWidth="1000.0" prefHeight="400.0" prefWidth="300.0">
+      <HBox alignment="CENTER_RIGHT" maxWidth="1000.0" minWidth="1000.0" prefHeight="600.0" prefWidth="300.0">
          <children>
-            <VBox maxWidth="100.0" prefHeight="200.0" prefWidth="100.0" styleClass="leftNav" />
-              <BorderPane minHeight="400.0" minWidth="900.0" prefHeight="400.0" prefWidth="900.0" styleClass="mainPageBorderPane">
+            <VBox alignment="TOP_CENTER" maxWidth="100.0" prefHeight="200.0" prefWidth="100.0" styleClass="leftNav">
+               <children>
+                  <Button maxWidth="100.0" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#logOut" prefHeight="25.0" prefWidth="100.0" styleClass="logoutBtn" text="Kijelentketés" />
+               </children>
+            </VBox>
+              <BorderPane minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" styleClass="mainPageBorderPane">
                   <top>
-                      <HBox minHeight="200.0" minWidth="630.0" prefHeight="200.0" prefWidth="800.0" styleClass="top_side_main" BorderPane.alignment="CENTER_RIGHT">
+                      <HBox minHeight="250.0" minWidth="630.0" prefHeight="200.0" prefWidth="800.0" styleClass="top_side_main" BorderPane.alignment="CENTER">
                           <children>
-                              <Pane minHeight="150.0" minWidth="250.0" prefHeight="173.0" prefWidth="256.0" styleClass="card_image">
+                              <Pane maxHeight="200.0" minHeight="150.0" minWidth="250.0" prefHeight="173.0" prefWidth="256.0" styleClass="card_image">
                                   <HBox.margin>
                                       <Insets top="25.0" />
                                   </HBox.margin>
                               </Pane>
-                              <Label prefHeight="400.0" styleClass="bankBalance" text="Számla összeggggg" textFill="WHITE">
+                              <Label prefHeight="600.0" styleClass="bankBalance" text="Számla összeggggg" textFill="WHITE">
                                   <font>
                                       <Font size="37.0" />
                                   </font>
@@ -39,20 +43,20 @@
                       </HBox>
                   </top>
                   <center>
-                      <HBox fx:id="myhbox" alignment="CENTER" maxWidth="Infinity" minHeight="200.0" minWidth="800.0" prefHeight="200.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                      <HBox fx:id="myhbox" alignment="CENTER" maxHeight="300.0" maxWidth="Infinity" minHeight="300.0" minWidth="800.0" prefHeight="300.0" prefWidth="800.0" BorderPane.alignment="CENTER">
                           <children>
-                              <VBox alignment="CENTER" minWidth="390.0" prefHeight="200.0" prefWidth="390.0" styleClass="leftSide" HBox.hgrow="ALWAYS">
+                              <VBox alignment="CENTER" maxWidth="390.0" minWidth="390.0" prefHeight="200.0" prefWidth="390.0" styleClass="leftSide" HBox.hgrow="ALWAYS">
                                   <children>
                                       <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pénznem váltás">
                                           <font>
                                               <Font size="20.0" />
                                           </font>
                                       </Text>
-                                      <HBox alignment="CENTER" maxWidth="10000.0" minHeight="100.0" minWidth="400.0" prefHeight="100.0" prefWidth="400.0" VBox.vgrow="ALWAYS">
+                                      <HBox alignment="CENTER" maxWidth="390.0" minHeight="100.0" minWidth="390.0" prefHeight="100.0" prefWidth="390.0" VBox.vgrow="ALWAYS">
                                           <children>
-                                              <VBox alignment="CENTER" maxWidth="400.0" minWidth="400.0" prefHeight="200.0" prefWidth="400.0" HBox.hgrow="ALWAYS">
+                                              <VBox alignment="TOP_CENTER" maxWidth="390.0" minWidth="390.0" prefHeight="200.0" prefWidth="390.0" HBox.hgrow="ALWAYS">
                                                   <children>
-                                                      <HBox fx:id="valtasCard" alignment="TOP_CENTER" maxHeight="100.0" prefHeight="50.0" prefWidth="200.0" VBox.vgrow="NEVER">
+                                                      <HBox fx:id="valtasCard" alignment="TOP_CENTER" maxHeight="100.0" maxWidth="100.0" minWidth="20.0" prefHeight="50.0" prefWidth="100.0" VBox.vgrow="NEVER">
                                                           <children>
                                                               <AnchorPane maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0" styleClass="currencyType" HBox.hgrow="ALWAYS">
                                                                   <children>
@@ -152,7 +156,12 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                               </VBox>
-                              <ListView fx:id="myList" maxWidth="Infinity" minHeight="200.0" minWidth="390.0" prefHeight="200.0" prefWidth="390.0" styleClass="myList" HBox.hgrow="ALWAYS" />
+                        <VBox maxWidth="390.0" minHeight="200.0" minWidth="390.0" prefHeight="200.0" prefWidth="390.0" styleClass="myList">
+                           <children>
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#popupWindow" text="felvetel" />
+                                    <ListView fx:id="myList" maxWidth="390.0" minHeight="200.0" minWidth="390.0" prefHeight="300.0" prefWidth="390.0" styleClass="myList" />
+                           </children>
+                        </VBox>
                           </children>
                       </HBox>
                   </center>

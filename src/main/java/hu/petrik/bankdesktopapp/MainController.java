@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static hu.petrik.bankdesktopapp.MainPage.setActiveUser;
+
 
 public class MainController {
 
@@ -37,51 +39,47 @@ public class MainController {
     private PasswordField passwordInput;
     @FXML
     private Text registerText;
+    @FXML
+    private Text loginErrorText;
 
 
     @FXML
     public void loadSecondFxml(ActionEvent event) throws IOException, InterruptedException {
 
+        String response = RestApi.Login(emailInput.getText(),passwordInput.getText());
 
-
-        if(  RestApi.Login(emailInput.getText(),passwordInput.getText()) == 500)
+        if( response.equals("Login Error") )
         {
             System.out.printf("Login failed\n");
+            loginErrorText.visibleProperty().setValue(true);
         }
         else
         {
-            root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
-
+            setActiveUser(response);
+            Parent root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.getScene().setRoot(root);
+            stage.setHeight(600);
+            stage.setWidth(1000);
 
-            scene = new Scene(root, 1000, 400);
-            stage.setScene(scene);
-            stage.setMinHeight(400);
-            stage.setMinWidth(1000);
+            stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.centerOnScreen();
             stage.show();
         }
-
-
-
-
-
-
-
-
-
 
     }
 
     @FXML
     public void registerPage(Event event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("RegisterPage.fxml"));
 
+        Parent root = FXMLLoader.load(getClass().getResource("RegisterPage.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        scene = new Scene(root, 300, 400);
-        stage.setScene(scene);
+        stage.getScene().setRoot(root);
         stage.setMinHeight(400);
         stage.setMinWidth(300);
+        stage.resizableProperty().setValue(Boolean.FALSE);
         stage.show();
+
+
     }
 }

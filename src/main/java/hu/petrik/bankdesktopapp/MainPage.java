@@ -2,22 +2,30 @@ package hu.petrik.bankdesktopapp;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.BufferedReader;
@@ -33,14 +41,12 @@ import java.net.http.HttpResponse;
 
 
 public class MainPage {
+    Stage stage;
+
     @javafx.fxml.FXML
     private VBox mainPage;
     @javafx.fxml.FXML
     private ListView myList;
-
-    final NumberAxis xAxis = new NumberAxis();
-    final NumberAxis yAxis = new NumberAxis();
-
     @FXML
     private LineChart myChart;
     @FXML
@@ -50,13 +56,32 @@ public class MainPage {
     @FXML
     private LineChart EurChart;
 
+    final NumberAxis xAxis = new NumberAxis();
+    final NumberAxis yAxis = new NumberAxis();
+
+
+    private static BankAccount[] bankAccounts;
+
     private Integer eurIndex = 5;
     private Integer eurValue = 500;
 
     RestApi api = new RestApi();
 
 
+    private static User activeUser;
 
+
+
+
+    public static void setActiveUser(String activeUserInput) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        //mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+
+        User user = mapper.readValue(activeUserInput,User.class);
+        activeUser = user;
+        System.out.println(activeUser.Firstname + "MŰKÖDIK!");
+    }
 
 
 
@@ -64,16 +89,13 @@ public class MainPage {
     public void initialize() throws IOException, InterruptedException {
 
 
+        bankAccounts = api.GetAllBankAccounts(activeUser.id);
+
+        System.out.printf(bankAccounts[0].toString());
+
         //System.out.printf(api.GetOneUser("678a363ecdb04bd08a6ad434").toString());
 
         //System.out.println(api.CreateUser("David","Varga","MyEmail","TestPass"));
-
-
-
-
-
-
-
 
         XYChart.Series<String,Number> series = new XYChart.Series<String,Number>();
         XYChart.Series<String,Number> series2 = new XYChart.Series<String,Number>();
@@ -119,5 +141,39 @@ public class MainPage {
     @FXML
     public void addToList(ActionEvent actionEvent) {
         myList.getItems().addAll(new Transactions("1000"),new Transactions("1000"));
+    }
+
+    @FXML
+    public void logOut(ActionEvent event) throws IOException {
+        activeUser = null;
+        Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(root);
+        stage.setHeight(400);
+        stage.setWidth(300);
+        stage.resizableProperty().setValue(Boolean.FALSE);
+        stage.centerOnScreen();
+        stage.show();
+    }
+
+    @FXML
+    public void popupWindow(ActionEvent actionEvent) throws IOException {
+       Stage popupStage = new Stage();
+       popupStage.initModality(Modality.APPLICATION_MODAL);
+       Parent root = FXMLLoader.load(getClass().getResource("popupWindow.fxml"));
+       Scene popupScene = new Scene(root);
+       popupStage.setScene(popupScene);
+       popupStage.resizableProperty().setValue(Boolean.FALSE);
+       popupStage.show();
+
+    }
+
+
+    public static BankAccount[] getBankAccounts() {
+        return bankAccounts;
+    }
+
+    public static User getActiveUser() {
+        return activeUser;
     }
 }

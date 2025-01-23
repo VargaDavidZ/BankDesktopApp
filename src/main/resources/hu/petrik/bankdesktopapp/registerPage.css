@@ -4,16 +4,9 @@
     -fx-min-width: 100px;
     -fx-background-color: #25273E;
 
+
 }
 
-.close {
-    -fx-background-color: transparent;
-    -fx-cursor: hand;
-}
-
-.close:hover {
-    -fx-background-color: #ffff;
-}
 
 .text-field {
 
@@ -36,25 +29,18 @@
     -fx-effect: dropshadow(three-pass-box, white, 10, 0, 0, 0);
 }
 
-.login-button {
-    -fx-background-color: #F57933;
+.register-button {
+    -fx-background-color: #ff8e47;
 
     -fx-background-radius: 5px;
     -fx-max-width: 250;
     -fx-font-size: 14px; /* Add 'px' unit to font size */
     -fx-text-fill: #fff;
-
+    -fx-font-family: "SansSerif";
 }
 
-.login-button:hover {
+.register-button:hover {
     -fx-background-color: #F57933CC;
-    -fx-cursor: hand;
-
-
-}
-
-
-.registerText:hover{
     -fx-cursor: hand;
 
 }

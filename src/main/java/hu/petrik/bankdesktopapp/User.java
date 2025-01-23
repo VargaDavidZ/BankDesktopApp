@@ -11,9 +11,9 @@ import java.util.Date;
 public class User {
     @JsonProperty("id")
     public String id;
-    @JsonProperty("fristname") // correct the spelling
+    @JsonProperty("firstName") // correct the spelling
     public String Firstname;
-    @JsonProperty("lastname")
+    @JsonProperty("lastName")
     public String Lastname;
     @JsonProperty("role")
     public String Role;
@@ -21,21 +21,21 @@ public class User {
     public String email;
     @JsonProperty("password")
     public String password;
-    @JsonProperty("Expense")
+    @JsonProperty("Expenses")
     public String[] Expense;
-    @JsonProperty("expenseid")
+    @JsonProperty("expenseId")
     public String[] expenseId;
-    @JsonProperty("Income")
+    @JsonProperty("Incomes")
     public String[] Income;
-    @JsonProperty("Incomeid")
+    @JsonProperty("incomeId")
     public String[] incomeId;
-    @JsonProperty("createdat")
+    @JsonProperty("createdAt")
     public Date createdAt;
-    @JsonProperty("updatedat")
+    @JsonProperty("updatedAt")
     public Date updatedAt;
-    @JsonProperty("Card")
-    public String[] Accounts;
-    @JsonProperty("cardid")
+    @JsonProperty("Account")
+    public BankAccount[] Accounts;
+    @JsonProperty("accountId")
     public  String[] BankaccountsId;
 
 
@@ -43,7 +43,7 @@ public class User {
 
     }
 
-    public User(String id, String firstname, String lastname, String role, String email, String password, String[] expense, String[] expenseId, String[] income, String[] incomeId, Date createdAt, Date updatedAt, String[] accounts, String[] bankaccountsId) {
+    public User(String id, String firstname, String lastname, String role, String email, String password, String[] expense, String[] expenseId, String[] income, String[] incomeId, Date createdAt, Date updatedAt, BankAccount[] accounts, String[] bankaccountsId) {
         this.id = id;
         Firstname = firstname;
         Lastname = lastname;
@@ -61,118 +61,6 @@ public class User {
     }
 
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
-    public void setFirstname(String firstname) {
-        Firstname = firstname;
-    }
-
-    public void setLastname(String lastname) {
-        Lastname = lastname;
-    }
-
-    public void setRole(String role) {
-        Role = role;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setExpense(String[] expense) {
-        Expense = expense;
-    }
-
-    public void setExpenseId(String[] expenseId) {
-        this.expenseId = expenseId;
-    }
-
-    public void setIncome(String[] income) {
-        Income = income;
-    }
-
-    public void setIncomeId(String[] incomeId) {
-        this.incomeId = incomeId;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public void setAccounts(String[] accounts) {
-        Accounts = accounts;
-    }
-
-    public void setBankaccountsId(String[] bankaccountsId) {
-        BankaccountsId = bankaccountsId;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getFirstname() {
-        return Firstname;
-    }
-
-    public String getLastname() {
-        return Lastname;
-    }
-
-    public String getRole() {
-        return Role;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String[] getExpense() {
-        return Expense;
-    }
-
-    public String[] getExpenseId() {
-        return expenseId;
-    }
-
-    public String[] getIncome() {
-        return Income;
-    }
-
-    public String[] getIncomeId() {
-        return incomeId;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public String[] getAccounts() {
-        return Accounts;
-    }
-
-    public String[] getBankaccountsId() {
-        return BankaccountsId;
-    }
 
     @Override
     public String toString() {

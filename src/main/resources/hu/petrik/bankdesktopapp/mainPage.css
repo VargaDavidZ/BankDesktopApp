@@ -8,7 +8,7 @@
 }
 
 .top_side_main{
-    -fx-border-color: transparent transparent #ff8000 transparent;
+    -fx-border-color: transparent transparent white transparent;
 
 }
 
@@ -58,7 +58,7 @@
 }
 
 .scroll-bar:vertical .thumb {
-    -fx-background-color: #ff8000;
+    -fx-background-color: #F57933;
 
 }
 
@@ -137,7 +137,20 @@
 .leftNav{
     -fx-background-color: #1c1d30;
     -fx-border-color: transparent white transparent transparent;
-    -fx-background-radius: 0 6 0 0;
-    -fx-border-radius: 5px;
+
+}
+
+
+
+.logoutBtn:hover{
+    -fx-background-color: #F57933CC;
+    -fx-cursor: hand;
+}
+
+.logoutBtn{
+    -fx-background-color: #F57933;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+
 }
 

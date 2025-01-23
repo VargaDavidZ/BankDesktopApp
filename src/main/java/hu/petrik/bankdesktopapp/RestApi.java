@@ -1,5 +1,7 @@
 package hu.petrik.bankdesktopapp;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -21,19 +23,26 @@ public class RestApi {
     static HttpClient client = HttpClient.newHttpClient();
 
 
-    public static int Login(String email, String password) throws IOException, InterruptedException {
+    public static String Login(String email, String password) throws IOException, InterruptedException {
 
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:3000/user/login"))
-                    .header("Content-Type", "application/json")
-                    .method("POST", HttpRequest.BodyPublishers.ofString(String.format("{\"email\": \"%s\",\"password\": \"%s\"}",email,password)))
-                    .build();
+                HttpRequest request = HttpRequest.newBuilder()
+                        .uri(URI.create("http://localhost:3000/user/login"))
+                        .header("Content-Type", "application/json")
+                        .method("POST", HttpRequest.BodyPublishers.ofString(String.format("{\"email\": \"%s\",\"password\": \"%s\"}",email,password)))
+                        .build();
 
-            //client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+                //client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
 
-            HttpResponse<String> response1 = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.printf("Login response: %s\n", response1.statusCode());
-            return response1.statusCode();
+                HttpResponse<String> response1 = client.send(request, HttpResponse.BodyHandlers.ofString());
+                System.out.printf("Login response: %s\n", response1.body());
+
+                if(response1.statusCode() == 201) {
+                    return response1.body();
+                }
+                else
+                {
+                    return "Login Error";
+                }
 
     }
 
@@ -61,8 +70,33 @@ public class RestApi {
 
     }
 
+    public BankAccount[] GetAllBankAccounts(String userId) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:3000/accounts/all/" + userId))
+                .build();
 
-    public String CreateUser(String firstName,String lastName,String email,String password) throws IOException, InterruptedException {
+        HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        //System.out.printf(response.body().toString());
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        //mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+
+        BankAccount[] bankaccounts = mapper.readValue(response.body().toString(),BankAccount[].class);
+
+       /* System.out.printf(bankaccounts[0].getCreatedAt().toString() + "asad");
+        System.out.printf(bankaccounts[1].getCreatedAt().toString());
+
+        */
+
+
+        return bankaccounts;
+
+    }
+
+
+    public static String CreateUser(String firstName, String lastName, String email, String password) throws IOException, InterruptedException {
 
         //"{\"Fristname\":\"s%\",\"Lastname\":\"s%\",\"email\": %s,\"password\": %s }",firstName,lastName,email,password
             HttpRequest request = HttpRequest.newBuilder()
@@ -77,9 +111,26 @@ public class RestApi {
 
         return   response1.body();
 
+    }
 
+
+
+    public static String createExpense(int total, String category,String vendor,String description, String userId, String bankAccountId) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:3000/expense"))
+                .header("Content-Type", "application/json")
+                .method("POST",HttpRequest.BodyPublishers.ofString(String.format("{\"total\": %d,\"Category\": \"%s\",\"vendor\": \"%s\",\"Description\":\"%s\",\"userid\": \"%s\",\"bankaccountid\": \"%s\"}", total,category,vendor,description,userId,bankAccountId)))
+                .build();
+
+
+        HttpResponse<String> response1 = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        return   response1.body();
 
     }
+
+
+
 
 
 }

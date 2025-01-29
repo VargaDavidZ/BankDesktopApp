@@ -1,6 +1,5 @@
 package hu.petrik.bankdesktopapp;
 
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

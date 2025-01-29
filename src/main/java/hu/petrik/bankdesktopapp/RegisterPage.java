@@ -44,7 +44,6 @@ public class RegisterPage {
             stage.setMinWidth(300);
             stage.show();
 
-
         }
         catch(Exception e){
             e.toString();

@@ -6,8 +6,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static hu.petrik.bankdesktopapp.RestApi.createExpense;
-
 public class PopupWindow {
     @javafx.fxml.FXML
     private TextField desciptionInput;
@@ -24,14 +22,18 @@ public class PopupWindow {
     @javafx.fxml.FXML
     private ComboBox<String> categoryInput;
 
+    @javafx.fxml.FXML
+    public Button addTransactionBtn;
 
+    MainPage mainPage = new MainPage();
+    @javafx.fxml.FXML
+    private Label errorMsg;
 
 
     public void initialize() {
         categoryInput.getItems().addAll("Food", "Rent","Transport","Other");
 
     }
-
 
     @javafx.fxml.FXML
     public void CancelTransaction(ActionEvent actionEvent) {
@@ -42,6 +44,39 @@ public class PopupWindow {
     @javafx.fxml.FXML
     public void AddTransaction(ActionEvent actionEvent) throws IOException, InterruptedException {
 
-        RestApi.createExpense(100,"Other","Spár","desc",MainPage.getActiveUser().id,MainPage.getBankAccounts()[0].id);
+        try{
+            Integer.parseInt(totalInput.getText());
+        }
+        catch(NumberFormatException e){
+            System.out.println("Not a number");
+            errorMsg.setText("Az összegnek számot kell megadni!");
+            errorMsg.setVisible(true);
+            return;
+        }
+
+        //kezelni ha a felhasználó nem ad meg Category értéket
+       try{
+           categoryInput.getValue().toString();
+       }
+       catch(NullPointerException e){
+          categoryInput.getSelectionModel().select("Other");
+       }
+
+        if(expenseRadioBtn.isSelected()){
+            RestApi.CreateExpense(Integer.parseInt(totalInput.getText()),categoryInput.getValue(),"Spár",desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.GetActiveBankAccount().getId());
+
+        }
+        else if(incomeRadioBtn.isSelected()){
+            RestApi.CreateIncome(Integer.parseInt(totalInput.getText()),categoryInput.getValue(),"Spár",desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.GetActiveBankAccount().getId());
+
+        }
+        else
+        {
+            System.out.println("Select a transaction type");
+        }
+
+        Stage stage = (Stage)closeBtn.getScene().getWindow();
+        stage.close();
+
     }
 }

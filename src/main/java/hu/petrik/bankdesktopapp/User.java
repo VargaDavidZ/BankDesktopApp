@@ -3,40 +3,27 @@ package hu.petrik.bankdesktopapp;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import java.util.Arrays;
 import java.util.Date;
 
 
 public class User {
-    @JsonProperty("id")
-    public String id;
-    @JsonProperty("firstName") // correct the spelling
-    public String Firstname;
-    @JsonProperty("lastName")
-    public String Lastname;
-    @JsonProperty("role")
-    public String Role;
-    @JsonProperty("email")
-    public String email;
-    @JsonProperty("password")
-    public String password;
-    @JsonProperty("Expenses")
-    public String[] Expense;
-    @JsonProperty("expenseId")
-    public String[] expenseId;
-    @JsonProperty("Incomes")
-    public String[] Income;
-    @JsonProperty("incomeId")
-    public String[] incomeId;
-    @JsonProperty("createdAt")
-    public Date createdAt;
-    @JsonProperty("updatedAt")
-    public Date updatedAt;
-    @JsonProperty("Account")
-    public BankAccount[] Accounts;
-    @JsonProperty("accountId")
-    public  String[] BankaccountsId;
+    private String id;
+    private String Firstname;
+    private String Lastname;
+    private String Role;
+    private String email;
+    private String password;
+    private String[] Expense;
+    private String[] expenseId;
+    private String[] Income;
+    private String[] incomeId;
+    private Date createdAt;
+    private Date updatedAt;
+    private BankAccount[] Accounts;
+    private  String[] BankaccountsId;
 
 
     public User() {
@@ -61,6 +48,132 @@ public class User {
     }
 
 
+
+    public String getId() {
+        return id;
+    }
+
+    @JsonSetter("id")
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getFirstname() {
+        return Firstname;
+    }
+
+    @JsonSetter("firstName")
+    public void setFirstname(String firstname) {
+        Firstname = firstname;
+    }
+
+    public String getLastname() {
+        return Lastname;
+    }
+
+    @JsonSetter("lastName")
+    public void setLastname(String lastname) {
+        Lastname = lastname;
+    }
+
+    public String getRole() {
+        return Role;
+    }
+
+    @JsonSetter("role")
+    public void setRole(String role) {
+        Role = role;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    @JsonSetter("email")
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    @JsonSetter("password")
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String[] getExpense() {
+        return Expense;
+    }
+
+    @JsonSetter("Expense")
+    public void setExpense(String[] expense) {
+        Expense = expense;
+    }
+
+    public String[] getExpenseId() {
+        return expenseId;
+    }
+
+    @JsonSetter("expenseId")
+    public void setExpenseId(String[] expenseId) {
+        this.expenseId = expenseId;
+    }
+
+    public String[] getIncome() {
+        return Income;
+    }
+
+    @JsonSetter("Income")
+    public void setIncome(String[] income) {
+        Income = income;
+    }
+
+    public String[] getIncomeId() {
+        return incomeId;
+    }
+
+    @JsonSetter("incomeId")
+    public void setIncomeId(String[] incomeId) {
+        this.incomeId = incomeId;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    @JsonSetter("createdAt")
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    @JsonSetter("updatedAt")
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public BankAccount[] getAccounts() {
+        return Accounts;
+    }
+
+    @JsonSetter("Accounts")
+    public void setAccounts(BankAccount[] accounts) {
+        Accounts = accounts;
+    }
+
+    public String[] getBankaccountsId() {
+        return BankaccountsId;
+    }
+
+    @JsonSetter("accountId")
+    public void setBankaccountsId(String[] bankaccountsId) {
+        BankaccountsId = bankaccountsId;
+    }
 
     @Override
     public String toString() {

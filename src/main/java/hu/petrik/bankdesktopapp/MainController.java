@@ -9,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -18,7 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static hu.petrik.bankdesktopapp.MainPage.setActiveUser;
+import static hu.petrik.bankdesktopapp.MainPage.SetActiveUser;
 
 
 public class MainController {
@@ -55,13 +54,12 @@ public class MainController {
         }
         else
         {
-            setActiveUser(response);
+            SetActiveUser(response);
             Parent root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.getScene().setRoot(root);
-            stage.setHeight(600);
+            stage.setHeight(625);
             stage.setWidth(1000);
-
             stage.resizableProperty().setValue(Boolean.FALSE);
             stage.centerOnScreen();
             stage.show();

@@ -5,7 +5,6 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -15,73 +14,88 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="mainPage" maxHeight="Infinity" minHeight="600" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.MainPage">
+<VBox fx:id="mainPage" maxHeight="400.0" minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.MainPage">
     <children>
-      <HBox alignment="CENTER_RIGHT" maxWidth="1000.0" minWidth="1000.0" prefHeight="600.0" prefWidth="300.0">
+      <HBox alignment="CENTER_RIGHT" maxHeight="600.0" maxWidth="1000.0" minWidth="1000.0" prefHeight="600.0" prefWidth="300.0">
          <children>
-            <VBox alignment="TOP_CENTER" maxWidth="100.0" prefHeight="200.0" prefWidth="100.0" styleClass="leftNav">
+            <VBox alignment="TOP_CENTER" maxHeight="600.0" maxWidth="100.0" prefHeight="200.0" prefWidth="100.0" styleClass="leftNav">
                <children>
-                  <Button maxWidth="100.0" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#logOut" prefHeight="25.0" prefWidth="100.0" styleClass="logoutBtn" text="Kijelentketés" />
+                  <Button maxWidth="100.0" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="25.0" prefWidth="100.0" styleClass="logoutBtn" text="Kijelentketés" />
+                  <VBox alignment="CENTER" maxHeight="575.0" minHeight="500.0" prefHeight="575.0" prefWidth="100.0" styleClass="buttonCont">
+                     <children>
+                        <Button minWidth="100.0" mnemonicParsing="false" styleClass="leftNavBtn" text="Eloszlás" />
+                        <Button minWidth="100.0" mnemonicParsing="false" styleClass="leftNavBtn" text="Crypto">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin></Button>
+                        <Button minWidth="100.0" mnemonicParsing="false" styleClass="leftNavBtn" text="Eloszlás">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin></Button>
+                     </children>
+                  </VBox>
                </children>
             </VBox>
-              <BorderPane minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" styleClass="mainPageBorderPane">
+              <BorderPane maxHeight="600.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" styleClass="mainPageBorderPane" HBox.hgrow="NEVER">
                   <top>
-                      <HBox minHeight="250.0" minWidth="630.0" prefHeight="200.0" prefWidth="800.0" styleClass="top_side_main" BorderPane.alignment="CENTER">
-                          <children>
-                              <Pane maxHeight="200.0" minHeight="150.0" minWidth="250.0" prefHeight="173.0" prefWidth="256.0" styleClass="card_image">
-                                  <HBox.margin>
-                                      <Insets top="25.0" />
-                                  </HBox.margin>
-                              </Pane>
-                              <Label prefHeight="600.0" styleClass="bankBalance" text="Számla összeggggg" textFill="WHITE">
-                                  <font>
-                                      <Font size="37.0" />
-                                  </font>
-                              </Label>
-                              <Button mnemonicParsing="false" onAction="#addToList" text="create new " />
-                          </children>
+                      <HBox alignment="CENTER" minHeight="250.0" minWidth="630.0" prefHeight="200.0" prefWidth="800.0" styleClass="top_side_main" BorderPane.alignment="CENTER">
+                     <children>
+                        <ListView fx:id="cardList" maxWidth="900.0" minWidth="900.0" onMouseClicked="#ChangeActiveBankAccount" prefHeight="200.0" prefWidth="900.0" styleClass="cardList" />
+                     </children>
                       </HBox>
                   </top>
                   <center>
                       <HBox fx:id="myhbox" alignment="CENTER" maxHeight="300.0" maxWidth="Infinity" minHeight="300.0" minWidth="800.0" prefHeight="300.0" prefWidth="800.0" BorderPane.alignment="CENTER">
                           <children>
-                              <VBox alignment="CENTER" maxWidth="390.0" minWidth="390.0" prefHeight="200.0" prefWidth="390.0" styleClass="leftSide" HBox.hgrow="ALWAYS">
+                              <VBox alignment="CENTER" maxHeight="200.0" maxWidth="390.0" minHeight="300.0" minWidth="430.0" prefHeight="200.0" prefWidth="390.0" styleClass="leftSide" HBox.hgrow="NEVER">
                                   <children>
                                       <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pénznem váltás">
                                           <font>
                                               <Font size="20.0" />
                                           </font>
                                       </Text>
-                                      <HBox alignment="CENTER" maxWidth="390.0" minHeight="100.0" minWidth="390.0" prefHeight="100.0" prefWidth="390.0" VBox.vgrow="ALWAYS">
+                                      <HBox alignment="CENTER" maxHeight="250.0" maxWidth="390.0" minHeight="250.0" minWidth="390.0" prefHeight="100.0" prefWidth="390.0" VBox.vgrow="NEVER">
                                           <children>
-                                              <VBox alignment="TOP_CENTER" maxWidth="390.0" minWidth="390.0" prefHeight="200.0" prefWidth="390.0" HBox.hgrow="ALWAYS">
+                                              <VBox alignment="TOP_CENTER" maxWidth="390.0" minWidth="390.0" prefHeight="200.0" prefWidth="390.0" HBox.hgrow="NEVER">
                                                   <children>
                                                       <HBox fx:id="valtasCard" alignment="TOP_CENTER" maxHeight="100.0" maxWidth="100.0" minWidth="20.0" prefHeight="50.0" prefWidth="100.0" VBox.vgrow="NEVER">
                                                           <children>
-                                                              <AnchorPane maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0" styleClass="currencyType" HBox.hgrow="ALWAYS">
+                                                              <AnchorPane maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0" styleClass="currencyType" HBox.hgrow="NEVER">
                                                                   <children>
                                                                       <BorderPane maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0">
-                                                                          <right>
-                                                                              <Text fill="#2d4cff" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" BorderPane.alignment="CENTER_LEFT">
-                                                                                  <BorderPane.margin>
-                                                                                      <Insets right="5.0" />
-                                                                                  </BorderPane.margin>
-                                                                              </Text>
-                                                                          </right>
                                                                           <left>
-                                                                              <Pane maxWidth="15.0" minHeight="50.0" minWidth="15.0" prefHeight="75.0" prefWidth="15.0" styleClass="sidePane" BorderPane.alignment="CENTER" />
+                                                                              <Pane maxWidth="20.0" minHeight="50.0" minWidth="20.0" prefHeight="75.0" prefWidth="20.0" styleClass="sidePane" BorderPane.alignment="CENTER" />
                                                                           </left>
                                                                           <center>
-                                                                              <BorderPane maxHeight="45.0" maxWidth="100.0" minHeight="35.0" minWidth="50.0" prefHeight="35.0" prefWidth="50.0" BorderPane.alignment="CENTER">
-                                                                                  <bottom>
-                                                                                      <Text fill="#0fff2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" BorderPane.alignment="TOP_LEFT" />
-                                                                                  </bottom>
-                                                                                  <left>
-                                                                                      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" BorderPane.alignment="BOTTOM_LEFT" />
-                                                                                  </left>
+                                                                              <BorderPane maxHeight="40.0" maxWidth="90.0" minHeight="40.0" minWidth="115.0" prefHeight="40.0" prefWidth="90.0" BorderPane.alignment="CENTER">
                                                                                   <BorderPane.margin>
                                                                                       <Insets top="5.0" />
                                                                                   </BorderPane.margin>
+                                                               <left>
+                                                                  <HBox maxHeight="90.0" minWidth="100.0" prefHeight="90.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                                                                     <children>
+                                                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                                                                     </children>
+                                                                  </HBox>
+                                                               </left>
+                                                               <right>
+                                                                  <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                                     <children>
+                                                                        <Text fill="#2938ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                                                                     </children>
+                                                                  </HBox>
+                                                               </right>
+                                                               <bottom>
+                                                                  <HBox prefHeight="20.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                                     <children>
+                                                                        <Text fill="#00ff26" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                                                                           <font>
+                                                                              <Font size="11.0" />
+                                                                           </font>
+                                                                        </Text>
+                                                                     </children>
+                                                                  </HBox>
+                                                               </bottom>
                                                                               </BorderPane>
                                                                           </center>
                                                                       </BorderPane>
@@ -90,40 +104,52 @@
                                                                       <Insets right="10.0" />
                                                                   </HBox.margin>
                                                               </AnchorPane>
-                                                              <AnchorPane maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0" styleClass="currencyType" HBox.hgrow="ALWAYS">
-                                                                  <children>
-                                                                      <BorderPane maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0">
-                                                                          <right>
-                                                                              <Text fill="#2d4cff" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" BorderPane.alignment="CENTER_LEFT">
-                                                                                  <BorderPane.margin>
-                                                                                      <Insets right="5.0" />
-                                                                                  </BorderPane.margin>
-                                                                              </Text>
-                                                                          </right>
-                                                                          <left>
-                                                                              <Pane maxWidth="15.0" minHeight="50.0" minWidth="15.0" prefHeight="75.0" prefWidth="15.0" styleClass="sidePane" BorderPane.alignment="CENTER" />
-                                                                          </left>
-                                                                          <center>
-                                                                              <BorderPane maxHeight="45.0" maxWidth="100.0" minHeight="35.0" minWidth="50.0" prefHeight="35.0" prefWidth="50.0" BorderPane.alignment="CENTER">
-                                                                                  <bottom>
-                                                                                      <Text fill="#0fff2f" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" BorderPane.alignment="TOP_LEFT" />
-                                                                                  </bottom>
-                                                                                  <left>
-                                                                                      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" BorderPane.alignment="BOTTOM_LEFT" />
-                                                                                  </left>
-                                                                                  <BorderPane.margin>
-                                                                                      <Insets top="5.0" />
-                                                                                  </BorderPane.margin>
-                                                                              </BorderPane>
-                                                                          </center>
-                                                                      </BorderPane>
-                                                                  </children>
-                                                              </AnchorPane>
+                                                <AnchorPane maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0" styleClass="currencyType" HBox.hgrow="NEVER">
+                                                   <children>
+                                                      <BorderPane maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0">
+                                                         <left>
+                                                            <Pane maxWidth="20.0" minHeight="50.0" minWidth="20.0" prefHeight="75.0" prefWidth="20.0" styleClass="sidePane" BorderPane.alignment="CENTER" />
+                                                         </left>
+                                                         <center>
+                                                            <BorderPane maxHeight="40.0" maxWidth="90.0" minHeight="40.0" minWidth="115.0" prefHeight="40.0" prefWidth="90.0" BorderPane.alignment="CENTER">
+                                                               <BorderPane.margin>
+                                                                  <Insets top="5.0" />
+                                                               </BorderPane.margin>
+                                                               <left>
+                                                                  <HBox maxHeight="90.0" minWidth="100.0" prefHeight="90.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                                                                     <children>
+                                                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                                                                     </children>
+                                                                  </HBox>
+                                                               </left>
+                                                               <right>
+                                                                  <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                                     <children>
+                                                                        <Text fill="#2938ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                                                                     </children>
+                                                                  </HBox>
+                                                               </right>
+                                                               <bottom>
+                                                                  <HBox prefHeight="20.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                                     <children>
+                                                                        <Text fill="#00ff26" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                                                                           <font>
+                                                                              <Font size="11.0" />
+                                                                           </font>
+                                                                        </Text>
+                                                                     </children>
+                                                                  </HBox>
+                                                               </bottom>
+                                                            </BorderPane>
+                                                         </center>
+                                                      </BorderPane>
+                                                   </children>
+                                                </AnchorPane>
                                                           </children>
                                                       </HBox>
                                                       <HBox alignment="CENTER" maxWidth="1000.0" minWidth="350.0" prefHeight="100.0" prefWidth="350.0" VBox.vgrow="NEVER">
                                                           <children>
-                                                              <LineChart fx:id="myChart" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="125.0" minWidth="175.0" prefHeight="125.0" prefWidth="175.0" HBox.hgrow="ALWAYS">
+                                                              <LineChart fx:id="myChart" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="125.0" minWidth="175.0" prefHeight="125.0" prefWidth="175.0" HBox.hgrow="NEVER">
                                                                   <xAxis>
                                                                       <CategoryAxis side="BOTTOM" />
                                                                   </xAxis>
@@ -134,7 +160,7 @@
                                                                       <Insets left="-20.0" />
                                                                   </HBox.margin>
                                                               </LineChart>
-                                                              <LineChart fx:id="EurChart" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="125.0" minWidth="175.0" prefHeight="125.0" prefWidth="175.0" HBox.hgrow="ALWAYS">
+                                                              <LineChart fx:id="EurChart" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="125.0" minWidth="175.0" prefHeight="125.0" prefWidth="175.0" HBox.hgrow="NEVER">
                                                                   <xAxis>
                                                                       <CategoryAxis side="BOTTOM" />
                                                                   </xAxis>
@@ -156,10 +182,17 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                               </VBox>
-                        <VBox maxWidth="390.0" minHeight="200.0" minWidth="390.0" prefHeight="200.0" prefWidth="390.0" styleClass="myList">
+                        <VBox maxHeight="200.0" maxWidth="390.0" minHeight="300.0" minWidth="430.0" prefHeight="300.0" prefWidth="390.0" styleClass="myList" HBox.hgrow="NEVER">
                            <children>
-                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#popupWindow" text="felvetel" />
-                                    <ListView fx:id="myList" maxWidth="390.0" minHeight="200.0" minWidth="390.0" prefHeight="300.0" prefWidth="390.0" styleClass="myList" />
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#PopUpWindow" styleClass="addTransactionBtn" text="Adat felvétele" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin></Button>
+                              <HBox maxHeight="300.0" minHeight="250.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="NEVER">
+                                 <children>
+                                    <ListView fx:id="expenseList" maxWidth="200.0" minHeight="200.0" minWidth="430.0" prefHeight="300.0" prefWidth="195.0" styleClass="myList" HBox.hgrow="NEVER" />
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                           </children>

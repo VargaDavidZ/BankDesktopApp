@@ -3,18 +3,24 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="400.0" maxWidth="300.0" minHeight="400.0" minWidth="300.0" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.PopupWindow">
+<AnchorPane maxHeight="400.0" maxWidth="300.0" minHeight="400.0" minWidth="300.0" prefHeight="400.0" prefWidth="300.0" stylesheets="@popupWindow.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.PopupWindow">
    <children>
-      <VBox alignment="CENTER" maxHeight="400.0" maxWidth="300.0" minHeight="400.0" minWidth="300.0" prefHeight="400.0" prefWidth="300.0">
+      <VBox alignment="CENTER" maxHeight="400.0" maxWidth="300.0" minHeight="400.0" minWidth="300.0" prefHeight="400.0" prefWidth="300.0" styleClass="popWindowContainer" stylesheets="@popupWindow.css">
          <children>
+            <Label fx:id="errorMsg" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="250.0" textFill="RED">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
             <HBox alignment="BOTTOM_CENTER" maxHeight="10.0" maxWidth="200.0" minWidth="300.0" prefHeight="10.0" prefWidth="200.0">
                <children>
                   <RadioButton fx:id="expenseRadioBtn" mnemonicParsing="false" text="Kiadás">
@@ -30,7 +36,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </TextField>
-            <ComboBox fx:id="categoryInput" prefWidth="150.0" promptText="Kategória">
+            <ComboBox fx:id="categoryInput" maxWidth="200.0" minWidth="250.0" prefWidth="200.0" promptText="Kategória" styleClass="categoryBox">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
@@ -40,12 +46,12 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </TextField>
-            <Button maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#AddTransaction" text="Felvétel">
+            <Button fx:id="addTransactionBtn" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#AddTransaction" text="Felvétel">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="closeBtn" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#CancelTransaction" text="Vissza">
+            <Button fx:id="closeBtn" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#CancelTransaction" text="Mégse">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>

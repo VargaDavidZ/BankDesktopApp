@@ -9,6 +9,7 @@
 
 .top_side_main{
     -fx-border-color: transparent transparent white transparent;
+    -fx-background-color: #1a1e35;
 
 }
 
@@ -30,35 +31,80 @@
 
 }
 
+.list-view:focused
+{
+    -fx-background-color: #1c1d30;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 10px;
+    -fx-alignment: center;
+    -fx-background-insets: 0;
+
+}
+.list-view
+{
+    -fx-background-color: #1c1d30;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-alignment: center;
+
+}
+
+
+
 .list-cell:odd{
 
     -fx-alignment: center;
     -fx-background-color: #1c1d30;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
+    -fx-border-width: 1px;
+
+
 }
 
 .list-cell:even{
     -fx-alignment: center;
     -fx-background-color: #1c1d30;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
+    -fx-border-width: 1px;
+
 
 }
 
 .list-cell
 {
     -fx-alignment: center;
+
 }
 
 
+.cardList .list-cell:focused
+{
+    -fx-alignment: center;
+    -fx-translate-y: -10;
+
+}
+
 .scroll-bar:vertical {
-    -fx-background-color: #25273E;
+    -fx-background-color: #1c1d30;
+    -fx-pref-width: 10px;
+
 
 }
 
 .scroll-bar:vertical .thumb {
     -fx-background-color: #F57933;
+    -fx-pref-width: 10px;
+
+}
+
+.scroll-bar:horizontal {
+    -fx-background-color: #1c1d30;
+    -fx-pref-width: 10px;
+
+
+}
+
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: #F57933;
+    -fx-pref-width: 10px;
 
 }
 
@@ -81,11 +127,11 @@
 {
     /* top-left, top-right, bottom-right, and bottom-left corners, in that order. */
     -fx-border-radius: 10 0 0 10;
-    -fx-border-color: white transparent white white;
+    /*-fx-border-color: white transparent white white; */
     -fx-border-width: 1px;
 
-    -fx-background-radius: 11 0 0 11;
-    -fx-background-color: green;
+    -fx-background-radius: 10 0 0 10;
+    -fx-background-color: #00c200;
 }
 
 
@@ -153,4 +199,42 @@
     -fx-background-radius: 0px;
 
 }
+
+
+.addTransactionBtn:hover{
+    -fx-background-color: #F57933CC;
+    -fx-cursor: hand;
+}
+
+.addTransactionBtn{
+    -fx-background-color: #F57933;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+
+}
+
+.cardList{
+
+}
+
+.addCardBtn:hover{
+    -fx-background-color: #1c1d30;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, white, 10, 0, 0, 0);
+    -fx-cursor: hand;
+
+}
+
+.leftNavBtn.button{
+    -fx-background-color: #F57933;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+
+}
+
+.leftNavBtn:hover{
+    -fx-background-color: #F57933CC;
+    -fx-cursor: hand;
+}
+
 

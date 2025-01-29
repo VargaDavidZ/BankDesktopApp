@@ -1,8 +1,6 @@
 .transactionContainer{
-    -fx-border-radius: 5px;
     -fx-border-width: 1px;
-    -fx-border-color: transparent transparent #ff8e47 transparent;
-    -fx-background-radius: 6px;
+   // -fx-border-color: transparent transparent #ff8e47 transparent;
     -fx-background-color: #1c1d30;
 
 }
@@ -16,10 +14,19 @@
     /*-fx-border-color: white transparent white white; */
 }
 
-
-.amountIndicator
+.dateSection
 {
-
+     /*
+     25273E - lighter
+     1c1d30 - darker
+      */
+    -fx-background-color: #25273E;
+    -fx-border-color: white white transparent white;
+    -fx-border-radius: 5px 5px 0 0;
 }
 
+
+.innerBox{
+    -fx-border-color: transparent white white white;
+}
 

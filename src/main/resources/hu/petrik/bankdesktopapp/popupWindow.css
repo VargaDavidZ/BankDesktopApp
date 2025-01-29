@@ -1,0 +1,103 @@
+
+.popWindowContainer {
+
+    -fx-min-width: 100px;
+    -fx-background-color: #25273E;
+
+}
+
+.close {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.close:hover {
+    -fx-background-color: #ffff;
+}
+
+.radio-button{
+    -fx-text-fill: white;
+}
+
+.combo-box-base{
+    -fx-text-fill: white;
+    -fx-background-color: #25273E;
+    -fx-border-color: #F57933 ;
+}
+
+.combo-box-base:hover{
+    -fx-text-fill: white;
+    -fx-background-color: #25273E;
+    -fx-border-color: #F57933 ;
+    -fx-cursor: hand;
+}
+
+.combo-box .list-cell{
+    -fx-text-fill: white;
+}
+
+.combo-box .list-cell:hover{
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+.combo-box .list-view .list-cell
+{
+    -fx-text-fill: white;
+    -fx-background-color: #25273E;
+    -fx-border-color: #F57933 ;
+}
+
+.combo-box .list-view .list-cell:hover
+{
+    -fx-text-fill: white;
+    -fx-background-color: #161725;
+    -fx-border-color: #F57933 ;
+}
+
+
+.text-field {
+
+
+    -fx-min-width: 100px;
+    -fx-max-width: 250px;
+    -fx-border-radius: 0px;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 13px;
+}
+
+.text-field:focused {
+
+    -fx-border-radius: 2px;
+    -fx-background-radius: 3px;
+    -fx-border-width: 2px;
+
+    -fx-effect: dropshadow(three-pass-box, white, 10, 0, 0, 0);
+}
+
+.button {
+    -fx-background-color: #F57933;
+
+    -fx-background-radius: 5px;
+    -fx-max-width: 250;
+    -fx-font-size: 14px; /* Add 'px' unit to font size */
+    -fx-text-fill: #fff;
+
+}
+
+.button:hover {
+    -fx-background-color: #F57933CC;
+    -fx-cursor: hand;
+
+
+}
+
+
+.registerText:hover{
+    -fx-cursor: hand;
+
+}
+
+

@@ -147,12 +147,17 @@
 }
 
 .axis {
-    -fx-font-size: 1.4em;
-    -fx-tick-label-fill: white;
-    -fx-tick-length: 0;
-    -fx-minor-tick-length: 0;
+    -fx-font-size: 1em;
+    -fx-tick-label-fill: red;
+    -fx-show-tick-labels: false;
+    -fx-tick-length: 1;
+    -fx-minor-tick-length: 1;
+    -fx-tick-label-gap: 1px;
+    -fx-major-tick-unit: 200;
 
 }
+
+
 
 .chart{
     -fx-horizontal-grid-lines-visible: false;
@@ -160,6 +165,37 @@
     -fx-vertical-zero-line-visible: false;
     -fx-horizontal-zero-line-visible: false;
 }
+
+
+
+.chart-pie-label {
+    -fx-fill: #ffffff;
+
+}
+.chart-legend {
+    -fx-background-color: #25273E;
+    -fx-border-color: #F57933;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+
+}
+
+.chart-legend-item {
+    -fx-text-fill: white;
+}
+
+/*
+.default-color0.chart-pie { -fx-pie-color: #ff4400; }
+.default-color1.chart-pie { -fx-pie-color: #37ff00; }
+.default-color2.chart-pie { -fx-pie-color: #0022ff; }
+.default-color3.chart-pie { -fx-pie-color: #00ffbc; }
+.default-color4.chart-pie { -fx-pie-color: #dd00ff; }
+
+ */
+
+.default-color0.chart-area-symbol { -fx-background-color: #16ff00, #16ff00; }
+.default-color0.chart-series-area-line { -fx-stroke: #16ff00; }
+.default-color0.chart-series-area-fill { -fx-fill: rgba(22, 255, 0, 0.51); }
 
 .default-color0.chart-series-line {
     -fx-stroke: #16ff00; -fx-stroke-width: 1px

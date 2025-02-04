@@ -52,6 +52,7 @@ public class TransactionComponent extends AnchorPane {
             }
 
 
+            type.setText(inputTransaction.getCategory());
 
 
     }

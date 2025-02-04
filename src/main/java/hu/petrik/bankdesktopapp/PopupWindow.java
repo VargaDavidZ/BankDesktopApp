@@ -30,8 +30,10 @@ public class PopupWindow {
     private Label errorMsg;
 
 
+    //only show the correct category types for income/expense
     public void initialize() {
-        categoryInput.getItems().addAll("Food", "Rent","Transport","Other");
+        categoryInput.getItems().setAll("Shopping", "Rent","Transport","Transaction" ,"Salary" ,"Other");
+
 
     }
 
@@ -40,6 +42,9 @@ public class PopupWindow {
         Stage stage = (Stage)closeBtn.getScene().getWindow();
         stage.close();
     }
+
+
+
 
     @javafx.fxml.FXML
     public void AddTransaction(ActionEvent actionEvent) throws IOException, InterruptedException {
@@ -63,20 +68,33 @@ public class PopupWindow {
        }
 
         if(expenseRadioBtn.isSelected()){
-            RestApi.CreateExpense(Integer.parseInt(totalInput.getText()),categoryInput.getValue(),"Spár",desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.GetActiveBankAccount().getId());
+            RestApi.CreateExpense(Integer.parseInt(totalInput.getText()),categoryInput.getValue(),"Spár",desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.GetActiveBankAccount().getId(),MainPage.getActiveUser().getAuthToken());
 
         }
         else if(incomeRadioBtn.isSelected()){
-            RestApi.CreateIncome(Integer.parseInt(totalInput.getText()),categoryInput.getValue(),"Spár",desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.GetActiveBankAccount().getId());
+            RestApi.CreateIncome(Integer.parseInt(totalInput.getText()),categoryInput.getValue(),"Spár",desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.GetActiveBankAccount().getId(), MainPage.getActiveUser().getAuthToken());
 
         }
         else
         {
-            System.out.println("Select a transaction type");
+            errorMsg.setText("Válassz tranzakció típust");
+            return;
         }
 
         Stage stage = (Stage)closeBtn.getScene().getWindow();
+        
         stage.close();
 
+    }
+
+    @javafx.fxml.FXML
+    public void setExpenseCategories(ActionEvent actionEvent) {
+        categoryInput.getItems().setAll("Shopping", "Rent","Transport","Transaction" ,"Other");
+
+    }
+
+    @javafx.fxml.FXML
+    public void setIncomeCategories(ActionEvent actionEvent) {
+        categoryInput.getItems().setAll("Transaction" ,"Salary" ,"Other");
     }
 }

@@ -23,12 +23,12 @@
             </Label>
             <HBox alignment="BOTTOM_CENTER" maxHeight="10.0" maxWidth="200.0" minWidth="300.0" prefHeight="10.0" prefWidth="200.0">
                <children>
-                  <RadioButton fx:id="expenseRadioBtn" mnemonicParsing="false" text="Kiadás">
+                  <RadioButton fx:id="expenseRadioBtn" mnemonicParsing="false" onAction="#setExpenseCategories" text="Kiadás">
                      <toggleGroup>
                         <ToggleGroup fx:id="transactionType" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="incomeRadioBtn" mnemonicParsing="false" text="Bevétel" toggleGroup="$transactionType" />
+                  <RadioButton fx:id="incomeRadioBtn" mnemonicParsing="false" onAction="#setIncomeCategories" text="Bevétel" toggleGroup="$transactionType" />
                </children>
             </HBox>
             <TextField fx:id="totalInput" maxWidth="200.0" minWidth="200.0" promptText="Összeg">

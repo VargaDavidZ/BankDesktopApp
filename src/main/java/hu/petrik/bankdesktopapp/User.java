@@ -12,7 +12,7 @@ public class User {
     private String Lastname;
     private String Role;
     private String email;
-    private String password;
+    //private String password;
     private String[] Expense;
     private String[] expenseId;
     private String[] Income;
@@ -21,19 +21,20 @@ public class User {
     private Date updatedAt;
     private BankAccount[] Accounts;
     private  String[] BankaccountsId;
+    private String authToken;
 
 
     public User() {
 
     }
 
-    public User(String id, String firstname, String lastname, String role, String email, String password, String[] expense, String[] expenseId, String[] income, String[] incomeId, Date createdAt, Date updatedAt, BankAccount[] accounts, String[] bankaccountsId) {
+    public User(String id, String firstname, String lastname, String role, String email, String[] expense, String[] expenseId, String[] income, String[] incomeId, Date createdAt, Date updatedAt, BankAccount[] accounts, String[] bankaccountsId, String authToken) {
         this.id = id;
         Firstname = firstname;
         Lastname = lastname;
         Role = role;
         this.email = email;
-        this.password = password;
+        //this.password = password;
         Expense = expense;
         this.expenseId = expenseId;
         Income = income;
@@ -42,9 +43,8 @@ public class User {
         this.updatedAt = updatedAt;
         Accounts = accounts;
         BankaccountsId = bankaccountsId;
+        this.authToken = authToken;
     }
-
-
 
     public String getId() {
         return id;
@@ -91,6 +91,7 @@ public class User {
         this.email = email;
     }
 
+    /*
     public String getPassword() {
         return password;
     }
@@ -99,6 +100,8 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+     */
 
     public String[] getExpense() {
         return Expense;
@@ -172,6 +175,15 @@ public class User {
         BankaccountsId = bankaccountsId;
     }
 
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    @JsonSetter("access_token")
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -180,7 +192,6 @@ public class User {
                 ", Lastname='" + Lastname + '\'' +
                 ", Role='" + Role + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", Expense=" + Arrays.toString(Expense) +
                 ", expenseId=" + Arrays.toString(expenseId) +
                 ", Income=" + Arrays.toString(Income) +

@@ -17,6 +17,7 @@ public class BankAccount {
     private Date createdAt;
     private Date updatedAt;
     private String currency;
+    private String ownerName;
 
 
 
@@ -26,21 +27,18 @@ public class BankAccount {
     }
 
 
-
-    public BankAccount(String id, User[] users, String[] userId, Expense[] expenses, Income[] incomes, float total, Date createdAt, Date updatedAt, String currency) throws JsonProcessingException {
-
-
+    public BankAccount(String id, User[] users, String[] userId, Expense[] expenses, hu.petrik.bankdesktopapp.Income[] income, float total, Date createdAt, Date updatedAt, String currency, String ownerName) {
         this.id = id;
         Users = users;
         this.userId = userId;
         Expenses = expenses;
-        Income =  incomes;
+        Income = income;
         this.total = total;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.currency = currency;
+        this.ownerName = ownerName;
     }
-
 
     public String getId() {
         return id;
@@ -117,6 +115,15 @@ public class BankAccount {
         this.currency = currency;
     }
 
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    @JsonSetter("ownerName")
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
     @Override
     public String toString() {
         return "BankAccount{" +
@@ -124,11 +131,12 @@ public class BankAccount {
                 ", Users=" + Arrays.toString(Users) +
                 ", userId=" + Arrays.toString(userId) +
                 ", Expenses=" + Arrays.toString(Expenses) +
-                ", Incomes=" + Income +
+                ", Income=" + Arrays.toString(Income) +
                 ", total=" + total +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", currency='" + currency + '\'' +
+                ", ownerName='" + ownerName + '\'' +
                 '}';
     }
 }

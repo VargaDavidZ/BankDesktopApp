@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
@@ -33,6 +34,9 @@
                                   </font>
                               </Text>
                           </children>
+                     <BorderPane.margin>
+                        <Insets left="10.0" />
+                     </BorderPane.margin>
                       </Pane>
                   </left>
                   <right>
@@ -40,6 +44,9 @@
                           <font>
                               <Font size="20.0" />
                           </font>
+                     <BorderPane.margin>
+                        <Insets right="10.0" />
+                     </BorderPane.margin>
                       </Text>
                   </right>
               </BorderPane>

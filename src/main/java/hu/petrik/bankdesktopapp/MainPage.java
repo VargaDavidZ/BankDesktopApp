@@ -3,9 +3,6 @@ package hu.petrik.bankdesktopapp;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +18,8 @@ import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -28,38 +27,28 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HexFormat;
+
 
 
 public class MainPage {
     Stage stage;
-
-    @javafx.fxml.FXML
-    private VBox mainPage;
     @FXML
     private HBox valtasCard;
     @FXML
     private HBox myhbox;
     @FXML
     private AreaChart<String,Number> EurChart;
-    final NumberAxis xAxis = new NumberAxis();
-    final NumberAxis yAxis = new NumberAxis();
     private  BankAccount[] bankAccounts;
-    private Integer eurIndex = 5;
-    private Integer eurValue = 500;
     RestApi api = new RestApi();
     private static User activeUser;
     private static BankAccount activeBankAccount;
     private float total;
     private final ArrayList<Transaction> transactionArray = new ArrayList<>();
     private int focusedItem = 0;
-    private ObservableList currencyExchange ;
 
     @FXML
     private ListView expenseList;
@@ -95,38 +84,38 @@ public class MainPage {
     private StackPane myStackPane;
     @FXML
     private CategoryAxis asd;
+    @FXML
+    private VBox pieChartContainer;
+    @FXML
+    private VBox mainPage;
+    @FXML
+    private ImageView usdImg;
+    @FXML
+    private ImageView eurImg;
 
-    @Deprecated
+    //javadoc documentation
     public static void SetActiveUser(String activeUserInput) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         //mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
 
-        User user = mapper.readValue(activeUserInput,User.class);
-        activeUser = user;
+        activeUser = mapper.readValue(activeUserInput,User.class);
 
     }
 
     public void initialize() throws IOException, InterruptedException {
 
-
-
-
-
-
         bankAccounts = api.GetAllBankAccounts(activeUser);
         cardList.setOrientation(Orientation.HORIZONTAL);
 
-
-
         Float currentEur = api.GetEur(0).getValue().get("huf");
         Float yesterdayEur = api.GetEur(1).getValue().get("huf");
-        Float change = ((currentEur-yesterdayEur) / currentEur * 100);
+        float change = ((currentEur-yesterdayEur) / currentEur * 100);
         Float currentUsd = api.GetUsd(0).getValue().get("huf");
         Float yesterdayUsd = api.GetUsd(1).getValue().get("huf");
-        Float changeUsd = ((currentUsd-yesterdayUsd) / currentUsd * 100);
+        float changeUsd = ((currentUsd-yesterdayUsd) / currentUsd * 100);
 
-        myPieChart.setVisible(false);
+        pieChartContainer.setVisible(false);
         //display EUR-HUF exchange rate and change %
         eurText.setText((Math.round(currentEur*100)/100) + " Ft");
         eurChange.setText("+"+Math.round(change*100)/100.0 + "%");
@@ -136,6 +125,7 @@ public class MainPage {
             eurIndicator.setStyle("-fx-background-color: red;");
             eurChange.setText(Math.round(change*100)/100.0 + "%");
             eurChange.setStyle("-fx-fill: red;");
+            eurImg.setImage(new Image(MainPage.class.getResourceAsStream("currencyNegInd.png")));
         }
 
         if(bankAccounts.length != 0) {
@@ -144,47 +134,28 @@ public class MainPage {
 
 
         //display USD-HUF exchange rate and change %
-        usdText.setText((Math.round(currentUsd*100)/100) + "Ft");
+        System.out.printf(currentUsd + "---");
+        usdText.setText((Math.round(currentUsd*100)/100) + "Ftttt");
         usdChange.setText("+"+Math.round(changeUsd*100)/100.0 + "%");
         if(currentUsd-yesterdayUsd < 0)
         {
-            usdText.setText(Math.round(currentEur * 100) / 100 + "Ft");
-            usdIndicator.setStyle("-fx-background-color: red;");
+            usdText.setText(Math.round(currentUsd * 100) / 100 + "Ft");
+            usdIndicator.setStyle("-fx-background-color: #FF2424;");
             usdChange.setText(Math.round(changeUsd*100)/100.0 + "%");
-            usdChange.setStyle("-fx-fill: red;");
+            usdChange.setStyle("-fx-fill: #FF2424;");
+            usdImg.setImage(new Image(MainPage.class.getResourceAsStream("currencyNegInd.png")));
         }
 
         if(bankAccounts.length != 0) {
             activeBankAccount = bankAccounts[0];
         }
 
-       // System.out.printf(api.GetAccountExpenses(activeBankAccount.id).toString());
         activeBankAccount.setExpenses(api.GetAccountExpenses(activeBankAccount.getId(), activeUser.getAuthToken()));
-        //System.out.printf(api.GetAccountIncomes(activeBankAccount.id).toString());
         activeBankAccount.setIncome(api.GetAccountIncomes(activeBankAccount.getId(), activeUser.getAuthToken()));
 
         CreatedSortedArray();
         ListTransactions();
         ListCards();
-
-        XYChart.Series<String,Number> series = new XYChart.Series<String,Number>();
-        XYChart.Series<String,Number> series2 = new XYChart.Series<String,Number>();
-
-        /*series.setName("USD");
-        series.getData().add(new XYChart.Data("1", 100));
-        series.getData().add(new XYChart.Data("2", 150));
-        series.getData().add(new XYChart.Data("3", 200));
-        series.getData().add(new XYChart.Data("4", 300));
-
-        series2.getData().add(new XYChart.Data("1", 50));
-        series2.getData().add(new XYChart.Data("2", 400));
-        series2.getData().add(new XYChart.Data("3", 350));
-        series2.getData().add(new XYChart.Data("4", 500));
-        series2.setName("EUR");
-
-        myChart.getData().add(series);
-        EurChart.getData().add(series2);
-         */
 
         Platform.runLater(() -> {
             cardList.getFocusModel().focus(0);
@@ -257,8 +228,6 @@ public class MainPage {
         expenseList.refresh();
     }
 
-
-
     @FXML
     public void LogOut(ActionEvent event) throws IOException {
         activeUser = null;
@@ -316,8 +285,6 @@ public class MainPage {
         }
         total = income - expense;
 
-
-
         UpdatePieChart();
         //total = activeBankAccount.getTotal();
 
@@ -343,12 +310,10 @@ public class MainPage {
             return;
         }
 
-
         RefreshTransactions();
         CalcActiveTotal();
         RefreshCards();
         cardList.getFocusModel().getFocusedItem().changeTotal(total);
-
 
     }
 
@@ -361,13 +326,9 @@ public class MainPage {
     public void AddNewAcc() throws IOException, InterruptedException {
         RestApi.CreateAccount(activeUser.getId(),"HUF",activeUser.getFirstname(),activeUser.getLastname(),activeUser.getAuthToken());
         RefreshCards();
-
     }
 
-
-
-
-    @FXML
+    @Deprecated
     public void currencyExchangeBtn(ActionEvent actionEvent) {
 
     }
@@ -379,14 +340,12 @@ public class MainPage {
         Float f = 100.5F;
 
         for (int i = 0; i < daysToShow; i++) {
-
             //series.getData().add(new XYChart.Data(Integer.toString(eurIndex), eurValue));
-            eurSeries.getData().add(new XYChart.Data(Integer.toString(i), api.GetEur(days).getValue().get("huf")));
-            usdSeries.getData().add(new XYChart.Data(Integer.toString(i), api.GetUsd(days).getValue().get("huf")));
+            eurSeries.getData().add(new XYChart.Data<>(Integer.toString(i), api.GetEur(days).getValue().get("huf")));
+            usdSeries.getData().add(new XYChart.Data<>(Integer.toString(i), api.GetUsd(days).getValue().get("huf")));
             days--;
 
         }
-
 
         UsdChart.getYAxis().setAutoRanging(false);
         ((NumberAxis)UsdChart.getYAxis()).setUpperBound(450);
@@ -428,9 +387,8 @@ public class MainPage {
 
         }
 
-
-
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
 
         if(shopping != 0)
         {
@@ -451,8 +409,10 @@ public class MainPage {
             pieChartData.add(new PieChart.Data("Other", other));
         }
 
-        myPieChart.setData(pieChartData);
 
+
+        myPieChart.setData(pieChartData);
+       // myPieChart.setLegendVisible(false);
 
 
 
@@ -460,19 +420,25 @@ public class MainPage {
 
     @FXML
     public void SwapLeftContainer(ActionEvent actionEvent) throws IOException, InterruptedException {
-        if(!myPieChart.isVisible())
+        if(!pieChartContainer.isVisible())
         {
             UpdatePieChart();
             swapLeftContainerBtn.setText("Árfolyam");
             currencyExchangeContainer.setVisible(false);
-            myPieChart.setVisible(true);
-            myStackPane.layout();
+            //myPieChart.setVisible(true);
+            pieChartContainer.setVisible(true);
+            System.out.println(pieChartContainer.isVisible());
+            pieChartContainer.setTranslateZ(2);
 
+            myStackPane.layout();
+            pieChartContainer.layout();
         }
         else {
             swapLeftContainerBtn.setText("Eloszlás");
             currencyExchangeContainer.setVisible(true);
-            myPieChart.setVisible(false);
+            //myPieChart.setVisible(false);
+
+            pieChartContainer.setVisible(false);
         }
     }
 
@@ -480,6 +446,10 @@ public class MainPage {
     public void showValuePieChart(Event event) {
         final Label caption = new Label("");
        // caption.setText(String.valueOf(myPieChart.getPieValue()) + "%");
+    }
+
+    @FXML
+    public void AccountInfo(ActionEvent actionEvent) {
     }
 }
 

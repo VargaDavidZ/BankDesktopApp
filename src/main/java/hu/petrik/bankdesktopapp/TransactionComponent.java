@@ -3,6 +3,8 @@ package hu.petrik.bankdesktopapp;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
@@ -20,6 +22,8 @@ public class TransactionComponent extends AnchorPane {
     private Pane circle;
     @javafx.fxml.FXML
     private Text dateText;
+    @FXML
+    private ImageView transactionImage;
 
     @FXML
     private AnchorPane controller;
@@ -42,13 +46,15 @@ public class TransactionComponent extends AnchorPane {
             if(inputTransaction.getClass() == Income.class) {
                 amount.setText(inputTransaction.getTotal() + "Ft");
                 amount.setFill(Paint.valueOf("#41ff24"));
-                circle.setStyle("-fx-background-color: #41ff24");
+                //circle.setStyle("-fx-background-color: #41ff24");
             }
             else
             {
                 amount.setText("-"+inputTransaction.getTotal() + "Ft");
                 amount.setFill(Paint.valueOf("#ff2424"));
-                circle.setStyle("-fx-background-color: #ff2424");
+               // circle.setStyle("-fx-background-color: #ff2424");
+                transactionImage.setImage(new Image(getClass().getResourceAsStream("Expense.png")));
+
             }
 
 
@@ -67,16 +73,6 @@ public class TransactionComponent extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-
-
-
-
-
     }
-
-
-
-
-
 
 }

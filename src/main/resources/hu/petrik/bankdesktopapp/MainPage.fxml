@@ -7,6 +7,8 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -28,11 +30,11 @@
                         <Button fx:id="swapLeftContainerBtn" minWidth="100.0" mnemonicParsing="false" onAction="#SwapLeftContainer" styleClass="leftNavBtn" text="Eloszlás" />
                         <Button minWidth="100.0" mnemonicParsing="false" styleClass="leftNavBtn" text="Crypto">
                            <VBox.margin>
-                              <Insets top="5.0" />
+                              <Insets />
                            </VBox.margin></Button>
-                        <Button minWidth="100.0" mnemonicParsing="false" onAction="#currencyExchangeBtn" styleClass="leftNavBtn" text="Eloszlás">
+                        <Button minWidth="100.0" mnemonicParsing="false" onAction="#AccountInfo" styleClass="leftNavBtn" text="Számla Infó">
                            <VBox.margin>
-                              <Insets top="5.0" />
+                              <Insets />
                            </VBox.margin></Button>
                      </children>
                   </VBox>
@@ -68,7 +70,13 @@
                                                                         <children>
                                                                             <BorderPane maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0">
                                                                                 <left>
-                                                                                    <Pane fx:id="usdIndicator" maxWidth="20.0" minHeight="50.0" minWidth="20.0" prefHeight="75.0" prefWidth="20.0" styleClass="sidePane" BorderPane.alignment="CENTER" />
+                                                                                    <Pane fx:id="usdIndicator" maxWidth="15.0" minHeight="50.0" minWidth="15.0" prefHeight="75.0" prefWidth="20.0" styleClass="sidePane" BorderPane.alignment="CENTER">
+                                                                     <children>
+                                                                        <ImageView fx:id="usdImg" fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@currencyPosInd.png" />
+                                                                           </image></ImageView>
+                                                                     </children></Pane>
                                                                                 </left>
                                                                                 <center>
                                                                                     <BorderPane maxHeight="40.0" maxWidth="90.0" minHeight="40.0" minWidth="115.0" prefHeight="40.0" prefWidth="90.0" BorderPane.alignment="CENTER">
@@ -92,7 +100,7 @@
                                                                                         <bottom>
                                                                                             <HBox prefHeight="20.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                                                                                 <children>
-                                                                                                    <Text fx:id="usdChange" fill="#00ff26" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                                                                                                    <Text fx:id="usdChange" fill="#41FF24" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                                                                                                         <font>
                                                                                                             <Font size="11.0" />
                                                                                                         </font>
@@ -112,7 +120,13 @@
                                                                         <children>
                                                                             <BorderPane maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0">
                                                                                 <left>
-                                                                                    <Pane fx:id="eurIndicator" maxWidth="20.0" minHeight="50.0" minWidth="20.0" prefHeight="75.0" prefWidth="20.0" styleClass="sidePane" BorderPane.alignment="CENTER" />
+                                                                                    <Pane fx:id="eurIndicator" maxWidth="15.0" minHeight="50.0" minWidth="15.0" prefHeight="75.0" prefWidth="20.0" styleClass="sidePane" BorderPane.alignment="CENTER">
+                                                                     <children>
+                                                                        <ImageView fx:id="eurImg" fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@currencyPosInd.png" />
+                                                                           </image></ImageView>
+                                                                     </children></Pane>
                                                                                 </left>
                                                                                 <center>
                                                                                     <BorderPane maxHeight="40.0" maxWidth="90.0" minHeight="40.0" minWidth="115.0" prefHeight="40.0" prefWidth="90.0" BorderPane.alignment="CENTER">
@@ -140,7 +154,7 @@
                                                                                         <bottom>
                                                                                             <HBox prefHeight="20.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                                                                                 <children>
-                                                                                                    <Text fx:id="eurChange" fill="#00ff26" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                                                                                                    <Text fx:id="eurChange" fill="#41FF24" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                                                                                                         <font>
                                                                                                             <Font size="12.0" />
                                                                                                         </font>
@@ -183,7 +197,18 @@
                                                             </HBox>
                                                         </children>
                                                     </VBox>
-                                          <PieChart fx:id="myPieChart" onMouseClicked="#showValuePieChart" styleClass="myPieChart" />
+                                          <VBox fx:id="pieChartContainer" prefHeight="200.0" prefWidth="100.0" styleClass="pieChartCont">
+                                             <children>
+                                                <HBox alignment="TOP_CENTER" prefHeight="100.0" styleClass="pieChartBtnContainer">
+                                                   <children>
+                                                      <Button mnemonicParsing="false" styleClass="pieExpenseBtn" text="Kiadás" />
+                                                      <Button mnemonicParsing="false" styleClass="pieIncomeBtn" text="Bevétel" />
+                                                      <Button mnemonicParsing="false" styleClass="pieCombinedBtn" text="Kiadás/Bevétel" />
+                                                   </children>
+                                                </HBox>
+                                                <PieChart fx:id="myPieChart" onMouseClicked="#showValuePieChart" styleClass="myPieChart" />
+                                             </children>
+                                          </VBox>
                                        </children>
                                     </StackPane>
                                           </children>

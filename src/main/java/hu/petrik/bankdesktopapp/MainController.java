@@ -49,7 +49,7 @@ public class MainController {
 
         if( response.equals("Login Error") )
         {
-            System.out.printf("Login failed\n");
+            System.out.print("Login failed\n");
             loginErrorText.visibleProperty().setValue(true);
         }
         else

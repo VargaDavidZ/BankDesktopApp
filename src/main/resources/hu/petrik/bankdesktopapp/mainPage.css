@@ -78,7 +78,7 @@
 .cardList .list-cell:focused
 {
     -fx-alignment: center;
-    -fx-translate-y: -10;
+    -fx-translate-y: -30;
 
 }
 
@@ -131,7 +131,7 @@
     -fx-border-width: 1px;
 
     -fx-background-radius: 10 0 0 10;
-    -fx-background-color: #00c200;
+    -fx-background-color: #41FF24;
 }
 
 
@@ -185,29 +185,31 @@
 }
 
 /*
-.default-color0.chart-pie { -fx-pie-color: #ff4400; }
-.default-color1.chart-pie { -fx-pie-color: #37ff00; }
-.default-color2.chart-pie { -fx-pie-color: #0022ff; }
-.default-color3.chart-pie { -fx-pie-color: #00ffbc; }
-.default-color4.chart-pie { -fx-pie-color: #dd00ff; }
-
+.default-color0.chart-pie { -fx-pie-color: #ffffff; }
+.default-color1.chart-pie { -fx-pie-color: #ffffff; }
+.default-color2.chart-pie { -fx-pie-color: #ffffff; }
+.default-color3.chart-pie { -fx-pie-color: #ff0000; }
+.default-color4.chart-pie { -fx-pie-color: #ff0000; }
+.default-color5.chart-pie { -fx-pie-color: #ff0000; }
+.default-color6.chart-pie { -fx-pie-color: #ff0000; }
+.default-color6.chart-pie { -fx-pie-color: #ff0000; }
  */
 
-.default-color0.chart-area-symbol { -fx-background-color: #16ff00, #16ff00; }
-.default-color0.chart-series-area-line { -fx-stroke: #16ff00; }
-.default-color0.chart-series-area-fill { -fx-fill: rgba(22, 255, 0, 0.51); }
 
-.default-color0.chart-series-line {
-    -fx-stroke: #16ff00; -fx-stroke-width: 1px
+
+.default-color0.chart-area-symbol{
+    -fx-background-color: transparent, transparent; /* Disables the circles on the graph */
 }
-
-
+.default-color0.chart-series-area-line{
+    -fx-stroke: #16ff00;   /* Sets the chart line's color */
+    -fx-stroke-width: 2px    /* Sets the cart line's width */
+}
+.default-color0.chart-series-area-fill{
+    -fx-fill: rgba(22, 255, 0, 0.51);
+}
 
 .chart-line-symbol{
     -fx-background-radius: 2px;
-    -fx-background-color: transparent, #16ff00;
-
-
 }
 
 .leftSide{
@@ -262,15 +264,28 @@
 }
 
 .leftNavBtn.button{
-    -fx-background-color: #F57933;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
+    -fx-background-color: #25273E;
+    -fx-text-fill: white;
+    -fx-border-color: transparent transparent white transparent;
 
 }
 
-.leftNavBtn:hover{
+.leftNavBtn.button:hover{
     -fx-background-color: #F57933CC;
     -fx-cursor: hand;
 }
+
+.pieExpenseBtn, .pieIncomeBtn, .pieCombinedBtn{
+    -fx-background-color: #25273E;
+    -fx-text-fill: white;
+    -fx-border-color: transparent transparent white transparent;
+}
+
+.pieExpenseBtn:hover, .pieIncomeBtn:hover, .pieCombinedBtn:hover{
+    -fx-background-color: #F57933CC;
+    -fx-cursor: hand;
+}
+
+
 
 

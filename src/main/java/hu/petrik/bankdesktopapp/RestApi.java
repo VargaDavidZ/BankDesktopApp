@@ -91,9 +91,13 @@ public class RestApi {
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         //mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
 
-        Expense[] exp = mapper.readValue(response.body().toString(),Expense[].class);
+        try{
 
-        return exp;
+            return mapper.readValue(response.body().toString(),Expense[].class);
+        }
+        catch(Exception e){
+            return new Expense[]{};
+        }
 
     }
 
@@ -110,9 +114,15 @@ public class RestApi {
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         //mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
 
-        Income[] inc = mapper.readValue(response.body().toString(),Income[].class);
+        try{
 
-        return inc;
+            return mapper.readValue(response.body().toString(),Income[].class);
+        }
+        catch(Exception e){
+            return new Income[]{};
+        }
+
+
 
     }
 
@@ -250,6 +260,7 @@ public class RestApi {
 
     //return the Usd price in HUF, -daysBack indicates how far in the past we want to go back -> 0 present ->1 yesterday..
     public Usd GetUsd(int daysBack) throws IOException, InterruptedException {
+
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(String.format("https://%s.currency-api.pages.dev/v1/currencies/usd.json",LocalDate.now().minusDays(daysBack)) ))
                 .build();
@@ -264,6 +275,7 @@ public class RestApi {
         Usd usd = mapper.readValue(response.body().toString(),Usd.class);
 
         //  System.out.printf(response.body().toString());
+        //System.out.println(String.valueOf(usd.getValue().get("huf")));
         return usd;
 
     }

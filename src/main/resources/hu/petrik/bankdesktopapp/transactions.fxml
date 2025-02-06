@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
@@ -23,16 +25,24 @@
                           <font>
                               <Font size="20.0" />
                           </font>
+                     <BorderPane.margin>
+                        <Insets left="10.0" />
+                     </BorderPane.margin>
                       </Text>
                   </center>
                   <left>
-                      <Pane fx:id="circle" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" prefHeight="20.0" prefWidth="20.0" styleClass="typeIndicator" BorderPane.alignment="CENTER">
+                      <Pane fx:id="circle" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" styleClass="typeIndicator" BorderPane.alignment="CENTER">
                           <children>
                               <Text layoutX="19.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="|">
                                   <font>
                                       <Font size="5.0" />
                                   </font>
                               </Text>
+                        <ImageView fx:id="transactionImage" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Income.png" />
+                           </image>
+                        </ImageView>
                           </children>
                      <BorderPane.margin>
                         <Insets left="10.0" />

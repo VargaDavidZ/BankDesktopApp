@@ -93,6 +93,10 @@ public class MainPage {
     @FXML
     private ImageView eurImg;
 
+    private boolean pieChartIncome = false;
+    private boolean pieChartExpense = true;
+    private boolean pieChartCombined = false;
+
     //javadoc documentation
     public static void SetActiveUser(String activeUserInput) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
@@ -361,6 +365,142 @@ public class MainPage {
     }
 
     public void UpdatePieChart() throws IOException, InterruptedException {
+
+        if(pieChartExpense == true)
+        {
+            pieChartToExpense();
+        }
+        else if(pieChartIncome == true)
+        {
+            PieChartToIncome();
+        }
+        else{
+            PieChartToIncomeExpense();
+
+        }
+       // myPieChart.setLegendVisible(false);
+        
+    }
+
+
+
+    @FXML
+    public void SwapLeftContainer(ActionEvent actionEvent) throws IOException, InterruptedException {
+        if(!pieChartContainer.isVisible())
+        {
+            UpdatePieChart();
+            swapLeftContainerBtn.setText("Árfolyam");
+            currencyExchangeContainer.setVisible(false);
+            //myPieChart.setVisible(true);
+            pieChartContainer.setVisible(true);
+            System.out.println(pieChartContainer.isVisible());
+            pieChartContainer.setTranslateZ(2);
+
+            myPieChart.setLegendVisible(false);
+            /*myStackPane.layout();
+            pieChartContainer.layout();
+
+             */
+        }
+        else {
+            swapLeftContainerBtn.setText("Eloszlás");
+            currencyExchangeContainer.setVisible(true);
+            //myPieChart.setVisible(false);
+
+            pieChartContainer.setVisible(false);
+        }
+    }
+
+    @FXML
+    public void showValuePieChart(Event event) {
+        final Label caption = new Label("");
+       // caption.setText(String.valueOf(myPieChart.getPieValue()) + "%");
+    }
+
+    @FXML
+    public void AccountInfo(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void PieChartToIncomeExpense() {
+        pieChartIncome = false;
+        pieChartExpense = false;
+        pieChartCombined = true;
+
+        int income = 0;
+        int expense = 0;
+
+        for (int i = 0; i < transactionArray.size(); i++) {
+            if(transactionArray.get(i).getClass() == Income.class) {
+                income+=transactionArray.get(i).getTotal();
+            }
+            else
+            {
+                expense+=transactionArray.get(i).getTotal();
+            }
+        }
+
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        if(income != 0)
+        {
+            pieChartData.add(new PieChart.Data("Bevétel", income));
+        }
+
+        if(expense != 0)
+        {
+            pieChartData.add(new PieChart.Data("Kiadás", expense));
+        }
+
+        myPieChart.setData(pieChartData);
+
+
+    }
+
+    @FXML
+    public void PieChartToIncome() {
+        pieChartIncome = true;
+        pieChartExpense = false;
+        pieChartCombined = false;
+        float salary = 0;
+        float transaction = 0;
+        float other = 0;
+
+        for (int i = 0; i < activeBankAccount.getIncome().length; i++) {
+            if(activeBankAccount.getIncome()[i].getCategory().equals("Transaction")){
+                transaction += activeBankAccount.getIncome()[i].getTotal();
+
+            }
+            else if(activeBankAccount.getIncome()[i].getCategory().equals("Other")){
+                other += activeBankAccount.getIncome()[i].getTotal();
+            }
+            else if(activeBankAccount.getIncome()[i].getCategory().equals("Salary")){
+                salary += activeBankAccount.getIncome()[i].getTotal();
+            }
+
+        }
+
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
+
+        if(salary != 0)
+        {
+            pieChartData.add(new PieChart.Data("Salary", salary));
+        }
+        if(transaction != 0){
+            pieChartData.add(new PieChart.Data("Transaction", transaction));
+        }
+        if(other != 0){
+            pieChartData.add(new PieChart.Data("Other", other));
+        }
+
+        myPieChart.setData(pieChartData);
+    }
+
+    @FXML
+    public void pieChartToExpense() {
+        pieChartIncome = false;
+        pieChartExpense = true;
+        pieChartCombined = false;
         float shopping = 0;
         float rent = 0;
         float transport = 0;
@@ -412,44 +552,6 @@ public class MainPage {
 
 
         myPieChart.setData(pieChartData);
-       // myPieChart.setLegendVisible(false);
-
-
-
-    }
-
-    @FXML
-    public void SwapLeftContainer(ActionEvent actionEvent) throws IOException, InterruptedException {
-        if(!pieChartContainer.isVisible())
-        {
-            UpdatePieChart();
-            swapLeftContainerBtn.setText("Árfolyam");
-            currencyExchangeContainer.setVisible(false);
-            //myPieChart.setVisible(true);
-            pieChartContainer.setVisible(true);
-            System.out.println(pieChartContainer.isVisible());
-            pieChartContainer.setTranslateZ(2);
-
-            myStackPane.layout();
-            pieChartContainer.layout();
-        }
-        else {
-            swapLeftContainerBtn.setText("Eloszlás");
-            currencyExchangeContainer.setVisible(true);
-            //myPieChart.setVisible(false);
-
-            pieChartContainer.setVisible(false);
-        }
-    }
-
-    @FXML
-    public void showValuePieChart(Event event) {
-        final Label caption = new Label("");
-       // caption.setText(String.valueOf(myPieChart.getPieValue()) + "%");
-    }
-
-    @FXML
-    public void AccountInfo(ActionEvent actionEvent) {
     }
 }
 

@@ -201,9 +201,9 @@
                                              <children>
                                                 <HBox alignment="TOP_CENTER" prefHeight="100.0" styleClass="pieChartBtnContainer">
                                                    <children>
-                                                      <Button mnemonicParsing="false" styleClass="pieExpenseBtn" text="Kiadás" />
-                                                      <Button mnemonicParsing="false" styleClass="pieIncomeBtn" text="Bevétel" />
-                                                      <Button mnemonicParsing="false" styleClass="pieCombinedBtn" text="Kiadás/Bevétel" />
+                                                      <Button mnemonicParsing="false" onAction="#pieChartToExpense" styleClass="pieExpenseBtn" text="Kiadás" />
+                                                      <Button mnemonicParsing="false" onAction="#PieChartToIncome" styleClass="pieIncomeBtn" text="Bevétel" />
+                                                      <Button mnemonicParsing="false" onAction="#PieChartToIncomeExpense" styleClass="pieCombinedBtn" text="Kiadás/Bevétel" />
                                                    </children>
                                                 </HBox>
                                                 <PieChart fx:id="myPieChart" onMouseClicked="#showValuePieChart" styleClass="myPieChart" />

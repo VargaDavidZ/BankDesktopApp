@@ -282,4 +282,35 @@ public class RestApi {
 
 
 
+    public static void ConnectUser(String accId, String email, String authToken) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(String.format("http://localhost:3000/accounts/user/email/%s",accId)))
+                .header("Content-Type", "application/json")
+                .header("authorization", "Bearer "+ authToken)
+                .method("PATCH", HttpRequest.BodyPublishers.ofString(String.format("{\"email\":\"%s\"}", email)))
+                .build();
+
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.printf(response.body());
+
+    }
+
+    public static void RemoveCardFromUser(String accId, String userId, String authToken) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(String.format("http://localhost:3000/accounts/disconnect/%s",accId)))
+                .header("Content-Type", "application/json")
+                .header("authorization", "Bearer "+ authToken)
+                .method("PATCH", HttpRequest.BodyPublishers.ofString(String.format("{\"userId\":\"%s\"}", userId)))
+                .build();
+
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.printf(response.body());
+    }
+
+
+
 }

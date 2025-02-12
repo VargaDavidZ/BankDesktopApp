@@ -27,11 +27,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-
 
 
 public class MainPage {
@@ -42,7 +43,7 @@ public class MainPage {
     private HBox myhbox;
     @FXML
     private AreaChart<String,Number> EurChart;
-    private  BankAccount[] bankAccounts;
+    private  BankAccount[] bankAccounts = new BankAccount[0];
     RestApi api = new RestApi();
     private static User activeUser;
     private static BankAccount activeBankAccount;
@@ -53,7 +54,7 @@ public class MainPage {
     @FXML
     private ListView expenseList;
     @FXML
-    private ListView<AccountCard> cardList;
+    private ListView<AccountCard> cardList = new ListView<>();
     @FXML
     private Text eurText;
     @FXML
@@ -109,7 +110,7 @@ public class MainPage {
 
     public void initialize() throws IOException, InterruptedException {
 
-        bankAccounts = api.GetAllBankAccounts(activeUser);
+        this.bankAccounts = api.GetAllBankAccounts(activeUser);
         cardList.setOrientation(Orientation.HORIZONTAL);
 
         Float currentEur = api.GetEur(0).getValue().get("huf");
@@ -118,6 +119,8 @@ public class MainPage {
         Float currentUsd = api.GetUsd(0).getValue().get("huf");
         Float yesterdayUsd = api.GetUsd(1).getValue().get("huf");
         float changeUsd = ((currentUsd-yesterdayUsd) / currentUsd * 100);
+
+        System.out.println("Active User Id"+activeUser.getId());
 
         pieChartContainer.setVisible(false);
         //display EUR-HUF exchange rate and change %
@@ -137,9 +140,12 @@ public class MainPage {
         }
 
 
+        System.out.println(activeBankAccount.toString());
+        System.out.println("Active acc id " +activeBankAccount.getId());
+        System.out.println(activeUser.getAuthToken());
         //display USD-HUF exchange rate and change %
         System.out.printf(currentUsd + "---");
-        usdText.setText((Math.round(currentUsd*100)/100) + "Ftttt");
+        usdText.setText((Math.round(currentUsd*100)/100) + "Ft");
         usdChange.setText("+"+Math.round(changeUsd*100)/100.0 + "%");
         if(currentUsd-yesterdayUsd < 0)
         {
@@ -161,6 +167,7 @@ public class MainPage {
         ListTransactions();
         ListCards();
 
+
         Platform.runLater(() -> {
             cardList.getFocusModel().focus(0);
             try {
@@ -169,6 +176,7 @@ public class MainPage {
                 throw new RuntimeException(e);
             }
             cardList.getFocusModel().getFocusedItem().changeTotal(total);
+            cardList.getFocusModel().getFocusedItem().getHamburgerMenu().setDisable(false);
             try {
                 LoadCharts(15);
             } catch (IOException | InterruptedException e) {
@@ -183,10 +191,12 @@ public class MainPage {
         activeBankAccount = inpAcc;
     }
 
-    public void ListCards()
-    {
+    public void ListCards() throws FileNotFoundException {
+
+
 
         cardList.getItems().clear();
+
         for (int i = 0; i < bankAccounts.length; i++) {
 
             cardList.getItems().add(new AccountCard(bankAccounts[i],activeUser));
@@ -255,7 +265,7 @@ public class MainPage {
        popupStage.setScene(popupScene);
        popupStage.resizableProperty().setValue(Boolean.FALSE);
        popupStage.show();
-
+       
        popupStage.setOnHidden(event -> {
            try {
                RefreshTransactions();
@@ -264,6 +274,10 @@ public class MainPage {
            }
        });
 
+
+
+
+
     }
 
 
@@ -271,9 +285,11 @@ public class MainPage {
         return bankAccounts;
     }
 
-    public static BankAccount GetActiveBankAccount() {
+    public static BankAccount getActiveBankAccount() {
         return activeBankAccount;
     }
+
+
 
     public void CalcActiveTotal() throws IOException, InterruptedException {
         float income = 0;
@@ -299,6 +315,13 @@ public class MainPage {
         return activeUser;
     }
 
+    public  ListView<AccountCard> getCardList() {
+        return cardList;
+    }
+
+    public void setCardList(ListView<AccountCard> cardList) {
+        this.cardList = cardList;
+    }
 
     @FXML
     public void ChangeActiveBankAccount(Event event) throws IOException, InterruptedException {
@@ -306,6 +329,7 @@ public class MainPage {
         {
             SetActiveAccount(bankAccounts[cardList.getFocusModel().getFocusedIndex()]);
             focusedItem = cardList.getFocusModel().getFocusedIndex();
+
 
         }
         catch (Exception e)
@@ -318,6 +342,18 @@ public class MainPage {
         CalcActiveTotal();
         RefreshCards();
         cardList.getFocusModel().getFocusedItem().changeTotal(total);
+        cardList.getFocusModel().getFocusedItem().getHamburgerMenu().setDisable(false);
+
+        cardList.getFocusModel().getFocusedItem().getDeleteMenuOpt().setOnAction( e -> {
+            try {
+                System.out.printf("ddd");
+                RestApi.RemoveCardFromUser(MainPage.getActiveBankAccount().getId(), MainPage.getActiveUser().getId(), MainPage.getActiveUser().getAuthToken());
+                RefreshCards();
+            } catch (IOException | InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+        } );
+
 
     }
 
@@ -549,9 +585,18 @@ public class MainPage {
             pieChartData.add(new PieChart.Data("Other", other));
         }
 
-
-
         myPieChart.setData(pieChartData);
     }
+
+
+    public void DeleteCard() throws IOException, InterruptedException {
+        RefreshCards();
+
+
+    }
+
+
+
+
 }
 

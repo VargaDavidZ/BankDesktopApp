@@ -16,4 +16,36 @@
 
 }
 
+.menu-button .arrow-button {
+    -fx-padding: 0;
+}
 
+.menu-button .arrow-button > .arrow {
+    -fx-padding: 0;
+}
+
+.menu-button{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.menu-item {
+    -fx-background-color: #25273E;
+    -fx-text-fill: white;
+    -fx-border-color: transparent transparent white transparent;;
+}
+
+.menu-item .label {
+    -fx-text-fill: white;
+}
+
+.menu-item:hover {
+    -fx-background-color: #F57933CC;
+    -fx-cursor: hand;
+}
+
+.context-menu{
+    -fx-background-color: #25273E;
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+}

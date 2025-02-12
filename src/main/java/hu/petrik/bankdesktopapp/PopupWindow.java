@@ -23,7 +23,7 @@ public class PopupWindow {
     private ComboBox<String> categoryInput;
 
     @javafx.fxml.FXML
-    public Button addTransactionBtn;
+    public Button addTransactionBtn = new Button();
 
     MainPage mainPage = new MainPage();
     @javafx.fxml.FXML
@@ -68,11 +68,11 @@ public class PopupWindow {
        }
 
         if(expenseRadioBtn.isSelected()){
-            RestApi.CreateExpense(Integer.parseInt(totalInput.getText()),categoryInput.getValue(),"Spár",desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.GetActiveBankAccount().getId(),MainPage.getActiveUser().getAuthToken());
+            RestApi.CreateExpense(Integer.parseInt(totalInput.getText()),categoryInput.getValue(),"Spár",desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.getActiveBankAccount().getId(),MainPage.getActiveUser().getAuthToken());
 
         }
         else if(incomeRadioBtn.isSelected()){
-            RestApi.CreateIncome(Integer.parseInt(totalInput.getText()),categoryInput.getValue(),"Spár",desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.GetActiveBankAccount().getId(), MainPage.getActiveUser().getAuthToken());
+            RestApi.CreateIncome(Integer.parseInt(totalInput.getText()),categoryInput.getValue(),"Spár",desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.getActiveBankAccount().getId(), MainPage.getActiveUser().getAuthToken());
 
         }
         else
@@ -96,5 +96,78 @@ public class PopupWindow {
     @javafx.fxml.FXML
     public void setIncomeCategories(ActionEvent actionEvent) {
         categoryInput.getItems().setAll("Transaction" ,"Salary" ,"Other");
+    }
+
+
+    public Button getAddTransactionBtn() {
+        return addTransactionBtn;
+    }
+
+    public void setAddTransactionBtn(Button addTransactionBtn) {
+        this.addTransactionBtn = addTransactionBtn;
+    }
+
+    public TextField getDesciptionInput() {
+        return desciptionInput;
+    }
+
+    public void setDesciptionInput(TextField desciptionInput) {
+        this.desciptionInput = desciptionInput;
+    }
+
+    public TextField getTotalInput() {
+        return totalInput;
+    }
+
+    public void setTotalInput(TextField totalInput) {
+        this.totalInput = totalInput;
+    }
+
+    public Button getCloseBtn() {
+        return closeBtn;
+    }
+
+    public void setCloseBtn(Button closeBtn) {
+        this.closeBtn = closeBtn;
+    }
+
+    public RadioButton getExpenseRadioBtn() {
+        return expenseRadioBtn;
+    }
+
+    public void setExpenseRadioBtn(RadioButton expenseRadioBtn) {
+        this.expenseRadioBtn = expenseRadioBtn;
+    }
+
+    public RadioButton getIncomeRadioBtn() {
+        return incomeRadioBtn;
+    }
+
+    public void setIncomeRadioBtn(RadioButton incomeRadioBtn) {
+        this.incomeRadioBtn = incomeRadioBtn;
+    }
+
+    public ToggleGroup getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(ToggleGroup transactionType) {
+        this.transactionType = transactionType;
+    }
+
+    public ComboBox<String> getCategoryInput() {
+        return categoryInput;
+    }
+
+    public void setCategoryInput(ComboBox<String> categoryInput) {
+        this.categoryInput = categoryInput;
+    }
+
+    public Label getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(Label errorMsg) {
+        this.errorMsg = errorMsg;
     }
 }

@@ -9,6 +9,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
+import java.util.UUID;
 
 
 public class RestApi {
@@ -60,7 +61,7 @@ public class RestApi {
 
     public BankAccount[] GetAllBankAccounts(User user) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:3000/accounts/all/" + user.getId()))
+                .uri(URI.create("http://localhost:3000/accounts/user/" + user.getId()))
                 .header("authorization", "Bearer "+ user.getAuthToken() )
                 .build();
 
@@ -213,28 +214,6 @@ public class RestApi {
 
     }
 
-
-    /*public Eur GetEur() throws IOException, InterruptedException {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://latest.currency-api.pages.dev/v1/currencies/eur.json"))
-                .build();
-
-        HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        //mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-
-        Eur eur = mapper.readValue(response.body().toString(),Eur.class);
-
-      //  System.out.printf(response.body().toString());
-
-        return eur;
-
-    }
-
-     */
     //prop to set how far back i want to go
     //rename to GetPastEur(x:dayBack)
     //return the Eur price in HUF, -daysBack indicates how far in the past we want to go back -> 0 present ->1 yesterday..
@@ -298,6 +277,8 @@ public class RestApi {
     }
 
     public static void RemoveCardFromUser(String accId, String userId, String authToken) throws IOException, InterruptedException {
+
+
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(String.format("http://localhost:3000/accounts/disconnect/%s",accId)))
                 .header("Content-Type", "application/json")
@@ -311,6 +292,40 @@ public class RestApi {
         System.out.printf(response.body());
     }
 
+    public static void DeleteCardFromUser(String accId, String authToken) throws IOException, InterruptedException {
+
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(String.format("http://localhost:3000/accounts/%s",accId)))
+                .header("Content-Type", "application/json")
+                .header("authorization", "Bearer "+ authToken)
+                .method("DELETE", HttpRequest.BodyPublishers.ofString(""))
+                .build();
+
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.printf(response.body());
+    }
+
+    public void Transfer(String userId,String senderId,String receiverId, int amount, String authToken) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(String.format("http://localhost:3000/accounts/transfer")))
+                .header("Content-Type", "application/json")
+                .header("authorization", "Bearer "+ authToken)
+                .method("PATCH", HttpRequest.BodyPublishers.ofString(String.format("{\"userId\":\"%s\",\"accountfrom\":\"%s\",\"accountto\":\"%s\",\"amount\": %d}", userId,senderId,receiverId,amount)))
+                .build();
+
+
+
+
+
+        HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
+
+
+        System.out.printf(response.body());
+
+    }
 
 
 }

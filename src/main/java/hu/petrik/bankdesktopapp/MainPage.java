@@ -108,7 +108,13 @@ public class MainPage {
 
     }
 
+
+    //duplicate card at user
+    //confirmation on delete and transfer
+
     public void initialize() throws IOException, InterruptedException {
+
+
 
         this.bankAccounts = api.GetAllBankAccounts(activeUser);
         cardList.setOrientation(Orientation.HORIZONTAL);
@@ -185,6 +191,8 @@ public class MainPage {
 
         });
 
+
+
     }
 
     public void SetActiveAccount(BankAccount inpAcc) {
@@ -218,8 +226,7 @@ public class MainPage {
         });
     }
 
-    public void ListTransactions()
-    {
+    public void ListTransactions() {
         for (int i = 0; i < transactionArray.size(); i++) {
             expenseList.getItems().add(0,new TransactionComponent(transactionArray.get(i)));
         }
@@ -273,11 +280,6 @@ public class MainPage {
                throw new RuntimeException(e);
            }
        });
-
-
-
-
-
     }
 
 
@@ -347,13 +349,44 @@ public class MainPage {
         cardList.getFocusModel().getFocusedItem().getDeleteMenuOpt().setOnAction( e -> {
             try {
                 System.out.printf("ddd");
-                RestApi.RemoveCardFromUser(MainPage.getActiveBankAccount().getId(), MainPage.getActiveUser().getId(), MainPage.getActiveUser().getAuthToken());
-                RefreshCards();
+                if(activeBankAccount.getOwnerName().equals(activeUser.getFirstname() + " " + activeUser.getLastname())){
+                    RestApi.DeleteCardFromUser(activeBankAccount.getId(),activeUser.getAuthToken());
+                }
+                else
+                {
+                    RestApi.RemoveCardFromUser(MainPage.getActiveBankAccount().getId(), MainPage.getActiveUser().getId(), MainPage.getActiveUser().getAuthToken());
+
+                }
+                 RefreshCards();
             } catch (IOException | InterruptedException ex) {
                 throw new RuntimeException(ex);
             }
         } );
 
+        /*
+        cardList.getFocusModel().getFocusedItem().getOpenTransferPopUp().setOnAction( e -> {
+            System.out.printf("asdddd");
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(getClass().getResource("transferPopUp.fxml"));
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            Scene popupScene = new Scene(root);
+            popupStage.setScene(popupScene);
+            popupStage.resizableProperty().setValue(Boolean.FALSE);
+            popupStage.show();
+
+            TransferPopUp transferPopUp = new TransferPopUp();
+            transferPopUp.getTransferBtn().setOnAction(ev ->{
+                System.out.println("transfer");
+            });
+
+        });
+
+         */
 
     }
 
@@ -424,6 +457,7 @@ public class MainPage {
     public void SwapLeftContainer(ActionEvent actionEvent) throws IOException, InterruptedException {
         if(!pieChartContainer.isVisible())
         {
+
             UpdatePieChart();
             swapLeftContainerBtn.setText("Árfolyam");
             currencyExchangeContainer.setVisible(false);
@@ -433,17 +467,25 @@ public class MainPage {
             pieChartContainer.setTranslateZ(2);
 
             myPieChart.setLegendVisible(false);
-            /*myStackPane.layout();
+
+
+            leftContainer.layout();
+            myStackPane.layout();
             pieChartContainer.layout();
 
-             */
+
+
+
         }
         else {
+            leftContainer.layout();
             swapLeftContainerBtn.setText("Eloszlás");
             currencyExchangeContainer.setVisible(true);
             //myPieChart.setVisible(false);
 
+            myStackPane.layout();
             pieChartContainer.setVisible(false);
+
         }
     }
 
@@ -596,7 +638,11 @@ public class MainPage {
     }
 
 
+    public void OpenTransferWindow() throws IOException {
 
 
+
+
+    }
 }
 

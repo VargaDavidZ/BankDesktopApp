@@ -48,8 +48,9 @@
                           </ImageView>
                       </graphic>
                     <items>
-                      <MenuItem mnemonicParsing="false" onAction="#OpenAddUserTab" text="Add user" />
-                      <MenuItem fx:id="deleteMenuOpt" mnemonicParsing="false" onAction="#DeleteCard" text="Delete card" />
+                        <MenuItem mnemonicParsing="false" onAction="#transferCurrency" text="Utalás" />
+                      <MenuItem mnemonicParsing="false" onAction="#OpenAddUserTab" text="Felhasználó felvétel" />
+                      <MenuItem fx:id="deleteMenuOpt" mnemonicParsing="false" onAction="#DeleteCard" text="Számla törlése" />
                     </items>
                   </MenuButton>
                </children>

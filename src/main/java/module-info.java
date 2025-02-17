@@ -5,6 +5,7 @@ module hu.petrik.bankdesktopapp {
     requires java.net.http;
 
     requires com.fasterxml.jackson.databind;
+    requires jdk.compiler;
 
 
     opens hu.petrik.bankdesktopapp to javafx.fxml;

@@ -8,48 +8,39 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="mainPage" maxHeight="400.0" minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.MainPage">
-        <HBox alignment="CENTER_RIGHT" maxHeight="600.0" maxWidth="1000.0" minWidth="1000.0" prefHeight="600.0" prefWidth="300.0">
-            <VBox alignment="TOP_CENTER" maxHeight="600.0" maxWidth="100.0" prefHeight="200.0" prefWidth="100.0" styleClass="leftNav">
-                <Button maxWidth="100.0" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="25.0" prefWidth="100.0" styleClass="logoutBtn" text="Kijelentketés" />
-                <VBox alignment="CENTER" maxHeight="575.0" minHeight="500.0" prefHeight="575.0" prefWidth="100.0" styleClass="buttonCont">
-                    <Button minWidth="100.0" mnemonicParsing="false" onAction="#MainPage" styleClass="leftNavBtn" text="Főoldal">
-                        <VBox.margin>
-                            <Insets />
-                        </VBox.margin>
-                    </Button>
-                </VBox>
-            </VBox>
-            <BorderPane maxHeight="600.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" styleClass="mainPageBorderPane" HBox.hgrow="NEVER">
-                <top>
-                    <HBox alignment="CENTER" minHeight="250.0" minWidth="630.0" prefHeight="200.0" prefWidth="800.0" styleClass="top_side_main" BorderPane.alignment="CENTER">
-               <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="kártya összeg" />
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Kártya azonosító" />
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Számlatulajdonos neve" />
-               </children>
-                    </HBox>
-                </top>
+<VBox fx:id="mainPage" maxHeight="400.0" maxWidth="800.0" minHeight="400.0" minWidth="400.0" prefHeight="400.0" prefWidth="800.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.MainPage">
+        <HBox alignment="CENTER_RIGHT" maxHeight="400.0" maxWidth="800.0" minHeight="400.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0">
+            <BorderPane maxHeight="400.0" minHeight="400.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" styleClass="mainPageBorderPane" HBox.hgrow="NEVER">
                 <center>
                     <HBox fx:id="myhbox" alignment="CENTER" maxHeight="300.0" maxWidth="Infinity" minHeight="300.0" minWidth="800.0" prefHeight="300.0" prefWidth="800.0" BorderPane.alignment="CENTER">
-                        <VBox fx:id="leftContainer" alignment="TOP_CENTER" maxHeight="200.0" maxWidth="390.0" minHeight="300.0" minWidth="430.0" prefHeight="200.0" prefWidth="390.0" styleClass="leftSide">
+                       <HBox alignment="CENTER" maxWidth="300.0" minHeight="250.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0" styleClass="leftSide">
+                  <children>
+                     <VBox maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0">
+                        <children>
+                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="kártya összeg" />
+                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Kártya azonosító" />
+                           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Számlatulajdonos neve" />
+                        </children>
+                        <padding>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </padding>
+                     </VBox>
+                  </children>
+                  <HBox.margin>
+                     <Insets right="10.0" />
+                  </HBox.margin>
+                       </HBox>
+                        <VBox fx:id="leftContainer" alignment="TOP_CENTER" maxHeight="200.0" maxWidth="300.0" minHeight="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="390.0" styleClass="leftSide">
                             <HBox.margin>
-                                <Insets right="10.0" />
+                                <Insets />
                             </HBox.margin>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Felhasználók" />
                   <Button mnemonicParsing="false" text="Felhasználó felvétele" />
-                  <ListView prefHeight="200.0" prefWidth="200.0" />
+                  <ListView fx:id="userList" prefHeight="200.0" prefWidth="200.0" />
+                  <padding>
+                     <Insets top="10.0" />
+                  </padding>
 
-                        </VBox>
-                        <VBox maxHeight="200.0" maxWidth="390.0" minHeight="300.0" minWidth="430.0" prefHeight="300.0" prefWidth="390.0" styleClass="myList" HBox.hgrow="NEVER">
-                            <Button alignment="CENTER" mnemonicParsing="false" onAction="#PopUpWindow" styleClass="addTransactionBtn" text="Adat felvétele" textFill="WHITE">
-                                <VBox.margin>
-                                    <Insets bottom="5.0" />
-                                </VBox.margin>
-                            </Button>
-                            <HBox maxHeight="300.0" minHeight="250.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="NEVER">
-                                <ListView fx:id="expenseList" maxWidth="200.0" minHeight="200.0" minWidth="430.0" prefHeight="300.0" prefWidth="195.0" styleClass="myList" HBox.hgrow="NEVER" />
-                            </HBox>
                         </VBox>
                     </HBox>
                 </center>

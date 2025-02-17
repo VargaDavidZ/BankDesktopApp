@@ -63,6 +63,8 @@ public class MainController {
             stage.resizableProperty().setValue(Boolean.FALSE);
             stage.centerOnScreen();
             stage.show();
+        
+
         }
 
     }

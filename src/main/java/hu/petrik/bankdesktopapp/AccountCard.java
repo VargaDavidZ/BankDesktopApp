@@ -1,5 +1,6 @@
 package hu.petrik.bankdesktopapp;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -36,6 +37,9 @@ public class AccountCard extends AnchorPane {
 
     @FXML
     private MenuItem deleteMenuOpt;
+
+    @FXML
+    private MenuItem openTransferPopUp;
 
     RestApi api;
 
@@ -95,6 +99,19 @@ public class AccountCard extends AnchorPane {
 
     }
 
+    //Handle the new window in main because this action will need to refresh components in main
+    @FXML
+    public void transferCurrency() throws IOException, InterruptedException {
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        Parent root = FXMLLoader.load(getClass().getResource("transferPopUp.fxml"));
+        Scene popupScene = new Scene(root);
+        popupStage.setScene(popupScene);
+        popupStage.resizableProperty().setValue(Boolean.FALSE);
+        popupStage.show();
+
+    }
+
 
     public MenuButton getHamburgerMenu() {
         return hamburgerMenu;
@@ -110,5 +127,13 @@ public class AccountCard extends AnchorPane {
 
     public void setDeleteMenuOpt(MenuItem deleteMenuOpt) {
         this.deleteMenuOpt = deleteMenuOpt;
+    }
+
+    public MenuItem getOpenTransferPopUp() {
+        return openTransferPopUp;
+    }
+
+    public void setOpenTransferPopUp(MenuItem openTransferPopUp) {
+        this.openTransferPopUp = openTransferPopUp;
     }
 }

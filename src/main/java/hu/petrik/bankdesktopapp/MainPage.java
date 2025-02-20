@@ -272,7 +272,7 @@ public class MainPage {
        popupStage.setScene(popupScene);
        popupStage.resizableProperty().setValue(Boolean.FALSE);
        popupStage.show();
-       
+
        popupStage.setOnHidden(event -> {
            try {
                RefreshTransactions();
@@ -282,7 +282,6 @@ public class MainPage {
        });
     }
 
-
     public BankAccount[] getBankAccounts() {
         return bankAccounts;
     }
@@ -290,8 +289,6 @@ public class MainPage {
     public static BankAccount getActiveBankAccount() {
         return activeBankAccount;
     }
-
-
 
     public void CalcActiveTotal() throws IOException, InterruptedException {
         float income = 0;
@@ -347,20 +344,31 @@ public class MainPage {
         cardList.getFocusModel().getFocusedItem().getHamburgerMenu().setDisable(false);
 
         cardList.getFocusModel().getFocusedItem().getDeleteMenuOpt().setOnAction( e -> {
-            try {
-                System.out.printf("ddd");
-                if(activeBankAccount.getOwnerName().equals(activeUser.getFirstname() + " " + activeUser.getLastname())){
-                    RestApi.DeleteCardFromUser(activeBankAccount.getId(),activeUser.getAuthToken());
-                }
-                else
-                {
-                    RestApi.RemoveCardFromUser(MainPage.getActiveBankAccount().getId(), MainPage.getActiveUser().getId(), MainPage.getActiveUser().getAuthToken());
 
-                }
-                 RefreshCards();
-            } catch (IOException | InterruptedException ex) {
+            //RestApi.RemoveCardFromUser(MainPage.getActiveBankAccount().getId(), MainPage.getActiveUser().getId(), MainPage.getActiveUser().getAuthToken());
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(getClass().getResource("confirmation.fxml"));
+            } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
+            Scene popupScene = new Scene(root);
+            popupStage.setScene(popupScene);
+            popupStage.resizableProperty().setValue(Boolean.FALSE);
+            popupStage.show();
+
+            popupStage.setOnHidden(windowEvent -> {
+                try {
+                    RefreshCards();
+
+                } catch (IOException | InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+
+
         } );
 
         /*
@@ -451,8 +459,6 @@ public class MainPage {
         
     }
 
-
-
     @FXML
     public void SwapLeftContainer(ActionEvent actionEvent) throws IOException, InterruptedException {
         if(!pieChartContainer.isVisible())
@@ -468,13 +474,9 @@ public class MainPage {
 
             myPieChart.setLegendVisible(false);
 
-
             leftContainer.layout();
             myStackPane.layout();
             pieChartContainer.layout();
-
-
-
 
         }
         else {
@@ -496,7 +498,14 @@ public class MainPage {
     }
 
     @FXML
-    public void AccountInfo(ActionEvent actionEvent) {
+    public void AccountInfo(ActionEvent actionEvent) throws IOException {
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        Parent root = FXMLLoader.load(getClass().getResource("cardDetail.fxml"));
+        Scene popupScene = new Scene(root);
+        popupStage.setScene(popupScene);
+        popupStage.resizableProperty().setValue(Boolean.FALSE);
+        popupStage.show();
     }
 
     @FXML
@@ -607,7 +616,6 @@ public class MainPage {
 
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
 
-
         if(shopping != 0)
         {
             pieChartData.add(new PieChart.Data("Shopping", shopping));
@@ -633,15 +641,9 @@ public class MainPage {
 
     public void DeleteCard() throws IOException, InterruptedException {
         RefreshCards();
-
-
     }
 
-
     public void OpenTransferWindow() throws IOException {
-
-
-
 
     }
 }

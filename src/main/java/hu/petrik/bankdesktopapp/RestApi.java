@@ -9,6 +9,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.UUID;
 
 
@@ -70,14 +71,10 @@ public class RestApi {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        BankAccount[] bankaccounts = mapper.readValue(response.body().toString(),BankAccount[].class);
 
-
-        return bankaccounts;
+        return mapper.readValue(response.body().toString(),BankAccount[].class);
 
     }
-
-
 
     public Expense[] GetAccountExpenses(String accountId, String authToken) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
@@ -195,7 +192,7 @@ public class RestApi {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        return   response.body();
+        return  response.body();
 
     }
 
@@ -316,14 +313,28 @@ public class RestApi {
                 .method("PATCH", HttpRequest.BodyPublishers.ofString(String.format("{\"userId\":\"%s\",\"accountfrom\":\"%s\",\"accountto\":\"%s\",\"amount\": %d}", userId,senderId,receiverId,amount)))
                 .build();
 
-
-
-
-
         HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
 
 
         System.out.printf(response.body());
+
+    }
+
+    public User[] GetAllUsers(String accId, String authToken) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:3000/accounts/onlyUsers/" + accId))
+                .header("authorization", "Bearer "+ authToken)
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.printf("%s\n", response.body());
+
+        ObjectMapper mapper = new ObjectMapper();
+
+
+        return mapper.readValue(response.body().toString(),User[].class);
+
 
     }
 

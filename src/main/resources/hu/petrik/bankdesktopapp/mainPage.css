@@ -47,6 +47,7 @@
     -fx-background-radius: 10px;
     -fx-alignment: center;
 
+
 }
 
 
@@ -285,6 +286,13 @@
 .pieExpenseBtn:hover, .pieIncomeBtn:hover, .pieCombinedBtn:hover{
     -fx-background-color: #F57933CC;
     -fx-cursor: hand;
+}
+
+
+.userList .list-cell
+{
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
 }
 
 

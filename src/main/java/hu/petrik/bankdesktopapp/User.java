@@ -1,11 +1,13 @@
 package hu.petrik.bankdesktopapp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import java.util.Arrays;
 import java.util.Date;
 
-
+@JsonIgnoreProperties({ "password" })
 public class User {
     private String id;
     private String Firstname;
@@ -96,12 +98,18 @@ public class User {
         return password;
     }
 
+
+
     @JsonSetter("password")
     public void setPassword(String password) {
         this.password = password;
     }
 
      */
+
+
+
+
 
     public String[] getExpense() {
         return Expense;

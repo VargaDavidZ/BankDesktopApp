@@ -2,6 +2,9 @@ package hu.petrik.bankdesktopapp;
 
 import com.sun.tools.javac.Main;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -22,6 +25,9 @@ public class TransferPopUp {
     @javafx.fxml.FXML
     private Button closeWindowBtn;
 
+    private static String accNum;
+    private static String amount;
+
     @javafx.fxml.FXML
     public void CancelUserAdd(ActionEvent actionEvent) {
         Stage stage = (Stage)closeWindowBtn.getScene().getWindow();
@@ -32,10 +38,30 @@ public class TransferPopUp {
 
     @javafx.fxml.FXML
     public void transferAmountBtn(ActionEvent actionEvent) throws IOException, InterruptedException {
-        System.out.println("asd");
-        RestApi restApi = new RestApi();
-        restApi.Transfer(MainPage.getActiveUser().getId(),MainPage.getActiveBankAccount().getId(), transferAccNum.getText(),Integer.parseInt(transferAmount.getText()),MainPage.getActiveUser().getAuthToken());
-        MainPage mainPage = new MainPage();
+
+
+        Stage stage = (Stage)closeWindowBtn.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("TransferConfirmation.fxml"));
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(root);
+        stage.setMinHeight(400);
+        stage.setMinWidth(300);
+        stage.resizableProperty().setValue(Boolean.FALSE);
+
+        accNum = transferAccNum.getText();
+        amount = transferAmount.getText();
+        System.out.println(accNum + " " + amount);
+        stage.show();
 
     }
+
+    public static String getAmount() {
+        return amount;
+    }
+
+    public static String getAccNum() {
+        return accNum;
+    }
+
+
 }

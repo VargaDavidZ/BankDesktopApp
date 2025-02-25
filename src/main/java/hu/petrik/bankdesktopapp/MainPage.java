@@ -43,7 +43,7 @@ public class MainPage {
     private HBox myhbox;
     @FXML
     private AreaChart<String,Number> EurChart;
-    private  BankAccount[] bankAccounts = new BankAccount[0];
+    private static BankAccount[] bankAccounts = new BankAccount[0];
     RestApi api = new RestApi();
     private static User activeUser;
     private static BankAccount activeBankAccount;
@@ -113,8 +113,6 @@ public class MainPage {
     //confirmation on delete and transfer
 
     public void initialize() throws IOException, InterruptedException {
-
-
 
         this.bankAccounts = api.GetAllBankAccounts(activeUser);
         cardList.setOrientation(Orientation.HORIZONTAL);
@@ -190,8 +188,6 @@ public class MainPage {
             }
 
         });
-
-
 
     }
 
@@ -282,12 +278,18 @@ public class MainPage {
        });
     }
 
-    public BankAccount[] getBankAccounts() {
+    public static BankAccount[] getBankAccounts() {
         return bankAccounts;
     }
 
     public static BankAccount getActiveBankAccount() {
         return activeBankAccount;
+    }
+
+
+
+    public static void setActiveBankAccount(BankAccount activeBankAccount) {
+        MainPage.activeBankAccount = activeBankAccount;
     }
 
     public void CalcActiveTotal() throws IOException, InterruptedException {
@@ -362,6 +364,8 @@ public class MainPage {
             popupStage.setOnHidden(windowEvent -> {
                 try {
                     RefreshCards();
+                   // cardList.getFocusModel().getFocusedItem().changeTotal(total);
+                    //cardList.getFocusModel().getFocusedItem().getHamburgerMenu().setDisable(false);
 
                 } catch (IOException | InterruptedException ex) {
                     throw new RuntimeException(ex);
@@ -370,31 +374,6 @@ public class MainPage {
 
 
         } );
-
-        /*
-        cardList.getFocusModel().getFocusedItem().getOpenTransferPopUp().setOnAction( e -> {
-            System.out.printf("asdddd");
-            Stage popupStage = new Stage();
-            popupStage.initModality(Modality.APPLICATION_MODAL);
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("transferPopUp.fxml"));
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-            Scene popupScene = new Scene(root);
-            popupStage.setScene(popupScene);
-            popupStage.resizableProperty().setValue(Boolean.FALSE);
-            popupStage.show();
-
-            TransferPopUp transferPopUp = new TransferPopUp();
-            transferPopUp.getTransferBtn().setOnAction(ev ->{
-                System.out.println("transfer");
-            });
-
-        });
-
-         */
 
     }
 
@@ -465,6 +444,8 @@ public class MainPage {
         {
 
             UpdatePieChart();
+
+            myStackPane.layout();
             swapLeftContainerBtn.setText("Árfolyam");
             currencyExchangeContainer.setVisible(false);
             //myPieChart.setVisible(true);
@@ -474,19 +455,19 @@ public class MainPage {
 
             myPieChart.setLegendVisible(false);
 
-            leftContainer.layout();
-            myStackPane.layout();
-            pieChartContainer.layout();
 
         }
         else {
-            leftContainer.layout();
+
+            UpdatePieChart();
+            myPieChart.getData().clear();
             swapLeftContainerBtn.setText("Eloszlás");
+            pieChartContainer.setVisible(false);
             currencyExchangeContainer.setVisible(true);
+
             //myPieChart.setVisible(false);
 
-            myStackPane.layout();
-            pieChartContainer.setVisible(false);
+
 
         }
     }

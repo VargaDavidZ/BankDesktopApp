@@ -295,6 +295,10 @@
     -fx-text-fill: white;
 }
 
+.accNum:hover{
+    -fx-text-fill: blue;
+}
+
 
 
 

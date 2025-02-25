@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -22,14 +23,22 @@
                               <font>
                                  <Font size="15.0" />
                               </font></Text>
-                           <Text fx:id="accNum" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Számlaszám: ">
+                           <Text fx:id="accNum" fill="WHITE" focusTraversable="true" onMouseClicked="#copyAccId" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="accNum" text="Számlaszám: ">
                               <font>
                                  <Font size="15.0" />
-                              </font></Text>
+                              </font>
+                              <cursor>
+                                 <Cursor fx:constant="HAND" />
+                              </cursor></Text>
                            <Text fx:id="ownerName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Számlatulajdonos neve:">
                               <font>
                                  <Font size="15.0" />
                               </font></Text>
+                           <Text fx:id="clipboardNotif" fill="#00ff22" strokeType="OUTSIDE" strokeWidth="0.0" text="Vágólapra másolva!">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                           </Text>
                         </children>
                         <padding>
                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

@@ -18,6 +18,7 @@ public class BankAccount {
     private Date updatedAt;
     private String currency;
     private String ownerName;
+    private String ownerId;
 
 
 
@@ -110,6 +111,7 @@ public class BankAccount {
     public String getCurrency() {
         return currency;
     }
+
     @JsonSetter("currency")
     public void setCurrency(String currency) {
         this.currency = currency;
@@ -123,6 +125,16 @@ public class BankAccount {
     public void setOwnerName(String ownerName) {
         this.ownerName = ownerName;
     }
+
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+    @JsonSetter("ownerId")
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
+
 
     @Override
     public String toString() {

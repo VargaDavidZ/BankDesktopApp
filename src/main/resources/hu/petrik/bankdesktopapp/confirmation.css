@@ -1,0 +1,24 @@
+.button {
+    -fx-background-color: #F57933;
+
+    -fx-background-radius: 5px;
+    -fx-max-width: 250;
+    -fx-font-size: 14px; /* Add 'px' unit to font size */
+    -fx-text-fill: #fff;
+
+}
+
+.button:hover {
+    -fx-background-color: #F57933CC;
+    -fx-cursor: hand;
+
+
+}
+
+.container{
+    -fx-background-color: #25273E;
+}
+
+.container.text{
+    -fx-text-fill: white;
+}

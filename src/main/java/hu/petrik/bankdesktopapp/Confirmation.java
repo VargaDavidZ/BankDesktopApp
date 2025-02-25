@@ -29,8 +29,10 @@ public class Confirmation {
         Stage stage = (Stage)confirm.getScene().getWindow();
         try {
             System.out.printf("ddd");
-            if(MainPage.getActiveBankAccount().getOwnerName().equals(MainPage.getActiveUser().getFirstname() + " " + MainPage.getActiveUser().getLastname())){
+
+            if(MainPage.getActiveBankAccount().getOwnerId().equals(MainPage.getActiveUser().getId())) {
                 RestApi.DeleteCardFromUser(MainPage.getActiveBankAccount().getId(),MainPage.getActiveUser().getAuthToken());
+                MainPage.setActiveBankAccount(MainPage.getBankAccounts()[0]);
                 //confirmation
                 stage.close();
             }
@@ -41,12 +43,15 @@ public class Confirmation {
             }
 
         } catch (IOException | InterruptedException ex) {
+            stage.close();
             throw new RuntimeException(ex);
+
         }
     }
 
     @javafx.fxml.FXML
     public void cancelAction(ActionEvent actionEvent) {
+        System.out.printf("close");
         Stage stage = (Stage)confirm.getScene().getWindow();
         stage.close();
     }

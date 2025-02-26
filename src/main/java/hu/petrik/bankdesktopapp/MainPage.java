@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -98,6 +99,9 @@ public class MainPage {
     private boolean pieChartExpense = true;
     private boolean pieChartCombined = false;
 
+
+
+
     //javadoc documentation
     public static void SetActiveUser(String activeUserInput) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
@@ -171,21 +175,27 @@ public class MainPage {
         ListTransactions();
         ListCards();
 
+        //LoadCurrencyData(15);
+
 
         Platform.runLater(() -> {
             cardList.getFocusModel().focus(0);
             try {
                 CalcActiveTotal();
+
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
+
             cardList.getFocusModel().getFocusedItem().changeTotal(total);
             cardList.getFocusModel().getFocusedItem().getHamburgerMenu().setDisable(false);
+
             try {
                 LoadCharts(15);
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
+
 
         });
 
@@ -394,10 +404,17 @@ public class MainPage {
     }
 
     public void LoadCharts(int daysToShow) throws IOException, InterruptedException {
+
+
         XYChart.Series<String, Number> eurSeries = new XYChart.Series<String, Number>();
         XYChart.Series<String, Number> usdSeries = new XYChart.Series<String, Number>();
+
+
+
+
         int days = daysToShow;
         Float f = 100.5F;
+
 
         for (int i = 0; i < daysToShow; i++) {
             //series.getData().add(new XYChart.Data(Integer.toString(eurIndex), eurValue));
@@ -406,6 +423,7 @@ public class MainPage {
             days--;
 
         }
+
 
         UsdChart.getYAxis().setAutoRanging(false);
         ((NumberAxis)UsdChart.getYAxis()).setUpperBound(450);
@@ -422,11 +440,11 @@ public class MainPage {
 
     public void UpdatePieChart() throws IOException, InterruptedException {
 
-        if(pieChartExpense == true)
+        if(pieChartExpense)
         {
             pieChartToExpense();
         }
-        else if(pieChartIncome == true)
+        else if(pieChartIncome)
         {
             PieChartToIncome();
         }
@@ -466,8 +484,6 @@ public class MainPage {
             currencyExchangeContainer.setVisible(true);
 
             //myPieChart.setVisible(false);
-
-
 
         }
     }
@@ -627,5 +643,45 @@ public class MainPage {
     public void OpenTransferWindow() throws IOException {
 
     }
+
+/*
+    public void LoadCurrencyData(int daysToShow)
+    {
+        Task<Void> task = new Task<>() {
+            @Override public Void call() throws IOException, InterruptedException {
+                Platform.runLater(() -> {
+                    int days = daysToShow;
+                    for (int i = 0; i < daysToShow; i++) {
+
+                        //series.getData().add(new XYChart.Data(Integer.toString(eurIndex), eurValue));
+                        try {
+                            eurSeries.getData().add(new XYChart.Data<>(Integer.toString(i), api.GetEur(days).getValue().get("huf")));
+                            System.out.println(eurSeries.getData());
+                        } catch (IOException | InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        try {
+                            usdSeries.getData().add(new XYChart.Data<>(Integer.toString(i), api.GetUsd(days).getValue().get("huf")));
+                        } catch (IOException | InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        days--;
+
+                    }
+                });
+
+                EurChart.getData().add(eurSeries);
+                UsdChart.getData().add(usdSeries);
+
+                return null;
+            }
+        };
+
+        new Thread(task).start();
+    }
+
+ */
+
+
 }
 

@@ -141,6 +141,7 @@ public class RestApi {
 
        // CreateAccount(user.getId(),"HUF");
 
+
         return   response.body();
 
     }
@@ -181,12 +182,12 @@ public class RestApi {
         return response.body();
     }
 
-    public static String CreateExpense(int total, String category,String vendor,String description, String userId, String bankAccountId, String authToken) throws IOException, InterruptedException {
+    public static String CreateExpense(int total, String category,String description, String userId, String bankAccountId, String authToken) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/expense"))
                 .header("Content-Type", "application/json")
                 .header("authorization", "Bearer "+ authToken)
-                .method("POST",HttpRequest.BodyPublishers.ofString(String.format("{\"total\": %d,\"category\": \"%s\",\"vendor\": \"%s\",\"description\":\"%s\",\"userId\": \"%s\",\"bankAccountId\": \"%s\"}", total,category,vendor,description,userId,bankAccountId)))
+                .method("POST",HttpRequest.BodyPublishers.ofString(String.format("{\"total\": %d,\"category\": \"%s\",\"description\":\"%s\",\"userId\": \"%s\",\"bankAccountId\": \"%s\"}", total,category,description,userId,bankAccountId)))
                 .build();
 
 
@@ -196,12 +197,12 @@ public class RestApi {
 
     }
 
-    public static String CreateIncome(int total, String category,String vendor,String description, String userId, String bankAccountId, String authToken) throws IOException, InterruptedException {
+    public static String CreateIncome(int total, String category,String description, String userId, String bankAccountId, String authToken) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/Income"))
                 .header("Content-Type", "application/json")
                 .header("authorization", "Bearer "+ authToken)
-                .method("POST",HttpRequest.BodyPublishers.ofString(String.format("{\"total\": %d,\"category\": \"%s\",\"vendor\": \"%s\",\"description\":\"%s\",\"userId\": \"%s\",\"bankAccountId\": \"%s\"}", total,category,vendor,description,userId,bankAccountId)))
+                .method("POST",HttpRequest.BodyPublishers.ofString(String.format("{\"total\": %d,\"category\": \"%s\",\"description\":\"%s\",\"userId\": \"%s\",\"bankAccountId\": \"%s\"}", total,category,description,userId,bankAccountId)))
                 .build();
 
 

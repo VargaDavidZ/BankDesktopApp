@@ -43,7 +43,9 @@ public class MainPage {
     @FXML
     private HBox myhbox;
     @FXML
-    private AreaChart<String,Number> EurChart;
+    private AreaChart<Number,Number> EurChart;
+    @FXML
+    private AreaChart<Number, Number> UsdChart;
     private static BankAccount[] bankAccounts = new BankAccount[0];
     RestApi api = new RestApi();
     private static User activeUser;
@@ -72,8 +74,7 @@ public class MainPage {
     private VBox leftContainer;
     @FXML
     private HBox innerLeftContainer;
-    @FXML
-    private AreaChart<String, Number> UsdChart;
+
     @FXML
     private PieChart myPieChart;
     @FXML
@@ -84,8 +85,6 @@ public class MainPage {
     private Button swapLeftContainerBtn;
     @FXML
     private StackPane myStackPane;
-    @FXML
-    private CategoryAxis asd;
     @FXML
     private VBox pieChartContainer;
     @FXML
@@ -406,8 +405,8 @@ public class MainPage {
     public void LoadCharts(int daysToShow) throws IOException, InterruptedException {
 
 
-        XYChart.Series<String, Number> eurSeries = new XYChart.Series<String, Number>();
-        XYChart.Series<String, Number> usdSeries = new XYChart.Series<String, Number>();
+        XYChart.Series<Number, Number> eurSeries = new XYChart.Series<Number, Number>();
+        XYChart.Series<Number, Number> usdSeries = new XYChart.Series<Number, Number>();
 
 
 
@@ -416,25 +415,35 @@ public class MainPage {
         Float f = 100.5F;
 
 
-        for (int i = 0; i < daysToShow; i++) {
+        for (int i = 0; i <= daysToShow; i++) {
             //series.getData().add(new XYChart.Data(Integer.toString(eurIndex), eurValue));
-            eurSeries.getData().add(new XYChart.Data<>(Integer.toString(i), api.GetEur(days).getValue().get("huf")));
-            usdSeries.getData().add(new XYChart.Data<>(Integer.toString(i), api.GetUsd(days).getValue().get("huf")));
+            eurSeries.getData().add(new XYChart.Data<>(i, api.GetEur(days).getValue().get("huf")));
+            usdSeries.getData().add(new XYChart.Data<>(i, api.GetUsd(days).getValue().get("huf")));
             days--;
 
         }
 
 
         UsdChart.getYAxis().setAutoRanging(false);
+
         ((NumberAxis)UsdChart.getYAxis()).setUpperBound(450);
-        ((NumberAxis)UsdChart.getYAxis()).setLowerBound(380);
+        ((NumberAxis)UsdChart.getYAxis()).setLowerBound(365);
+
+
+        UsdChart.getXAxis().setAutoRanging(false);
+        ((NumberAxis)UsdChart.getXAxis()).setUpperBound(15.1);
+        ((NumberAxis)UsdChart.getXAxis()).setLowerBound(0);
 
         EurChart.getYAxis().setAutoRanging(false);
         ((NumberAxis)EurChart.getYAxis()).setUpperBound(450);
-        ((NumberAxis) EurChart.getYAxis()).setLowerBound(380);
+        ((NumberAxis) EurChart.getYAxis()).setLowerBound(365);
+        EurChart.getXAxis().setAutoRanging(false);
+        ((NumberAxis)EurChart.getXAxis()).setUpperBound(15.1);
+        ((NumberAxis)EurChart.getXAxis()).setLowerBound(0);
 
-        EurChart.getData().add(eurSeries);
         UsdChart.getData().add(usdSeries);
+        EurChart.getData().add(eurSeries);
+
 
     }
 

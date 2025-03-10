@@ -17,13 +17,14 @@ public class AddUserPopUp {
     @javafx.fxml.FXML
     private Button closeWindowBtn;
 
+    RestApi restApi = new RestApi();
 
 
     @javafx.fxml.FXML
     public void AddUserToCard(ActionEvent actionEvent) throws IOException, InterruptedException {
         Stage stage = (Stage)closeWindowBtn.getScene().getWindow();
         String email = emailInput.getText();
-        RestApi.ConnectUser(MainPage.getActiveBankAccount().getId(),email,MainPage.getActiveUser().getAuthToken());
+        restApi.connectUser(MainPage.getActiveBankAccount().getId(),email,MainPage.getActiveUser().getAuthToken());
         System.out.println(Arrays.toString(MainPage.getActiveBankAccount().getUsers()));
         stage.close();
 

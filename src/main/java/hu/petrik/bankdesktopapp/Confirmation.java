@@ -1,11 +1,7 @@
 package hu.petrik.bankdesktopapp;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,6 +10,7 @@ public class Confirmation {
     @javafx.fxml.FXML
     private Button confirm;
 
+    RestApi restApi = new RestApi();
 
     public Button getConfirm() {
         return confirm;
@@ -31,14 +28,14 @@ public class Confirmation {
             System.out.printf("ddd");
 
             if(MainPage.getActiveBankAccount().getOwnerId().equals(MainPage.getActiveUser().getId())) {
-                RestApi.DeleteCardFromUser(MainPage.getActiveBankAccount().getId(),MainPage.getActiveUser().getAuthToken());
+                restApi.deleteCardFromUser(MainPage.getActiveBankAccount().getId(),MainPage.getActiveUser().getAuthToken());
                 MainPage.setActiveBankAccount(MainPage.getBankAccounts()[0]);
                 //confirmation
                 stage.close();
             }
             else
             {
-                RestApi.RemoveCardFromUser(MainPage.getActiveBankAccount().getId(), MainPage.getActiveUser().getId(), MainPage.getActiveUser().getAuthToken());
+                restApi.removeCardFromUser(MainPage.getActiveBankAccount().getId(), MainPage.getActiveUser().getId(), MainPage.getActiveUser().getAuthToken());
                 stage.close();
             }
 

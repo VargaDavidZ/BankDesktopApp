@@ -10,7 +10,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.UUID;
+import java.util.Date;
 
 
 public class RestApi {
@@ -18,7 +18,7 @@ public class RestApi {
     static HttpClient client = HttpClient.newHttpClient();
 
 
-    public static String Login(String email, String password) throws IOException, InterruptedException {
+    public String login(String email, String password) throws IOException, InterruptedException {
 
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create("http://localhost:3000/user/login"))
@@ -26,11 +26,11 @@ public class RestApi {
                         .method("POST", HttpRequest.BodyPublishers.ofString(String.format("{\"email\": \"%s\",\"password\": \"%s\"}",email,password)))
                         .build();
 
-                HttpResponse<String> response1 = client.send(request, HttpResponse.BodyHandlers.ofString());
+                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
 
-                if(response1.statusCode() == 201) {
-                    return response1.body();
+                if(response.statusCode() == 201) {
+                    return response.body();
                 }
                 else
                 {
@@ -39,7 +39,7 @@ public class RestApi {
 
     }
 
-    public User GetOneUser(String userId) throws IOException, InterruptedException {
+    public User getOneUser(String userId) throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/user/" + userId))
@@ -60,7 +60,7 @@ public class RestApi {
 
     }
 
-    public BankAccount[] GetAllBankAccounts(User user) throws IOException, InterruptedException {
+    public BankAccount[] getAllBankAccounts(User user) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/accounts/user/" + user.getId()))
                 .header("authorization", "Bearer "+ user.getAuthToken() )
@@ -76,7 +76,7 @@ public class RestApi {
 
     }
 
-    public Expense[] GetAccountExpenses(String accountId, String authToken) throws IOException, InterruptedException {
+    public Expense[] getAccountExpenses(String accountId, String authToken) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/accounts/allex/" + accountId))
                 .header("authorization", "Bearer "+ authToken )
@@ -90,16 +90,17 @@ public class RestApi {
         //mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
 
         try{
-
+            System.out.println(Arrays.toString(mapper.readValue(response.body().toString(), Expense[].class)));
             return mapper.readValue(response.body().toString(),Expense[].class);
         }
         catch(Exception e){
+            System.out.println(e.getMessage());
             return new Expense[]{};
         }
 
     }
 
-    public Income[] GetAccountIncomes(String accountId, String authToken) throws IOException, InterruptedException {
+    public Income[] getAccountIncomes(String accountId, String authToken) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/accounts/allin/" + accountId))
                 .header("authorization", "Bearer "+ authToken )
@@ -124,7 +125,7 @@ public class RestApi {
 
     }
 
-    public static String CreateUser(String firstName, String lastName, String email, String password) throws IOException, InterruptedException {
+    public String createUser(String firstName, String lastName, String email, String password) throws IOException, InterruptedException {
 
         //"{\"Fristname\":\"s%\",\"Lastname\":\"s%\",\"email\": %s,\"password\": %s }",firstName,lastName,email,password
             HttpRequest request = HttpRequest.newBuilder()
@@ -146,6 +147,7 @@ public class RestApi {
 
     }
 
+    /*
     public static String UpdateTotal(String accId, Float total, String authToken) throws IOException, InterruptedException {
 
         //"{\"Fristname\":\"s%\",\"Lastname\":\"s%\",\"email\": %s,\"password\": %s }",firstName,lastName,email,password
@@ -168,7 +170,9 @@ public class RestApi {
 
     }
 
-    public static String CreateAccount(String userId, String currency, String fistName, String lastName, String authToken) throws IOException, InterruptedException {
+     */
+
+    public String createAccount(String userId, String currency, String fistName, String lastName, String authToken) throws IOException, InterruptedException {
 
         HttpRequest createAccountRequest = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/accounts"))
@@ -182,7 +186,7 @@ public class RestApi {
         return response.body();
     }
 
-    public static String CreateExpense(int total, String category,String description, String userId, String bankAccountId, String authToken) throws IOException, InterruptedException {
+    public String createExpense(int total, String category, String description, String userId, String bankAccountId, String authToken) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/expense"))
                 .header("Content-Type", "application/json")
@@ -197,7 +201,7 @@ public class RestApi {
 
     }
 
-    public static String CreateIncome(int total, String category,String description, String userId, String bankAccountId, String authToken) throws IOException, InterruptedException {
+    public String createIncome(int total, String category, String description, String userId, String bankAccountId, String authToken) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/Income"))
                 .header("Content-Type", "application/json")
@@ -215,7 +219,7 @@ public class RestApi {
     //prop to set how far back i want to go
     //rename to GetPastEur(x:dayBack)
     //return the Eur price in HUF, -daysBack indicates how far in the past we want to go back -> 0 present ->1 yesterday..
-    public Eur GetEur(int daysBack) throws IOException, InterruptedException {
+    public Eur getEur(int daysBack) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(String.format("https://%s.currency-api.pages.dev/v1/currencies/eur.json",LocalDate.now().minusDays(daysBack)) ))
                 .build();
@@ -236,7 +240,7 @@ public class RestApi {
 
 
     //return the Usd price in HUF, -daysBack indicates how far in the past we want to go back -> 0 present ->1 yesterday..
-    public Usd GetUsd(int daysBack) throws IOException, InterruptedException {
+    public Usd getUsd(int daysBack) throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(String.format("https://%s.currency-api.pages.dev/v1/currencies/usd.json",LocalDate.now().minusDays(daysBack)) ))
@@ -259,7 +263,7 @@ public class RestApi {
 
 
 
-    public static void ConnectUser(String accId, String email, String authToken) throws IOException, InterruptedException {
+    public void connectUser(String accId, String email, String authToken) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(String.format("http://localhost:3000/accounts/user/email/%s",accId)))
                 .header("Content-Type", "application/json")
@@ -274,7 +278,7 @@ public class RestApi {
 
     }
 
-    public static void RemoveCardFromUser(String accId, String userId, String authToken) throws IOException, InterruptedException {
+    public void removeCardFromUser(String accId, String userId, String authToken) throws IOException, InterruptedException {
 
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -290,7 +294,7 @@ public class RestApi {
         System.out.printf(response.body());
     }
 
-    public static void DeleteCardFromUser(String accId, String authToken) throws IOException, InterruptedException {
+    public void deleteCardFromUser(String accId, String authToken) throws IOException, InterruptedException {
 
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -306,7 +310,7 @@ public class RestApi {
         System.out.printf(response.body());
     }
 
-    public void Transfer(String userId,String senderId,String receiverId, int amount, String authToken) throws IOException, InterruptedException {
+    public void transfer(String userId, String senderId, String receiverId, int amount, String authToken) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(String.format("http://localhost:3000/accounts/transfer")))
                 .header("Content-Type", "application/json")
@@ -321,7 +325,7 @@ public class RestApi {
 
     }
 
-    public User[] GetAllUsers(String accId, String authToken) throws IOException, InterruptedException {
+    public User[] getAllUsers(String accId, String authToken) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/accounts/onlyUsers/" + accId))
                 .header("authorization", "Bearer "+ authToken)
@@ -333,9 +337,28 @@ public class RestApi {
 
         ObjectMapper mapper = new ObjectMapper();
 
-
+        System.out.println("---------------------");
+        System.out.println(response.body());
         return mapper.readValue(response.body().toString(),User[].class);
 
+
+    }
+
+
+    public void createRepeatableTransaction(float total, String category, String description, String userId, String bankAccountId, int repeatAmount, String repeatMetric, LocalDate repeatStart, LocalDate repeatEnd ,String authToken) throws IOException, InterruptedException {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("http://localhost:3000/repeatabletransaction"))
+                    .header("Content-Type", "application/json")
+                    .header("authorization", "Bearer "+ authToken)
+                    .method("POST", HttpRequest.BodyPublishers.ofString(String.format("{\"total\": \"%f\",\"category\": \"%s\",\"description\":\"%s\",\"userId\": \"%s\",\"accountId\": \"%s\",\"repeatAmount\": \"%d\",\"repeatMetric\": \"%s\",\"repeatStart\": \"%s\",\"repeatEnd\": \"%s\" }",total,category,description,userId,bankAccountId,repeatAmount,repeatMetric,repeatStart,repeatEnd)))
+                    .build();
+
+        HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
+
+        System.out.printf(response.body());
+    }
+
+    public void updateRepeatableTransaction(){ //have to call an endpoint that check the status of the transaction
 
     }
 

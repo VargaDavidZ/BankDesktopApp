@@ -20,25 +20,39 @@
 <VBox fx:id="mainPage" maxHeight="400.0" minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.MainPage">
     <HBox alignment="CENTER_RIGHT" maxHeight="600.0" maxWidth="1000.0" minWidth="1000.0" prefHeight="600.0" prefWidth="300.0">
         <VBox alignment="TOP_CENTER" maxHeight="600.0" maxWidth="100.0" prefHeight="200.0" prefWidth="100.0" styleClass="leftNav">
-            <Button maxWidth="100.0" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="25.0" prefWidth="100.0" styleClass="logoutBtn" text="Kijelentketés" />
+            <Button maxWidth="100.0" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#logOut" prefHeight="25.0" prefWidth="100.0" styleClass="logoutBtn" text="Kijelentketés" />
             <VBox alignment="CENTER" maxHeight="575.0" minHeight="500.0" prefHeight="575.0" prefWidth="100.0" styleClass="buttonCont">
-                <Button fx:id="swapLeftContainerBtn" minWidth="100.0" mnemonicParsing="false" onAction="#SwapLeftContainer" styleClass="leftNavBtn" text="Eloszlás" />
+                <Button fx:id="swapLeftContainerBtn" minWidth="100.0" mnemonicParsing="false" onAction="#swapLeftContainer" styleClass="leftNavBtn" text="Eloszlás">
+               <graphic>
+                  <ImageView fx:id="swapLeftContainerBtnImageView" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@PieChart.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
                 <Button minWidth="100.0" mnemonicParsing="false" styleClass="leftNavBtn" text="Crypto">
                     <VBox.margin>
                         <Insets />
                     </VBox.margin>
                 </Button>
-                <Button minWidth="100.0" mnemonicParsing="false" onAction="#AccountInfo" styleClass="leftNavBtn" text="Számla Infó">
+                <Button minWidth="100.0" mnemonicParsing="false" onAction="#accountInfo" styleClass="leftNavBtn" text="Számla Infó">
                     <VBox.margin>
                         <Insets />
                     </VBox.margin>
+               <graphic>
+                  <ImageView fx:id="swapLeftContainerBtnImageView1" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@accountInf.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                 </Button>
             </VBox>
         </VBox>
         <BorderPane maxHeight="600.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" styleClass="mainPageBorderPane" HBox.hgrow="NEVER">
             <top>
                 <HBox alignment="CENTER" minHeight="250.0" minWidth="630.0" prefHeight="200.0" prefWidth="800.0" styleClass="top_side_main" BorderPane.alignment="CENTER">
-                    <ListView fx:id="cardList" maxWidth="900.0" minWidth="900.0" onMouseClicked="#ChangeActiveBankAccount" prefHeight="200.0" prefWidth="900.0" styleClass="cardList" />
+                    <ListView fx:id="cardList" maxWidth="900.0" minWidth="900.0" onMouseClicked="#changeActiveBankAccount" prefHeight="200.0" prefWidth="900.0" styleClass="cardList" />
                 </HBox>
             </top>
             <center>
@@ -166,8 +180,8 @@
                                 <VBox fx:id="pieChartContainer" prefHeight="200.0" prefWidth="100.0" styleClass="pieChartCont">
                                     <HBox alignment="TOP_CENTER" prefHeight="100.0" styleClass="pieChartBtnContainer">
                                         <Button mnemonicParsing="false" onAction="#pieChartToExpense" styleClass="pieExpenseBtn" text="Kiadás" />
-                                        <Button mnemonicParsing="false" onAction="#PieChartToIncome" styleClass="pieIncomeBtn" text="Bevétel" />
-                                        <Button mnemonicParsing="false" onAction="#PieChartToIncomeExpense" styleClass="pieCombinedBtn" text="Kiadás/Bevétel" />
+                                        <Button mnemonicParsing="false" onAction="#pieChartToIncome" styleClass="pieIncomeBtn" text="Bevétel" />
+                                        <Button mnemonicParsing="false" onAction="#pieChartToIncomeExpense" styleClass="pieCombinedBtn" text="Kiadás/Bevétel" />
                                     </HBox>
                                     <PieChart fx:id="myPieChart" onMouseClicked="#showValuePieChart" styleClass="myPieChart" />
                                 </VBox>
@@ -176,13 +190,13 @@
 
                     </VBox>
                     <VBox maxHeight="200.0" maxWidth="390.0" minHeight="300.0" minWidth="430.0" prefHeight="300.0" prefWidth="390.0" styleClass="myList" HBox.hgrow="NEVER">
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#PopUpWindow" styleClass="addTransactionBtn" text="Adat felvétele" textFill="WHITE">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#popUpWindow" styleClass="addTransactionBtn" text="Adat felvétele" textFill="WHITE">
                             <VBox.margin>
                                 <Insets bottom="5.0" />
                             </VBox.margin>
                         </Button>
                         <HBox maxHeight="300.0" minHeight="250.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="NEVER">
-                            <ListView fx:id="expenseList" maxWidth="200.0" minHeight="200.0" minWidth="430.0" prefHeight="300.0" prefWidth="195.0" styleClass="myList" HBox.hgrow="NEVER" />
+                            <ListView fx:id="expenseList" maxWidth="200.0" minHeight="200.0" minWidth="430.0" onMouseClicked="#showTransactionDetail" prefHeight="300.0" prefWidth="195.0" styleClass="myList" HBox.hgrow="NEVER" />
                         </HBox>
                     </VBox>
                 </HBox>

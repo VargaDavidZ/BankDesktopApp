@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -97,19 +96,8 @@ public class MainPage {
     private boolean pieChartIncome = false;
     private boolean pieChartExpense = true;
     private boolean pieChartCombined = false;
-
-
-
-
-    //javadoc documentation
-    public static void SetActiveUser(String activeUserInput) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        //mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-
-        activeUser = mapper.readValue(activeUserInput,User.class);
-
-    }
+    @FXML
+    private ImageView swapLeftContainerBtnImageView;
 
 
     //duplicate card at user
@@ -117,14 +105,13 @@ public class MainPage {
 
     public void initialize() throws IOException, InterruptedException {
 
-        this.bankAccounts = api.GetAllBankAccounts(activeUser);
+        this.bankAccounts = api.getAllBankAccounts(activeUser);
         cardList.setOrientation(Orientation.HORIZONTAL);
-
-        Float currentEur = api.GetEur(0).getValue().get("huf");
-        Float yesterdayEur = api.GetEur(1).getValue().get("huf");
+        Float currentEur = api.getEur(0).getValue().get("huf");
+        Float yesterdayEur = api.getEur(1).getValue().get("huf");
         float change = ((currentEur-yesterdayEur) / currentEur * 100);
-        Float currentUsd = api.GetUsd(0).getValue().get("huf");
-        Float yesterdayUsd = api.GetUsd(1).getValue().get("huf");
+        Float currentUsd = api.getUsd(0).getValue().get("huf");
+        Float yesterdayUsd = api.getUsd(1).getValue().get("huf");
         float changeUsd = ((currentUsd-yesterdayUsd) / currentUsd * 100);
 
         System.out.println("Active User Id"+activeUser.getId());
@@ -167,30 +154,34 @@ public class MainPage {
             activeBankAccount = bankAccounts[0];
         }
 
-        activeBankAccount.setExpenses(api.GetAccountExpenses(activeBankAccount.getId(), activeUser.getAuthToken()));
-        activeBankAccount.setIncome(api.GetAccountIncomes(activeBankAccount.getId(), activeUser.getAuthToken()));
+        activeBankAccount.setExpenses(api.getAccountExpenses(activeBankAccount.getId(), activeUser.getAuthToken()));
 
-        CreatedSortedArray();
-        ListTransactions();
-        ListCards();
+        activeBankAccount.setIncome(api.getAccountIncomes(activeBankAccount.getId(), activeUser.getAuthToken()));
+
+        createdSortedArray();
+        listTransactions();
+        listCards();
 
         //LoadCurrencyData(15);
 
 
         Platform.runLater(() -> {
             cardList.getFocusModel().focus(0);
+            expenseList.getFocusModel().focus(0);
+
+            //System.out.println(activeBankAccount.getExpenses()[0].toString() + "---------");
             try {
-                CalcActiveTotal();
+                calcActiveTotal();
 
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
 
-            cardList.getFocusModel().getFocusedItem().changeTotal(total);
+            cardList.getFocusModel().getFocusedItem().changeTotal(total, activeBankAccount.getCurrency());
             cardList.getFocusModel().getFocusedItem().getHamburgerMenu().setDisable(false);
 
             try {
-                LoadCharts(15);
+                loadCharts(15);
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -200,11 +191,21 @@ public class MainPage {
 
     }
 
+    public static void setActiveUser(String activeUserInput) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        //mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+
+        activeUser = mapper.readValue(activeUserInput,User.class);
+
+    }
+
+
     public void SetActiveAccount(BankAccount inpAcc) {
         activeBankAccount = inpAcc;
     }
 
-    public void ListCards() throws FileNotFoundException {
+    public void listCards() throws FileNotFoundException {
 
 
 
@@ -219,7 +220,7 @@ public class MainPage {
         cardList.getItems().add(new AccountCard());
     }
 
-    public void CreatedSortedArray(){
+    public void createdSortedArray(){
         transactionArray.addAll(Arrays.stream(activeBankAccount.getExpenses()).toList());
         transactionArray.addAll(Arrays.stream(activeBankAccount.getIncome()).toList());
         transactionArray.sort(new Comparator<Transaction>() {
@@ -229,33 +230,35 @@ public class MainPage {
                 return o1.getCreatedAt().compareTo(o2.getCreatedAt());
             }
         });
+
     }
 
-    public void ListTransactions() {
+    public void listTransactions() {
         for (int i = 0; i < transactionArray.size(); i++) {
+            System.out.println(transactionArray.get(i).getTotal());
             expenseList.getItems().add(0,new TransactionComponent(transactionArray.get(i)));
         }
 
         expenseList.scrollTo(0);
     }
 
-    public void RefreshTransactions() throws IOException, InterruptedException {
+    public void refreshTransactions() throws IOException, InterruptedException {
         expenseList.getItems().clear();
         transactionArray.clear();
-        activeBankAccount.setExpenses(api.GetAccountExpenses(activeBankAccount.getId(),activeUser.getAuthToken()));
-        activeBankAccount.setIncome(api.GetAccountIncomes(activeBankAccount.getId(),activeUser.getAuthToken()));
+        activeBankAccount.setExpenses(api.getAccountExpenses(activeBankAccount.getId(),activeUser.getAuthToken()));
+        activeBankAccount.setIncome(api.getAccountIncomes(activeBankAccount.getId(),activeUser.getAuthToken()));
 
-        CreatedSortedArray();
+        createdSortedArray();
         System.out.print("Refreshing transactions...");
 
-        ListTransactions();
-        CalcActiveTotal();
-        cardList.getFocusModel().getFocusedItem().changeTotal(total);
+        listTransactions();
+        calcActiveTotal();
+        cardList.getFocusModel().getFocusedItem().changeTotal(total, activeBankAccount.getCurrency());
         expenseList.refresh();
     }
 
     @FXML
-    public void LogOut(ActionEvent event) throws IOException {
+    public void logOut(ActionEvent event) throws IOException {
         activeUser = null;
         Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -268,7 +271,7 @@ public class MainPage {
     }
 
     @FXML
-    public void PopUpWindow(ActionEvent actionEvent) throws IOException {
+    public void popUpWindow(ActionEvent actionEvent) throws IOException {
 
        Stage popupStage = new Stage();
        popupStage.initModality(Modality.APPLICATION_MODAL);
@@ -280,7 +283,7 @@ public class MainPage {
 
        popupStage.setOnHidden(event -> {
            try {
-               RefreshTransactions();
+               refreshTransactions();
            } catch (IOException | InterruptedException e) {
                throw new RuntimeException(e);
            }
@@ -301,7 +304,7 @@ public class MainPage {
         MainPage.activeBankAccount = activeBankAccount;
     }
 
-    public void CalcActiveTotal() throws IOException, InterruptedException {
+    public void calcActiveTotal() throws IOException, InterruptedException {
         float income = 0;
         float expense = 0;
         for (int i = 0; i < activeBankAccount.getExpenses().length; i++) {
@@ -315,10 +318,10 @@ public class MainPage {
         }
         total = income - expense;
 
-        UpdatePieChart();
+        updatePieChart();
         //total = activeBankAccount.getTotal();
 
-        RestApi.UpdateTotal(activeBankAccount.getId(),total,activeUser.getAuthToken());
+        //RestApi.UpdateTotal(activeBankAccount.getId(),total,activeUser.getAuthToken());
     }
 
     public static User getActiveUser() {
@@ -334,24 +337,23 @@ public class MainPage {
     }
 
     @FXML
-    public void ChangeActiveBankAccount(Event event) throws IOException, InterruptedException {
+    public void changeActiveBankAccount(Event event) throws IOException, InterruptedException {
         try
         {
             SetActiveAccount(bankAccounts[cardList.getFocusModel().getFocusedIndex()]);
             focusedItem = cardList.getFocusModel().getFocusedIndex();
 
-
         }
         catch (Exception e)
         {
-            AddNewAcc();
+            addNewAcc();
             return;
         }
 
-        RefreshTransactions();
-        CalcActiveTotal();
-        RefreshCards();
-        cardList.getFocusModel().getFocusedItem().changeTotal(total);
+        refreshTransactions();
+        calcActiveTotal();
+        refreshCards();
+        cardList.getFocusModel().getFocusedItem().changeTotal(total, activeBankAccount.getCurrency());
         cardList.getFocusModel().getFocusedItem().getHamburgerMenu().setDisable(false);
 
         cardList.getFocusModel().getFocusedItem().getDeleteMenuOpt().setOnAction( e -> {
@@ -372,7 +374,7 @@ public class MainPage {
 
             popupStage.setOnHidden(windowEvent -> {
                 try {
-                    RefreshCards();
+                    refreshCards();
                    // cardList.getFocusModel().getFocusedItem().changeTotal(total);
                     //cardList.getFocusModel().getFocusedItem().getHamburgerMenu().setDisable(false);
 
@@ -386,15 +388,16 @@ public class MainPage {
 
     }
 
-    public void RefreshCards() throws IOException, InterruptedException {
+    public void refreshCards() throws IOException, InterruptedException {
 
-        bankAccounts = api.GetAllBankAccounts(activeUser);
-        ListCards();
+        bankAccounts = api.getAllBankAccounts(activeUser);
+        listCards();
     }
 
-    public void AddNewAcc() throws IOException, InterruptedException {
-        RestApi.CreateAccount(activeUser.getId(),"HUF",activeUser.getFirstname(),activeUser.getLastname(),activeUser.getAuthToken());
-        RefreshCards();
+    public void addNewAcc() throws IOException, InterruptedException {
+
+        api.createAccount(activeUser.getId(),"HUF",activeUser.getFirstname(),activeUser.getLastname(),activeUser.getAuthToken());
+        refreshCards();
     }
 
     @Deprecated
@@ -402,14 +405,11 @@ public class MainPage {
 
     }
 
-    public void LoadCharts(int daysToShow) throws IOException, InterruptedException {
+    public void loadCharts(int daysToShow) throws IOException, InterruptedException {
 
 
         XYChart.Series<Number, Number> eurSeries = new XYChart.Series<Number, Number>();
         XYChart.Series<Number, Number> usdSeries = new XYChart.Series<Number, Number>();
-
-
-
 
         int days = daysToShow;
         Float f = 100.5F;
@@ -417,8 +417,8 @@ public class MainPage {
 
         for (int i = 0; i <= daysToShow; i++) {
             //series.getData().add(new XYChart.Data(Integer.toString(eurIndex), eurValue));
-            eurSeries.getData().add(new XYChart.Data<>(i, api.GetEur(days).getValue().get("huf")));
-            usdSeries.getData().add(new XYChart.Data<>(i, api.GetUsd(days).getValue().get("huf")));
+            eurSeries.getData().add(new XYChart.Data<>(i, api.getEur(days).getValue().get("huf")));
+            usdSeries.getData().add(new XYChart.Data<>(i, api.getUsd(days).getValue().get("huf")));
             days--;
 
         }
@@ -447,7 +447,7 @@ public class MainPage {
 
     }
 
-    public void UpdatePieChart() throws IOException, InterruptedException {
+    public void updatePieChart() throws IOException, InterruptedException {
 
         if(pieChartExpense)
         {
@@ -455,10 +455,10 @@ public class MainPage {
         }
         else if(pieChartIncome)
         {
-            PieChartToIncome();
+            pieChartToIncome();
         }
         else{
-            PieChartToIncomeExpense();
+            pieChartToIncomeExpense();
 
         }
        // myPieChart.setLegendVisible(false);
@@ -466,14 +466,15 @@ public class MainPage {
     }
 
     @FXML
-    public void SwapLeftContainer(ActionEvent actionEvent) throws IOException, InterruptedException {
+    public void swapLeftContainer(ActionEvent actionEvent) throws IOException, InterruptedException {
         if(!pieChartContainer.isVisible())
         {
 
-            UpdatePieChart();
+            updatePieChart();
 
             myStackPane.layout();
             swapLeftContainerBtn.setText("Árfolyam");
+            swapLeftContainerBtnImageView.setImage(new Image(MainPage.class.getResourceAsStream("currency.png")));
             currencyExchangeContainer.setVisible(false);
             //myPieChart.setVisible(true);
             pieChartContainer.setVisible(true);
@@ -486,9 +487,10 @@ public class MainPage {
         }
         else {
 
-            UpdatePieChart();
+            updatePieChart();
             myPieChart.getData().clear();
             swapLeftContainerBtn.setText("Eloszlás");
+            swapLeftContainerBtnImageView.setImage(new Image(MainPage.class.getResourceAsStream("PieChart.png")));
             pieChartContainer.setVisible(false);
             currencyExchangeContainer.setVisible(true);
 
@@ -504,7 +506,7 @@ public class MainPage {
     }
 
     @FXML
-    public void AccountInfo(ActionEvent actionEvent) throws IOException {
+    public void accountInfo(ActionEvent actionEvent) throws IOException {
         Stage popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
         Parent root = FXMLLoader.load(getClass().getResource("cardDetail.fxml"));
@@ -515,7 +517,7 @@ public class MainPage {
     }
 
     @FXML
-    public void PieChartToIncomeExpense() {
+    public void pieChartToIncomeExpense() {
         pieChartIncome = false;
         pieChartExpense = false;
         pieChartCombined = true;
@@ -550,7 +552,7 @@ public class MainPage {
     }
 
     @FXML
-    public void PieChartToIncome() {
+    public void pieChartToIncome() {
         pieChartIncome = true;
         pieChartExpense = false;
         pieChartCombined = false;
@@ -645,12 +647,17 @@ public class MainPage {
     }
 
 
-    public void DeleteCard() throws IOException, InterruptedException {
-        RefreshCards();
+    public void deleteCard() throws IOException, InterruptedException {
+        refreshCards();
     }
 
     public void OpenTransferWindow() throws IOException {
 
+    }
+
+    @FXML
+    public void showTransactionDetail(Event event) {
+        System.out.println(transactionArray.get(transactionArray.size() -  expenseList.getFocusModel().getFocusedIndex()-1));
     }
 
 /*

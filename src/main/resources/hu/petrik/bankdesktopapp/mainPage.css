@@ -92,20 +92,25 @@
 
 .scroll-bar:vertical .thumb {
     -fx-background-color: #F57933;
-    -fx-pref-width: 10px;
 
+}
+
+.scroll-bar:vertical:hover {
+    -fx-cursor: hand;
 }
 
 .scroll-bar:horizontal {
     -fx-background-color: #1c1d30;
-    -fx-pref-width: 10px;
+    -fx-pref-height: 10px;
+}
 
-
+.scroll-bar:horizontal:hover {
+    -fx-cursor: hand;
 }
 
 .scroll-bar:horizontal .thumb {
     -fx-background-color: #F57933;
-    -fx-pref-width: 10px;
+    -fx-pref-height: 10px;
 
 }
 

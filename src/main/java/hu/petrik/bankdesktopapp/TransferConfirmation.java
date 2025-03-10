@@ -18,7 +18,7 @@ public class TransferConfirmation {
         RestApi restApi = new RestApi();
         System.out.println("jasbdkadbabdakb");
         System.out.println(TransferPopUp.getAccNum() + " " + TransferPopUp.getAmount() + "asdsadadas");
-        restApi.Transfer(MainPage.getActiveUser().getId(),MainPage.getActiveBankAccount().getId(), TransferPopUp.getAccNum(),Integer.parseInt(TransferPopUp.getAmount()),MainPage.getActiveUser().getAuthToken());
+        restApi.transfer(MainPage.getActiveUser().getId(),MainPage.getActiveBankAccount().getId(), TransferPopUp.getAccNum(),Integer.parseInt(TransferPopUp.getAmount()),MainPage.getActiveUser().getAuthToken());
 
         Stage stage = (Stage) container.getScene().getWindow();
         stage.close();

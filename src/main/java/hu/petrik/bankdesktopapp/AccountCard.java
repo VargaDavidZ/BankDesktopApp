@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
+import java.math.BigDecimal;
 
 
 public class AccountCard extends AnchorPane {
@@ -74,8 +74,8 @@ public class AccountCard extends AnchorPane {
 
     }
 
-    public void changeTotal(float amount) {
-        cardTotal.setText(String.valueOf(amount));
+    public void changeTotal(float amount, String currency) {
+        cardTotal.setText(new BigDecimal(amount).toPlainString() + " " + currency); //avoid scientific notation
     }
 
     public void resetTotal() {

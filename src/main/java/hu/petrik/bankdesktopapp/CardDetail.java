@@ -44,7 +44,7 @@ public class CardDetail {
 
     public void ListUsers() throws IOException, InterruptedException {
         RestApi api = new RestApi();
-        User[] users = api.GetAllUsers(MainPage.getActiveBankAccount().getId(), MainPage.getActiveUser().getAuthToken());
+        User[] users = api.getAllUsers(MainPage.getActiveBankAccount().getId(), MainPage.getActiveUser().getAuthToken());
 
         userList.getItems().clear();
         for (int i = 0; i < users.length ; i++) {

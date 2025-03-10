@@ -2,6 +2,7 @@ package hu.petrik.bankdesktopapp;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,11 +29,29 @@ public class PopupWindow {
     MainPage mainPage = new MainPage();
     @javafx.fxml.FXML
     private Label errorMsg;
+    @javafx.fxml.FXML
+    private CheckBox repeatableCheckBox;
+    @javafx.fxml.FXML
+    private DatePicker endDatePicker;
+    @javafx.fxml.FXML
+    private DatePicker startDatePicker;
+    @javafx.fxml.FXML
+    private VBox datePickerContainer;
 
+    RestApi restApi = new RestApi();
+    @javafx.fxml.FXML
+    private ComboBox<String> metricInput;
+    @javafx.fxml.FXML
+    private TextField repeatAmountInp;
 
     //only show the correct category types for income/expense
     public void initialize() {
         categoryInput.getItems().setAll("Shopping", "Rent","Transport","Transaction" ,"Salary" ,"Other");
+        repeatableCheckBox.setVisible(false);
+        repeatableCheckBox.setManaged(false);
+        metricInput.setVisible(false);
+        metricInput.setManaged(false);
+        hideDatePickers();
 
 
     }
@@ -68,11 +87,23 @@ public class PopupWindow {
        }
 
         if(expenseRadioBtn.isSelected()){
-            RestApi.CreateExpense(Integer.parseInt(totalInput.getText()),categoryInput.getValue(),desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.getActiveBankAccount().getId(),MainPage.getActiveUser().getAuthToken());
 
+            if(!repeatableCheckBox.isSelected()){
+                System.out.println("defa");
+                restApi.createExpense(Integer.parseInt(totalInput.getText()),categoryInput.getValue(),desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.getActiveBankAccount().getId(),MainPage.getActiveUser().getAuthToken());
+
+            }
+            else{
+                System.out.println("rep");
+                restApi.createRepeatableTransaction(Float.parseFloat(totalInput.getText()),categoryInput.getValue(),desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.getActiveBankAccount().getId(),Integer.parseInt(repeatAmountInp.getText()), metricInput.getValue(),startDatePicker.getValue(),endDatePicker.getValue() , MainPage.getActiveUser().getAuthToken());
+
+            }
         }
         else if(incomeRadioBtn.isSelected()){
-            RestApi.CreateIncome(Integer.parseInt(totalInput.getText()),categoryInput.getValue(),desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.getActiveBankAccount().getId(), MainPage.getActiveUser().getAuthToken());
+
+
+                restApi.createIncome(Integer.parseInt(totalInput.getText()),categoryInput.getValue(),desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.getActiveBankAccount().getId(), MainPage.getActiveUser().getAuthToken());
+
 
         }
         else
@@ -90,12 +121,27 @@ public class PopupWindow {
     @javafx.fxml.FXML
     public void setExpenseCategories(ActionEvent actionEvent) {
         categoryInput.getItems().setAll("Shopping", "Rent","Transport","Transaction" ,"Other");
+        repeatableCheckBox.setVisible(true);
+        repeatableCheckBox.setManaged(true);
 
     }
 
     @javafx.fxml.FXML
     public void setIncomeCategories(ActionEvent actionEvent) {
         categoryInput.getItems().setAll("Transaction" ,"Salary" ,"Other");
+        repeatableCheckBox.setVisible(false);
+        repeatableCheckBox.setManaged(false);
+        hideDatePickers();
+    }
+
+    public void hideDatePickers(){
+        datePickerContainer.setVisible(false);
+        datePickerContainer.setManaged(false);
+    }
+
+    public void showDatePickers(){
+        datePickerContainer.setVisible(true);
+        datePickerContainer.setManaged(true);
     }
 
 
@@ -169,5 +215,13 @@ public class PopupWindow {
 
     public void setErrorMsg(Label errorMsg) {
         this.errorMsg = errorMsg;
+    }
+
+    @javafx.fxml.FXML
+    public void showDatePickerContainer(ActionEvent actionEvent) {
+        metricInput.setVisible(true);
+        metricInput.setManaged(true);
+        metricInput.getItems().setAll("Day", "Week","Month","Year");
+        showDatePickers();
     }
 }

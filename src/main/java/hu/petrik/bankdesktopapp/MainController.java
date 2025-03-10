@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static hu.petrik.bankdesktopapp.MainPage.SetActiveUser;
+import static hu.petrik.bankdesktopapp.MainPage.setActiveUser;
 
 
 public class MainController {
@@ -45,7 +45,8 @@ public class MainController {
     @FXML
     public void loadSecondFxml(ActionEvent event) throws IOException, InterruptedException {
 
-        String response = RestApi.Login(emailInput.getText(),passwordInput.getText());
+        RestApi restApi = new RestApi();
+        String response = restApi.login(emailInput.getText(),passwordInput.getText());
 
         if( response.equals("Login Error") )
         {
@@ -54,7 +55,7 @@ public class MainController {
         }
         else
         {
-            SetActiveUser(response);
+            setActiveUser(response);
             Parent root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.getScene().setRoot(root);

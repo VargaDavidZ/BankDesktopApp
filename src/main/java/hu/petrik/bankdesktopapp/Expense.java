@@ -17,17 +17,14 @@ public class Expense extends Transaction {
     private Date updatedAt;
     private BankAccount bankAccount;
     private String accountId;
-    private int repeatAmount;
-    private String repeatMetric;
-    private Date repeatStart;
-    private Date repeatEnd;
+    private String repeatableTransactionId;
 
     public Expense() {
 
     }
 
 
-    public Expense(String id, Float total, String category, String vendor, String description, hu.petrik.bankdesktopapp.User user, String userId, Date createdAt, Date updatedAt, BankAccount bankAccount, String accountId, int repeatAmount, String repeatMetric, Date repeatStart, Date repeatEnd) {
+    public Expense(String id, Float total, String category, String vendor, String description, hu.petrik.bankdesktopapp.User user, String userId, Date createdAt, Date updatedAt, BankAccount bankAccount, String accountId, String repeatableTransactionId) {
         this.id = id;
         this.total = total;
         this.category = category;
@@ -39,12 +36,8 @@ public class Expense extends Transaction {
         this.updatedAt = updatedAt;
         this.bankAccount = bankAccount;
         this.accountId = accountId;
-        this.repeatAmount = repeatAmount;
-        this.repeatMetric = repeatMetric;
-        this.repeatStart = repeatStart;
-        this.repeatEnd = repeatEnd;
+        this.repeatableTransactionId = repeatableTransactionId;
     }
-
 
     @JsonSetter("id")
     public void setId(String id) {
@@ -101,26 +94,13 @@ public class Expense extends Transaction {
         this.accountId = accountId;
     }
 
-    @JsonSetter("repeatAmount")
-    public void setRepeatAmount(int repeatAmount) {
-        this.repeatAmount = repeatAmount;
+    public String getRepeatableTransactionId() {
+        return repeatableTransactionId;
     }
-
-    @JsonSetter("repeatMetric")
-    public void setRepeatMetric(String repeatMetric) {
-        this.repeatMetric = repeatMetric;
+    @JsonSetter("repeatableTransactionId")
+    public void setRepeatableTransactionId(String repeatableTransactionId) {
+        this.repeatableTransactionId = repeatableTransactionId;
     }
-
-    @JsonSetter("repeatStart")
-    public void setRepeatStart(Date repeatStart) {
-        this.repeatStart = repeatStart;
-    }
-
-    @JsonSetter("repeatEnd")
-    public void setRepeatEnd(Date repeatEnd) {
-        this.repeatEnd = repeatEnd;
-    }
-
 
     public String getId() {
         return id;
@@ -166,21 +146,6 @@ public class Expense extends Transaction {
         return accountId;
     }
 
-    public int getRepeatAmount() {
-        return repeatAmount;
-    }
-
-    public String getRepeatMetric() {
-        return repeatMetric;
-    }
-
-    public Date getRepeatStart() {
-        return repeatStart;
-    }
-
-    public Date getRepeatEnd() {
-        return repeatEnd;
-    }
 
     @Override
     public String toString() {
@@ -196,10 +161,7 @@ public class Expense extends Transaction {
                 ", updatedAt=" + updatedAt +
                 ", bankAccount=" + bankAccount +
                 ", accountId='" + accountId + '\'' +
-                ", repeatAmount=" + repeatAmount +
-                ", repeatMetric='" + repeatMetric + '\'' +
-                ", repeatStart=" + repeatStart +
-                ", repeatEnd=" + repeatEnd +
-                '}';
+                ", repeatableTransactionId='" + repeatableTransactionId + '\'' +
+                "} " + super.toString();
     }
 }

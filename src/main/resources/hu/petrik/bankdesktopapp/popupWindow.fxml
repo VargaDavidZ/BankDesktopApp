@@ -2,7 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
@@ -31,7 +33,7 @@
                   <RadioButton fx:id="incomeRadioBtn" mnemonicParsing="false" onAction="#setIncomeCategories" text="Bevétel" toggleGroup="$transactionType" />
                </children>
             </HBox>
-            <TextField fx:id="totalInput" maxWidth="200.0" minWidth="200.0" promptText="Összeg">
+            <TextField fx:id="totalInput" maxWidth="200.0" minWidth="200.0" promptText="Összeg" VBox.vgrow="NEVER">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
@@ -41,6 +43,34 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </ComboBox>
+            <CheckBox fx:id="repeatableCheckBox" mnemonicParsing="false" onAction="#showDatePickerContainer" text="Ismétlődés" textFill="WHITE">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </CheckBox>
+            <VBox fx:id="datePickerContainer" alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="repeatAmountInp" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" promptText="x" />
+                        <ComboBox fx:id="metricInput" maxWidth="150.0" minWidth="100.0" prefWidth="150.0" promptText="Gyakoriság" styleClass="categoryBox" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <DatePicker fx:id="startDatePicker" promptText="Kezdés Dátum">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </DatePicker>
+                  <DatePicker fx:id="endDatePicker" promptText="Befejezés Dátum">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </DatePicker>
+               </children>
+            </VBox>
             <TextField fx:id="desciptionInput" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" promptText="Leírás">
                <VBox.margin>
                   <Insets top="10.0" />

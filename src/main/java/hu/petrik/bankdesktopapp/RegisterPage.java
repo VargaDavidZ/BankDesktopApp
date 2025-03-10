@@ -12,7 +12,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,6 +36,7 @@ public class RegisterPage {
     @javafx.fxml.FXML
     private Text errorText;
 
+   RestApi restApi = new RestApi();
 
     @javafx.fxml.FXML
     public void registerAccount(Event event) throws IOException, InterruptedException {
@@ -49,7 +49,7 @@ public class RegisterPage {
             }
             else {
                 if(validate(emailInput.getText())) {
-                    System.out.println(RestApi.CreateUser(firstNameInput.getText(), lastNameInput.getText(), emailInput.getText(), passwordInput.getText()));
+                    System.out.println(restApi.createUser(firstNameInput.getText(), lastNameInput.getText(), emailInput.getText(), passwordInput.getText()));
                     Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     stage.getScene().setRoot(root);

@@ -363,4 +363,49 @@ public class RestApi {
     }
 
 
+
+
+    public Btc getBtc(int daysBack) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(String.format("https://%s.currency-api.pages.dev/v1/currencies/btc.json",LocalDate.now().minusDays(daysBack)) ))
+                .build();
+
+        HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        //mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+
+        Btc btc = mapper.readValue(response.body().toString(),Btc.class);
+
+        //  System.out.printf(response.body().toString());
+        return btc;
+
+    }
+
+    public Eth getEth(int daysBack) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(String.format("https://%s.currency-api.pages.dev/v1/currencies/eth.json",LocalDate.now().minusDays(daysBack)) ))
+                .build();
+
+        HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        //mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+
+        Eth eth = mapper.readValue(response.body().toString(),Eth.class);
+
+        //  System.out.printf(response.body().toString());
+        return eth;
+
+    }
+
+
+
+
+
+
 }

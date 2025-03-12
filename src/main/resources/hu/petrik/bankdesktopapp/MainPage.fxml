@@ -30,10 +30,17 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-                <Button minWidth="100.0" mnemonicParsing="false" styleClass="leftNavBtn" text="Crypto">
+                <Button fx:id="cryptoBtn" minWidth="100.0" mnemonicParsing="false" onAction="#showCrypto" styleClass="leftNavBtn" text="Crypto">
                     <VBox.margin>
                         <Insets />
                     </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@BitcoinCryptocurrency.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                 </Button>
                 <Button minWidth="100.0" mnemonicParsing="false" onAction="#accountInfo" styleClass="leftNavBtn" text="Számla Infó">
                     <VBox.margin>
@@ -153,26 +160,26 @@
                                         </AnchorPane>
                                     </HBox>
                                     <HBox fx:id="lineChartContainer" alignment="CENTER" maxWidth="1000.0" minWidth="350.0" prefHeight="100.0" prefWidth="350.0">
-                                        <AreaChart fx:id="UsdChart" maxHeight="125.0" maxWidth="160.0" minHeight="125.0" minWidth="160.0" prefHeight="125.0" prefWidth="160.0" HBox.hgrow="NEVER">
+                                        <AreaChart fx:id="UsdChart" maxHeight="125.0" maxWidth="180.0" minHeight="125.0" minWidth="180.0" prefHeight="125.0" prefWidth="180.0" HBox.hgrow="NEVER">
                                             <xAxis>
                                                 <NumberAxis side="BOTTOM" style="-fx-tick-labels-visible: false;" tickLabelsVisible="false" tickMarkVisible="false" />
                                             </xAxis>
                                             <yAxis>
-                                                <NumberAxis side="LEFT" style="-fx-tick-labels-visible: false;" />
+                                                <NumberAxis side="LEFT" style="-fx-tick-labels-visible: true;" />
                                             </yAxis>
                                             <HBox.margin>
                                                 <Insets />
                                             </HBox.margin>
                                         </AreaChart>
-                                        <AreaChart fx:id="EurChart" maxHeight="125.0" maxWidth="160.0" minHeight="125.0" minWidth="160.0" prefHeight="125.0" prefWidth="160.0" HBox.hgrow="NEVER">
+                                        <AreaChart fx:id="EurChart" maxHeight="125.0" maxWidth="180.0" minHeight="125.0" minWidth="180.0" prefHeight="125.0" prefWidth="180.0" HBox.hgrow="NEVER">
                                             <xAxis>
                                                 <NumberAxis side="BOTTOM" tickLabelsVisible="false" tickMarkVisible="false" />
                                             </xAxis>
                                             <yAxis>
-                                                <NumberAxis side="LEFT" style="-fx-tick-labels-visible: false;" />
+                                                <NumberAxis side="LEFT" style="-fx-tick-labels-visible: true;" />
                                             </yAxis>
                                             <HBox.margin>
-                                                <Insets />
+                                                <Insets left="-20.0" right="10.0" />
                                             </HBox.margin>
                                         </AreaChart>
                                     </HBox>
@@ -185,6 +192,150 @@
                                     </HBox>
                                     <PieChart fx:id="myPieChart" onMouseClicked="#showValuePieChart" styleClass="myPieChart" />
                                 </VBox>
+                        <VBox fx:id="cryptoContainer" alignment="TOP_CENTER" maxWidth="390.0" minWidth="390.0" prefHeight="200.0" prefWidth="390.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Crypto">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <HBox fx:id="cryptoCards" alignment="CENTER" maxHeight="100.0" maxWidth="400.0" minWidth="400.0" prefHeight="50.0" prefWidth="100.0" VBox.vgrow="NEVER">
+                                 <children>
+                                    <AnchorPane maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0" styleClass="currencyType" HBox.hgrow="NEVER">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                       <children>
+                                          <BorderPane maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0">
+                                             <left>
+                                                <Pane fx:id="btcIndicator" maxWidth="15.0" minHeight="50.0" minWidth="15.0" prefHeight="75.0" prefWidth="20.0" styleClass="sidePane" BorderPane.alignment="CENTER">
+                                                   <children>
+                                                      <ImageView fx:id="btcImg" fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@currencyPosInd.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </Pane>
+                                             </left>
+                                             <center>
+                                                <BorderPane maxHeight="40.0" maxWidth="90.0" minHeight="40.0" minWidth="115.0" prefHeight="40.0" prefWidth="90.0" BorderPane.alignment="CENTER">
+                                                   <BorderPane.margin>
+                                                      <Insets top="5.0" />
+                                                   </BorderPane.margin>
+                                                   <left>
+                                                      <HBox maxHeight="90.0" minWidth="100.0" prefHeight="90.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                                                         <children>
+                                                            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="BTC" />
+                                                         </children>
+                                                      </HBox>
+                                                   </left>
+                                                   <right>
+                                                      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                         <children>
+                                                            <Text fx:id="btcText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                                                         </children>
+                                                      </HBox>
+                                                   </right>
+                                                   <bottom>
+                                                      <HBox prefHeight="20.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                         <children>
+                                                            <Text fx:id="btcChange" fill="#41FF24" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                                                               <font>
+                                                                  <Font size="11.0" />
+                                                               </font>
+                                                            </Text>
+                                                         </children>
+                                                      </HBox>
+                                                   </bottom>
+                                                </BorderPane>
+                                             </center>
+                                          </BorderPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0" styleClass="currencyType" HBox.hgrow="NEVER">
+                                       <children>
+                                          <BorderPane maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0">
+                                             <left>
+                                                <Pane fx:id="ethIndicator" maxWidth="15.0" minHeight="50.0" minWidth="15.0" prefHeight="75.0" prefWidth="20.0" styleClass="sidePane" BorderPane.alignment="CENTER">
+                                                   <children>
+                                                      <ImageView fx:id="ethImg" fitHeight="50.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@currencyPosInd.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </Pane>
+                                             </left>
+                                             <center>
+                                                <BorderPane maxHeight="40.0" maxWidth="90.0" minHeight="40.0" minWidth="115.0" prefHeight="40.0" prefWidth="90.0" BorderPane.alignment="CENTER">
+                                                   <BorderPane.margin>
+                                                      <Insets top="5.0" />
+                                                   </BorderPane.margin>
+                                                   <left>
+                                                      <HBox maxHeight="90.0" minWidth="100.0" prefHeight="90.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                                                         <children>
+                                                            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ETH" />
+                                                         </children>
+                                                      </HBox>
+                                                   </left>
+                                                   <right>
+                                                      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                         <children>
+                                                            <Text fx:id="ethText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                                                               <font>
+                                                                  <Font size="14.0" />
+                                                               </font>
+                                                            </Text>
+                                                         </children>
+                                                      </HBox>
+                                                   </right>
+                                                   <bottom>
+                                                      <HBox prefHeight="20.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                         <children>
+                                                            <Text fx:id="ethChange" fill="#41FF24" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                                                               <font>
+                                                                  <Font size="12.0" />
+                                                               </font>
+                                                            </Text>
+                                                         </children>
+                                                      </HBox>
+                                                   </bottom>
+                                                </BorderPane>
+                                             </center>
+                                          </BorderPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="lineChartContainer1" alignment="CENTER" maxWidth="1000.0" minWidth="350.0" prefHeight="100.0" prefWidth="350.0">
+                                 <children>
+                                    <AreaChart fx:id="BtcChart" maxHeight="125.0" maxWidth="180.0" minHeight="125.0" minWidth="180.0" prefHeight="125.0" prefWidth="180.0" HBox.hgrow="NEVER">
+                                       <xAxis>
+                                          <NumberAxis side="BOTTOM" style="-fx-tick-labels-visible: false; -fx-minor-tick-visible: false;" tickLabelsVisible="false" tickMarkVisible="false" />
+                                       </xAxis>
+                                       <yAxis>
+                                          <NumberAxis side="LEFT" style="-fx-tick-labels-visible: true; -fx-tick-unit: 10000000;" />
+                                       </yAxis>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </AreaChart>
+                                    <AreaChart fx:id="EthChart" maxHeight="125.0" maxWidth="180.0" minHeight="125.0" minWidth="180.0" prefHeight="125.0" prefWidth="180.0" HBox.hgrow="NEVER">
+                                       <xAxis>
+                                          <NumberAxis side="BOTTOM" style="-fx-minor-tick-visible: false; -fx-tick-labels-visible: false;" tickLabelsVisible="false" tickMarkVisible="false" />
+                                       </xAxis>
+                                       <yAxis>
+                                          <NumberAxis side="LEFT" style="-fx-tick-labels-visible: true;" />
+                                       </yAxis>
+                                       <HBox.margin>
+                                          <Insets left="-20.0" right="10.0" />
+                                       </HBox.margin>
+                                    </AreaChart>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                             </StackPane>
                         </HBox>
 

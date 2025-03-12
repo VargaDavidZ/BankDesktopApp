@@ -153,14 +153,10 @@
 }
 
 .axis {
-    -fx-font-size: 1em;
-    -fx-tick-label-fill: red;
-    -fx-show-tick-labels: false;
+    -fx-font-size: 2px;
+    -fx-tick-label-fill: white;
     -fx-tick-length: 1;
     -fx-minor-tick-length: 1;
-    -fx-tick-label-gap: 1px;
-    -fx-major-tick-unit: 200;
-
 }
 
 

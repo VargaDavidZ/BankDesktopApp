@@ -32,6 +32,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 
 
@@ -98,8 +99,39 @@ public class MainPage {
     private boolean pieChartCombined = false;
     @FXML
     private ImageView swapLeftContainerBtnImageView;
+    @FXML
+    private ImageView swapLeftContainerBtnImageView1;
+    @FXML
+    private Text ethText;
+    @FXML
+    private HBox lineChartContainer1;
+    @FXML
+    private Text btcChange;
+    @FXML
+    private Text ethChange;
+    @FXML
+    private VBox cryptoContainer;
+    @FXML
+    private Text btcText;
+    @FXML
+    private Pane btcIndicator;
+    @FXML
+    private Pane ethIndicator;
+    @FXML
+    private HBox cryptoCards;
+    @FXML
+    private ImageView ethImg;
+    @FXML
+    private ImageView btcImg;
+    @FXML
+    private Button cryptoBtn;
+    @FXML
+    private AreaChart BtcChart;
+    @FXML
+    private AreaChart EthChart;
 
-
+    XYChart.Series<Number, Number> btcSeries = new XYChart.Series<Number, Number>();
+    XYChart.Series<Number, Number> ethSeries = new XYChart.Series<Number, Number>();
     //duplicate card at user
     //confirmation on delete and transfer
 
@@ -116,6 +148,7 @@ public class MainPage {
 
         System.out.println("Active User Id"+activeUser.getId());
 
+        cryptoContainer.setVisible(false);
         pieChartContainer.setVisible(false);
         //display EUR-HUF exchange rate and change %
         eurText.setText((Math.round(currentEur*100)/100) + " Ft");
@@ -134,11 +167,12 @@ public class MainPage {
         }
 
 
+
         System.out.println(activeBankAccount.toString());
         System.out.println("Active acc id " +activeBankAccount.getId());
         System.out.println(activeUser.getAuthToken());
         //display USD-HUF exchange rate and change %
-        System.out.printf(currentUsd + "---");
+        //System.out.printf(currentUsd + "---");
         usdText.setText((Math.round(currentUsd*100)/100) + "Ft");
         usdChange.setText("+"+Math.round(changeUsd*100)/100.0 + "%");
         if(currentUsd-yesterdayUsd < 0)
@@ -235,7 +269,7 @@ public class MainPage {
 
     public void listTransactions() {
         for (int i = 0; i < transactionArray.size(); i++) {
-            System.out.println(transactionArray.get(i).getTotal());
+            //System.out.println(transactionArray.get(i).getTotal());
             expenseList.getItems().add(0,new TransactionComponent(transactionArray.get(i)));
         }
 
@@ -405,6 +439,45 @@ public class MainPage {
 
     }
 
+    public void loadCryptoCharts(int daysToShow) throws IOException, InterruptedException {
+
+
+        int days = daysToShow;
+        Float f = 100.5F;
+
+
+        for (int i = 0; i <= daysToShow; i++) {
+            //series.getData().add(new XYChart.Data(Integer.toString(eurIndex), eurValue));
+            btcSeries.getData().add(new XYChart.Data<>(i, api.getBtc(days).getValue().get("huf")));
+            ethSeries.getData().add(new XYChart.Data<>(i, api.getEth(days).getValue().get("huf")));
+            days--;
+
+        }
+
+
+        BtcChart.getYAxis().setAutoRanging(true);
+        ((NumberAxis)BtcChart.getYAxis()).setForceZeroInRange(false);
+
+
+
+        BtcChart.getXAxis().setAutoRanging(false);
+        ((NumberAxis)BtcChart.getXAxis()).setUpperBound(15.1);
+        ((NumberAxis)BtcChart.getXAxis()).setLowerBound(0);
+
+        EthChart.getYAxis().setAutoRanging(true);
+        ((NumberAxis)EthChart.getYAxis()).setForceZeroInRange(false);
+
+
+
+        EthChart.getXAxis().setAutoRanging(false);
+        ((NumberAxis)EthChart.getXAxis()).setUpperBound(15.1);
+        ((NumberAxis)EthChart.getXAxis()).setLowerBound(0);
+
+        BtcChart.getData().add(btcSeries);
+        EthChart.getData().add(ethSeries);
+
+    }
+
     public void loadCharts(int daysToShow) throws IOException, InterruptedException {
 
 
@@ -424,19 +497,26 @@ public class MainPage {
         }
 
 
-        UsdChart.getYAxis().setAutoRanging(false);
-
+        UsdChart.getYAxis().setAutoRanging(true);
+        ((NumberAxis)UsdChart.getYAxis()).setForceZeroInRange(false);
+/*
         ((NumberAxis)UsdChart.getYAxis()).setUpperBound(450);
         ((NumberAxis)UsdChart.getYAxis()).setLowerBound(365);
+
+ */
 
 
         UsdChart.getXAxis().setAutoRanging(false);
         ((NumberAxis)UsdChart.getXAxis()).setUpperBound(15.1);
         ((NumberAxis)UsdChart.getXAxis()).setLowerBound(0);
 
-        EurChart.getYAxis().setAutoRanging(false);
+        EurChart.getYAxis().setAutoRanging(true);
+        ((NumberAxis)EurChart.getYAxis()).setForceZeroInRange(false);
+        /*
         ((NumberAxis)EurChart.getYAxis()).setUpperBound(450);
         ((NumberAxis) EurChart.getYAxis()).setLowerBound(365);
+
+         */
         EurChart.getXAxis().setAutoRanging(false);
         ((NumberAxis)EurChart.getXAxis()).setUpperBound(15.1);
         ((NumberAxis)EurChart.getXAxis()).setLowerBound(0);
@@ -467,7 +547,7 @@ public class MainPage {
 
     @FXML
     public void swapLeftContainer(ActionEvent actionEvent) throws IOException, InterruptedException {
-        if(!pieChartContainer.isVisible())
+        if(swapLeftContainerBtn.getText().equals("Eloszlás"))
         {
 
             updatePieChart();
@@ -475,10 +555,11 @@ public class MainPage {
             myStackPane.layout();
             swapLeftContainerBtn.setText("Árfolyam");
             swapLeftContainerBtnImageView.setImage(new Image(MainPage.class.getResourceAsStream("currency.png")));
+            cryptoContainer.setVisible(false);
             currencyExchangeContainer.setVisible(false);
             //myPieChart.setVisible(true);
             pieChartContainer.setVisible(true);
-            System.out.println(pieChartContainer.isVisible());
+            //System.out.println(pieChartContainer.isVisible());
             pieChartContainer.setTranslateZ(2);
 
             myPieChart.setLegendVisible(false);
@@ -490,8 +571,10 @@ public class MainPage {
             updatePieChart();
             myPieChart.getData().clear();
             swapLeftContainerBtn.setText("Eloszlás");
+            cryptoBtn.setText("Crypto");
             swapLeftContainerBtnImageView.setImage(new Image(MainPage.class.getResourceAsStream("PieChart.png")));
             pieChartContainer.setVisible(false);
+            cryptoContainer.setVisible(false);
             currencyExchangeContainer.setVisible(true);
 
             //myPieChart.setVisible(false);
@@ -658,6 +741,69 @@ public class MainPage {
     @FXML
     public void showTransactionDetail(Event event) {
         System.out.println(transactionArray.get(transactionArray.size() -  expenseList.getFocusModel().getFocusedIndex()-1));
+    }
+
+    @FXML
+    public void showCrypto(ActionEvent actionEvent) throws IOException, InterruptedException {
+        if(cryptoBtn.getText().equals("Crypto"))
+        {
+            if((long) btcSeries.getData().size() == 0)
+            {
+                System.out.println("No series found");
+                loadCryptoCharts(15);
+            }
+
+
+            cryptoBtn.setText("Árfolyam");
+            cryptoContainer.setVisible(true);
+            currencyExchangeContainer.setVisible(false);
+            pieChartContainer.setVisible(false);
+            Float currentBtc = api.getBtc(0).getValue().get("huf");
+            Float yesterdayBtc = api.getBtc(1).getValue().get("huf");
+            float change = ((currentBtc-yesterdayBtc) / currentBtc * 100);
+
+            Float currentEth = api.getEth(0).getValue().get("huf");
+            Float yesterdayEth = api.getEth(1).getValue().get("huf");
+            float changeEth = ((currentEth-yesterdayEth) / currentEth * 100);
+
+
+
+            btcText.setText((Math.round(currentBtc*100)/100) + " Ft");
+            btcChange.setText("+"+Math.round(change*100)/100.0 + "%");
+            if(currentBtc-yesterdayBtc < 0)
+            {
+                btcText.setText((Math.round(currentBtc*100)/100) + " Ft");
+                btcIndicator.setStyle("-fx-background-color: red;");
+                btcChange.setText(Math.round(change*100)/100.0 + "%");
+                btcChange.setStyle("-fx-fill: red;");
+                btcImg.setImage(new Image(MainPage.class.getResourceAsStream("currencyNegInd.png")));
+            }
+
+            ethText.setText((Math.round(currentEth*100)/100) + " Ft");
+            ethChange.setText("+"+Math.round(changeEth*100)/100.0 + "%");
+            if(currentEth-yesterdayEth < 0)
+            {
+                ethText.setText((Math.round(currentEth*100)/100) + " Ft");
+                ethIndicator.setStyle("-fx-background-color: red;");
+                ethChange.setText(Math.round(changeEth*100)/100.0 + "%");
+                ethChange.setStyle("-fx-fill: red;");
+                ethImg.setImage(new Image(MainPage.class.getResourceAsStream("currencyNegInd.png")));
+            }
+
+
+
+        }
+        else
+        {
+            updatePieChart();
+            myPieChart.getData().clear();
+            cryptoBtn.setText("Crypto");
+            swapLeftContainerBtn.setText("Eloszlás");
+            cryptoContainer.setVisible(false);
+            currencyExchangeContainer.setVisible(true);
+            pieChartContainer.setVisible(false);
+        }
+
     }
 
 /*

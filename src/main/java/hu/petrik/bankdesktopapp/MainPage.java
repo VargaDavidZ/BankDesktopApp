@@ -32,8 +32,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Comparator;
+import java.util.Optional;
 
 
 public class MainPage {
@@ -446,13 +446,81 @@ public class MainPage {
         Float f = 100.5F;
 
 
-        for (int i = 0; i <= daysToShow; i++) {
+        for (int i = 0; i <= daysToShow-1; i++) {
             //series.getData().add(new XYChart.Data(Integer.toString(eurIndex), eurValue));
-            btcSeries.getData().add(new XYChart.Data<>(i, api.getBtc(days).getValue().get("huf")));
+
+            btcSeries.getData().add(new XYChart.Data<>(i,api.getBtc(days).getValue().get("huf")));
             ethSeries.getData().add(new XYChart.Data<>(i, api.getEth(days).getValue().get("huf")));
             days--;
 
         }
+
+        /*
+        btcSeries.getData().add(new XYChart.Data<>(15,10));
+        ethSeries.getData().add(new XYChart.Data<>(15,10));
+
+         */
+
+        btcSeries.getData().forEach(series -> {
+            System.out.println(series.toString());
+        });
+
+
+
+        Optional<XYChart.Data<Number, Number>> minBtcValue = btcSeries.getData().stream().min(Comparator.comparingInt(a -> a.getYValue().intValue()));
+        Optional<XYChart.Data<Number, Number>> minEthValue = ethSeries.getData().stream().min(Comparator.comparingInt(a -> a.getYValue().intValue()));
+        /*
+        System.out.println(n.get().getYValue().intValue());
+        System.out.println(n.get().getXValue());
+        System.out.println(n.get());
+
+         */
+
+        Optional<XYChart.Data<Number, Number>> maxBtcValue = btcSeries.getData().stream().max(Comparator.comparingInt(a -> a.getYValue().intValue()));
+        Optional<XYChart.Data<Number, Number>> maxEthValue = ethSeries.getData().stream().max(Comparator.comparingInt(a -> a.getYValue().intValue()));
+
+
+        Platform.runLater(() -> {
+
+            if(btcSeries.getData().getFirst().getYValue().intValue() > btcSeries.getData().getLast().getYValue().intValue())
+            {
+                Node fill = btcSeries.getNode().lookup(".chart-series-area-fill"); // only for AreaChart
+                Node line = btcSeries.getNode().lookup(".chart-series-area-line");
+                fill.setStyle("-fx-fill:rgba(255,0,0,0.5) ");
+                line.setStyle("-fx-stroke:#ff0000 ");
+            }
+
+            if(ethSeries.getData().getFirst().getYValue().intValue() > ethSeries.getData().getLast().getYValue().intValue())
+            {
+                Node fill = ethSeries.getNode().lookup(".chart-series-area-fill"); // only for AreaChart
+                Node line = ethSeries.getNode().lookup(".chart-series-area-line");
+                fill.setStyle("-fx-fill:rgba(255,0,0,0.5) ");
+                line.setStyle("-fx-stroke: #ff0000");
+            }
+
+
+
+            /*
+            System.out.println(minBtcValue.get().getXValue().intValue() + " " + btcSeries.getData().size());
+            if(minBtcValue.get().getXValue().intValue() == btcSeries.getData().size()-1)
+            {
+                Node fill = btcSeries.getNode().lookup(".chart-series-area-fill"); // only for AreaChart
+                Node line = btcSeries.getNode().lookup(".chart-series-area-line");
+                fill.setStyle("-fx-fill:rgba(255,0,0,0.5) ");
+                line.setStyle("-fx-stroke:#ff0000 ");
+            }
+
+            if(minEthValue.get().getXValue().intValue() == ethSeries.getData().size()-1)
+            {
+                Node fill = ethSeries.getNode().lookup(".chart-series-area-fill"); // only for AreaChart
+                Node line = ethSeries.getNode().lookup(".chart-series-area-line");
+                fill.setStyle("-fx-fill:rgba(255,0,0,0.5) ");
+                line.setStyle("-fx-stroke: #ff0000");
+            }
+
+             */
+        });
+
 
 
         BtcChart.getYAxis().setAutoRanging(true);
@@ -461,7 +529,7 @@ public class MainPage {
 
 
         BtcChart.getXAxis().setAutoRanging(false);
-        ((NumberAxis)BtcChart.getXAxis()).setUpperBound(15.1);
+        ((NumberAxis)BtcChart.getXAxis()).setUpperBound(14.22);
         ((NumberAxis)BtcChart.getXAxis()).setLowerBound(0);
 
         EthChart.getYAxis().setAutoRanging(true);
@@ -470,7 +538,7 @@ public class MainPage {
 
 
         EthChart.getXAxis().setAutoRanging(false);
-        ((NumberAxis)EthChart.getXAxis()).setUpperBound(15.1);
+        ((NumberAxis)EthChart.getXAxis()).setUpperBound(14.22);
         ((NumberAxis)EthChart.getXAxis()).setLowerBound(0);
 
         BtcChart.getData().add(btcSeries);
@@ -488,13 +556,70 @@ public class MainPage {
         Float f = 100.5F;
 
 
-        for (int i = 0; i <= daysToShow; i++) {
+        for (int i = 0; i <= daysToShow-1; i++) {
             //series.getData().add(new XYChart.Data(Integer.toString(eurIndex), eurValue));
             eurSeries.getData().add(new XYChart.Data<>(i, api.getEur(days).getValue().get("huf")));
             usdSeries.getData().add(new XYChart.Data<>(i, api.getUsd(days).getValue().get("huf")));
             days--;
 
         }
+        /*
+        usdSeries.getData().add(new XYChart.Data<>(15,10));
+        eurSeries.getData().add(new XYChart.Data<>(15,10));
+
+         */
+        Optional<XYChart.Data<Number, Number>> minUsdValue = usdSeries.getData().stream().min(Comparator.comparingInt(a -> a.getYValue().intValue()));
+        Optional<XYChart.Data<Number, Number>> minEurValue = eurSeries.getData().stream().min(Comparator.comparingInt(a -> a.getYValue().intValue()));
+        /*
+        System.out.println(n.get().getYValue().intValue());
+        System.out.println(n.get().getXValue());
+        System.out.println(n.get());
+
+         */
+
+        Optional<XYChart.Data<Number, Number>> maxUsdValue = usdSeries.getData().stream().max(Comparator.comparingInt(a -> a.getYValue().intValue()));
+        Optional<XYChart.Data<Number, Number>> maxEurValue = eurSeries.getData().stream().max(Comparator.comparingInt(a -> a.getYValue().intValue()));
+
+        Platform.runLater(() -> {
+            //System.out.println(minUsdValue.get().getXValue().intValue() + " " + usdSeries.getData().size());
+
+            if(usdSeries.getData().getFirst().getYValue().intValue() > usdSeries.getData().getLast().getYValue().intValue())
+            {
+                Node fill = usdSeries.getNode().lookup(".chart-series-area-fill"); // only for AreaChart
+                Node line = usdSeries.getNode().lookup(".chart-series-area-line");
+                fill.setStyle("-fx-fill:rgba(255,0,0,0.5) ");
+                line.setStyle("-fx-stroke:#ff0000 ");
+            }
+
+            if(eurSeries.getData().getFirst().getYValue().intValue() > eurSeries.getData().getLast().getYValue().intValue())
+            {
+                Node fill = eurSeries.getNode().lookup(".chart-series-area-fill"); // only for AreaChart
+                Node line = eurSeries.getNode().lookup(".chart-series-area-line");
+                fill.setStyle("-fx-fill:rgba(255,0,0,0.5) ");
+                line.setStyle("-fx-stroke: #ff0000");
+            }
+
+            /*
+            if(minUsdValue.get().getXValue().intValue() == usdSeries.getData().size()-1)
+            {
+                Node fill = usdSeries.getNode().lookup(".chart-series-area-fill"); // only for AreaChart
+                Node line = usdSeries.getNode().lookup(".chart-series-area-line");
+                fill.setStyle("-fx-fill:rgba(255,0,0,0.5) ");
+                line.setStyle("-fx-stroke:#ff0000 ");
+            }
+
+            if(minEurValue.get().getXValue().intValue() == eurSeries.getData().size()-1)
+            {
+                Node fill = eurSeries.getNode().lookup(".chart-series-area-fill"); // only for AreaChart
+                Node line = eurSeries.getNode().lookup(".chart-series-area-line");
+                fill.setStyle("-fx-fill:rgba(255,0,0,0.5) ");
+                line.setStyle("-fx-stroke: #ff0000");
+            }
+
+             */
+        });
+
+
 
 
         UsdChart.getYAxis().setAutoRanging(true);
@@ -507,7 +632,7 @@ public class MainPage {
 
 
         UsdChart.getXAxis().setAutoRanging(false);
-        ((NumberAxis)UsdChart.getXAxis()).setUpperBound(15.1);
+        ((NumberAxis)UsdChart.getXAxis()).setUpperBound(14.22);
         ((NumberAxis)UsdChart.getXAxis()).setLowerBound(0);
 
         EurChart.getYAxis().setAutoRanging(true);
@@ -518,7 +643,7 @@ public class MainPage {
 
          */
         EurChart.getXAxis().setAutoRanging(false);
-        ((NumberAxis)EurChart.getXAxis()).setUpperBound(15.1);
+        ((NumberAxis)EurChart.getXAxis()).setUpperBound(14.22);
         ((NumberAxis)EurChart.getXAxis()).setLowerBound(0);
 
         UsdChart.getData().add(usdSeries);

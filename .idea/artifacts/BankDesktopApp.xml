@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="BankDesktopApp">
+    <output-path>$PROJECT_DIR$/out/artifacts/BankDesktopApp</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="hu.petrik.bankdesktopapp.MainApplication" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="BankDesktopApp.jar">
+        <element id="module-output" name="BankDesktopApp" />
+      </element>
+    </root>
+  </artifact>
+</component>

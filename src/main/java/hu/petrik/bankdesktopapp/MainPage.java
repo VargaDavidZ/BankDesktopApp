@@ -215,6 +215,12 @@ public class MainPage {
             cardList.getFocusModel().getFocusedItem().getHamburgerMenu().setDisable(false);
 
             try {
+                api.updateRepeatableTransaction(activeBankAccount.getId(),activeUser.getId(), activeUser.getAuthToken());
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            try {
                 loadCharts(15);
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
@@ -482,7 +488,7 @@ public class MainPage {
 
         Platform.runLater(() -> {
 
-            if(btcSeries.getData().getFirst().getYValue().intValue() > btcSeries.getData().getLast().getYValue().intValue())
+            if(btcSeries.getData().get(0).getYValue().intValue() > btcSeries.getData().get(btcSeries.getData().size()-1).getYValue().intValue())
             {
                 Node fill = btcSeries.getNode().lookup(".chart-series-area-fill"); // only for AreaChart
                 Node line = btcSeries.getNode().lookup(".chart-series-area-line");
@@ -490,7 +496,7 @@ public class MainPage {
                 line.setStyle("-fx-stroke:#ff0000 ");
             }
 
-            if(ethSeries.getData().getFirst().getYValue().intValue() > ethSeries.getData().getLast().getYValue().intValue())
+            if(ethSeries.getData().get(0).getYValue().intValue() > ethSeries.getData().get(ethSeries.getData().size()-1).getYValue().intValue())
             {
                 Node fill = ethSeries.getNode().lookup(".chart-series-area-fill"); // only for AreaChart
                 Node line = ethSeries.getNode().lookup(".chart-series-area-line");
@@ -548,6 +554,7 @@ public class MainPage {
 
     public void loadCharts(int daysToShow) throws IOException, InterruptedException {
 
+        
 
         XYChart.Series<Number, Number> eurSeries = new XYChart.Series<Number, Number>();
         XYChart.Series<Number, Number> usdSeries = new XYChart.Series<Number, Number>();
@@ -583,7 +590,7 @@ public class MainPage {
         Platform.runLater(() -> {
             //System.out.println(minUsdValue.get().getXValue().intValue() + " " + usdSeries.getData().size());
 
-            if(usdSeries.getData().getFirst().getYValue().intValue() > usdSeries.getData().getLast().getYValue().intValue())
+            if(usdSeries.getData().get(0).getYValue().intValue() > usdSeries.getData().get(usdSeries.getData().size()-1).getYValue().intValue())
             {
                 Node fill = usdSeries.getNode().lookup(".chart-series-area-fill"); // only for AreaChart
                 Node line = usdSeries.getNode().lookup(".chart-series-area-line");
@@ -591,7 +598,7 @@ public class MainPage {
                 line.setStyle("-fx-stroke:#ff0000 ");
             }
 
-            if(eurSeries.getData().getFirst().getYValue().intValue() > eurSeries.getData().getLast().getYValue().intValue())
+            if(eurSeries.getData().get(0).getYValue().intValue() > eurSeries.getData().get(eurSeries.getData().size()-1).getYValue().intValue())
             {
                 Node fill = eurSeries.getNode().lookup(".chart-series-area-fill"); // only for AreaChart
                 Node line = eurSeries.getNode().lookup(".chart-series-area-line");

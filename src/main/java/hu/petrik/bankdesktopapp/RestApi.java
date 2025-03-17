@@ -54,7 +54,7 @@ public class RestApi {
         User user = mapper.readValue(response.body().toString(),User.class);
 
 
-        client.close();
+
 
         return user;
 
@@ -358,8 +358,16 @@ public class RestApi {
         System.out.printf(response.body());
     }
 
-    public void updateRepeatableTransaction(){ //have to call an endpoint that check the status of the transaction
+    public void updateRepeatableTransaction(String accountId,String userId, String authToken) throws IOException, InterruptedException { //have to call an endpoint that check the status of the transaction
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:3000/repeatabletransaction/update/" + accountId))
+                .header("Content-Type","application/json")
+                .header("authorization", "Bearer "+ authToken)
+                .method("PATCH", HttpRequest.BodyPublishers.ofString(String.format("{\"userId\": \"%s\"}", userId)))
+                .build();
 
+        HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
+        //System.out.println(response.body());
     }
 
 

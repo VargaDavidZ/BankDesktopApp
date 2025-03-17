@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="400.0" maxWidth="300.0" minHeight="400.0" minWidth="300.0" prefHeight="400.0" prefWidth="300.0" stylesheets="@popupWindow.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.PopupWindow">
+<AnchorPane maxHeight="400.0" maxWidth="300.0" minHeight="400.0" minWidth="300.0" prefHeight="400.0" prefWidth="300.0" stylesheets="@popupWindow.css"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.PopupWindow">
    <children>
       <VBox alignment="CENTER" maxHeight="400.0" maxWidth="300.0" minHeight="400.0" minWidth="300.0" prefHeight="400.0" prefWidth="300.0" styleClass="popWindowContainer" stylesheets="@popupWindow.css">
          <children>

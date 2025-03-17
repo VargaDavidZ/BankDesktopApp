@@ -8,7 +8,7 @@
 
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.Font?>
-<VBox fx:id="container" styleClass="container" stylesheets="confirmation.css" alignment="CENTER" maxHeight="400.0" maxWidth="300.0" minHeight="400.0" minWidth="300.0" prefWidth="300.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.TransferConfirmation">
+<VBox fx:id="container" styleClass="container" stylesheets="confirmation.css" alignment="CENTER" maxHeight="400.0" maxWidth="300.0" minHeight="400.0" minWidth="300.0" prefWidth="300.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.TransferConfirmation">
     <BorderPane maxHeight="Infinity" stylesheets="@loginDesign.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/">
         <center>
             <BorderPane styleClass="right-form">

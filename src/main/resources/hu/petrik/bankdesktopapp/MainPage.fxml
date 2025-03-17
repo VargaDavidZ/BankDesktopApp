@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="mainPage" maxHeight="400.0" minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.MainPage">
+<VBox fx:id="mainPage" maxHeight="400.0" minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" stylesheets="@mainPage.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.MainPage">
     <HBox alignment="CENTER_RIGHT" maxHeight="600.0" maxWidth="1000.0" minWidth="1000.0" prefHeight="600.0" prefWidth="300.0">
         <VBox alignment="TOP_CENTER" maxHeight="600.0" maxWidth="100.0" prefHeight="200.0" prefWidth="100.0" styleClass="leftNav">
             <Button maxWidth="100.0" minHeight="25.0" minWidth="100.0" mnemonicParsing="false" onAction="#logOut" prefHeight="25.0" prefWidth="100.0" styleClass="logoutBtn" text="Kijelentketés" />

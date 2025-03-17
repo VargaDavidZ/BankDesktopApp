@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="200.0" prefWidth="200.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.Confirmation">
+<AnchorPane prefHeight="200.0" prefWidth="200.0" stylesheets="@mainPage.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.Confirmation">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" styleClass="container" stylesheets="@confirmation.css">
          <children>

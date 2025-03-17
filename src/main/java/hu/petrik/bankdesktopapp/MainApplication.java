@@ -10,12 +10,17 @@ import java.util.Arrays;
 
 // ctrl+ctrl -> mvn javafx:jlink , mvn package - snapshot.jar
 /*
+
+create the jar file for the package --> https://www.youtube.com/watch?v=F8ahBtXkQzU
+
 jpackage --input target/ \
-        --name JPackageDemoApp \
-        --main-jar BankDesktopApp-1.0-SNAPSHOT.jar \
+        --name BankApp \
+        --main-jar BankDesktopApp.jar \
         --main-class hu.petrik.bankdesktopapp.MainApplication \
-        --type EXE \
+        --type dmg \
         --java-options '--enable-preview'
+
+
 
  */
         public class MainApplication extends Application {

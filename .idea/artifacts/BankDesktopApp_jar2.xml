@@ -1,0 +1,47 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="BankDesktopApp:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/BankDesktopApp_jar2</output-path>
+    <root id="archive" name="BankDesktopApp.jar">
+      <element id="module-output" name="BankDesktopApp" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.13.4/jackson-annotations-2.13.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.13.4.2/jackson-databind-2.13.4.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/21/javafx-fxml-21-mac-aarch64.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.13.4/jackson-core-2.13.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/21/javafx-graphics-21-mac-aarch64.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/21/javafx-controls-21.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/21/javafx-controls-21-mac-aarch64.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/21/javafx-base-21.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/21/javafx-base-21-mac-aarch64.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar" path-in-jar="/" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jar" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jarsigner" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/java" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/javac" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/javadoc" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/javap" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jcmd" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jconsole" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jdb" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jdeprscan" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jdeps" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jfr" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jhsdb" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jimage" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jinfo" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jlink" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jmap" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jmod" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jpackage" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jps" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jrunscript" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jshell" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jstack" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jstat" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/jstatd" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/keytool" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/rmiregistry" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/serialver" />
+    </root>
+  </artifact>
+</component>

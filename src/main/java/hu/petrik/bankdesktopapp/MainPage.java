@@ -50,6 +50,8 @@ public class MainPage {
     RestApi api = new RestApi();
     private static User activeUser;
     private static BankAccount activeBankAccount;
+
+
     private float total;
     private final ArrayList<Transaction> transactionArray = new ArrayList<>();
     private int focusedItem = 0;
@@ -245,6 +247,19 @@ public class MainPage {
         activeBankAccount = inpAcc;
     }
 
+
+
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
+
+
+
     public void listCards() throws FileNotFoundException {
 
 
@@ -357,7 +372,7 @@ public class MainPage {
             income += activeBankAccount.getIncome()[i].getTotal();
         }
         total = income - expense;
-
+        activeBankAccount.setTotal(total);
         updatePieChart();
         //total = activeBankAccount.getTotal();
 

@@ -83,7 +83,7 @@ public class RestApi {
                 .build();
 
         HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
+        System.out.println(response.body());
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);

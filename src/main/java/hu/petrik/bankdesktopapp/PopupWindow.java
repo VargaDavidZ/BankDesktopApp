@@ -43,15 +43,13 @@ public class PopupWindow {
     private ComboBox<String> metricInput;
     @javafx.fxml.FXML
     private TextField repeatAmountInp;
+    @javafx.fxml.FXML
+    private TextField title;
 
     //only show the correct category types for income/expense
     public void initialize() {
         categoryInput.getItems().setAll("Shopping", "Rent","Transport","Transaction" ,"Salary" ,"Other");
-        repeatableCheckBox.setVisible(false);
-        repeatableCheckBox.setManaged(false);
-        metricInput.setVisible(false);
-        metricInput.setManaged(false);
-        hideDatePickers();
+        hideRepeatableDependencies();
 
 
     }
@@ -95,7 +93,7 @@ public class PopupWindow {
             }
             else{
                 System.out.println("rep");
-                restApi.createRepeatableTransaction(Float.parseFloat(totalInput.getText()),categoryInput.getValue(),desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.getActiveBankAccount().getId(),Integer.parseInt(repeatAmountInp.getText()), metricInput.getValue(),startDatePicker.getValue(),endDatePicker.getValue() , MainPage.getActiveUser().getAuthToken());
+                restApi.createRepeatableTransaction(Float.parseFloat(totalInput.getText()),categoryInput.getValue(),desciptionInput.getText(),MainPage.getActiveUser().getId(),MainPage.getActiveBankAccount().getId(),Integer.parseInt(repeatAmountInp.getText()), metricInput.getValue(),startDatePicker.getValue(),endDatePicker.getValue() , title.getText() ,MainPage.getActiveUser().getAuthToken());
 
             }
         }
@@ -129,12 +127,17 @@ public class PopupWindow {
     @javafx.fxml.FXML
     public void setIncomeCategories(ActionEvent actionEvent) {
         categoryInput.getItems().setAll("Transaction" ,"Salary" ,"Other");
-        repeatableCheckBox.setVisible(false);
-        repeatableCheckBox.setManaged(false);
-        hideDatePickers();
+        hideRepeatableDependencies();
     }
 
-    public void hideDatePickers(){
+
+    public void hideRepeatableDependencies(){
+        repeatableCheckBox.setVisible(false);
+        repeatableCheckBox.setManaged(false);
+        metricInput.setVisible(false);
+        metricInput.setManaged(false);
+        title.setVisible(false);
+        title.setManaged(false);
         datePickerContainer.setVisible(false);
         datePickerContainer.setManaged(false);
     }
@@ -221,6 +224,8 @@ public class PopupWindow {
     public void showDatePickerContainer(ActionEvent actionEvent) {
         metricInput.setVisible(true);
         metricInput.setManaged(true);
+        title.setVisible(true);
+        title.setManaged(true);
         metricInput.getItems().setAll("Day", "Week","Month","Year");
         showDatePickers();
     }

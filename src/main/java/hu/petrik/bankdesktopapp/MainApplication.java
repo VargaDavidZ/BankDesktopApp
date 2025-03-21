@@ -16,7 +16,7 @@ create the jar file for the package --> https://www.youtube.com/watch?v=F8ahBtXk
 jpackage --input target/ \
         --name BankApp \
         --main-jar BankDesktopApp.jar \
-        --main-class hu.petrik.bankdesktopapp.MainApplication \
+        --main-class hu.petrik.bankdesktopapp.Main_1 \
         --type dmg \
         --java-options '--enable-preview'
 

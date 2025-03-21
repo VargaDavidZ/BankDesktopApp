@@ -42,6 +42,58 @@
       <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/keytool" />
       <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/rmiregistry" />
       <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/serialver" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/classlist" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/ct.sym" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/fontconfig.bfc" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/fontconfig.properties.src" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/jrt-fs.jar" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/jspawnhelper" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/jvm.cfg" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libattach.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libawt_lwawt.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libawt.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libdt_socket.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libextnet.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libfontmanager.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libfreetype.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libinstrument.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libj2gss.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libj2pcsc.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libj2pkcs11.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libjaas.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libjava.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libjavajpeg.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libjawt.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libjdwp.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libjimage.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libjli.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libjsig.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libjsound.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/liblcms.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libmanagement_agent.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libmanagement_ext.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libmanagement.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libmlib_image.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libnet.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libnio.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libosx.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libosxapp.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libosxkrb5.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libosxsecurity.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libosxui.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libprefs.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/librmi.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libsaproc.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libsplashscreen.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libsyslookup.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libverify.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/libzip.dylib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/modules" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/psfont.properties.ja" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/psfontj2d.properties" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/shaders.metallib" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/src.zip" />
+      <element id="file-copy" path="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/lib/tzdb.dat" />
     </root>
   </artifact>
 </component>

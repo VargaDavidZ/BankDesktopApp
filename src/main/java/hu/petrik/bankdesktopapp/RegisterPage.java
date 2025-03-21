@@ -65,7 +65,7 @@ public class RegisterPage {
             }
 
 
-        }
+        }//strong password kezelés
         catch(Exception e){
             //System.out.println("Foglalt email");
             errorText.setText("Foglalt email");

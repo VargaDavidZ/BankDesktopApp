@@ -170,7 +170,7 @@ public class MainPage {
 
 
 
-        System.out.println(activeBankAccount.toString());
+      //  System.out.println(activeBankAccount.toString());
         System.out.println("Active acc id " +activeBankAccount.getId());
         System.out.println(activeUser.getAuthToken());
         //display USD-HUF exchange rate and change %
@@ -576,6 +576,7 @@ public class MainPage {
 
         int days = daysToShow;
         Float f = 100.5F;
+
 
 
         for (int i = 0; i <= daysToShow-1; i++) {

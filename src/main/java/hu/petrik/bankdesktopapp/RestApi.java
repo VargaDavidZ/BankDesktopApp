@@ -83,14 +83,14 @@ public class RestApi {
                 .build();
 
         HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.body());
+        //System.out.println(response.body());
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         //mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
 
         try{
-            System.out.println(Arrays.toString(mapper.readValue(response.body().toString(), Expense[].class)));
+           // System.out.println(Arrays.toString(mapper.readValue(response.body().toString(), Expense[].class)));
             return mapper.readValue(response.body().toString(),Expense[].class);
         }
         catch(Exception e){
@@ -345,17 +345,17 @@ public class RestApi {
     }
 
 
-    public void createRepeatableTransaction(float total, String category, String description, String userId, String bankAccountId, int repeatAmount, String repeatMetric, LocalDate repeatStart, LocalDate repeatEnd ,String authToken) throws IOException, InterruptedException {
+    public void createRepeatableTransaction(float total, String category, String description, String userId, String bankAccountId, int repeatAmount, String repeatMetric, LocalDate repeatStart, LocalDate repeatEnd, String title ,String authToken) throws IOException, InterruptedException {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("http://localhost:3000/repeatabletransaction"))
                     .header("Content-Type", "application/json")
                     .header("authorization", "Bearer "+ authToken)
-                    .method("POST", HttpRequest.BodyPublishers.ofString(String.format("{\"total\": \"%f\",\"category\": \"%s\",\"description\":\"%s\",\"userId\": \"%s\",\"accountId\": \"%s\",\"repeatAmount\": \"%d\",\"repeatMetric\": \"%s\",\"repeatStart\": \"%s\",\"repeatEnd\": \"%s\" }",total,category,description,userId,bankAccountId,repeatAmount,repeatMetric,repeatStart,repeatEnd)))
+                    .method("POST", HttpRequest.BodyPublishers.ofString(String.format("{\"total\": \"%f\",\"category\": \"%s\",\"description\":\"%s\",\"userId\": \"%s\",\"accountId\": \"%s\",\"repeatAmount\": \"%d\",\"repeatMetric\": \"%s\",\"repeatStart\": \"%s\",\"repeatEnd\": \"%s\", \"name\": \"%s\" }",total,category,description,userId,bankAccountId,repeatAmount,repeatMetric,repeatStart,repeatEnd,title)))
                     .build();
 
         HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
 
-        System.out.printf(response.body());
+        //System.out.printf(response.body());
     }
 
     public void updateRepeatableTransaction(String accountId,String userId, String authToken) throws IOException, InterruptedException { //have to call an endpoint that check the status of the transaction

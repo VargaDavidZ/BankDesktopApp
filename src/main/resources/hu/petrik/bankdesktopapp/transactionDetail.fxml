@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox fx:id="mainPage" maxHeight="350.0" maxWidth="400.0" minHeight="350.0" minWidth="400.0" prefHeight="350.0" prefWidth="800.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.TransactionDetail">
+    <HBox alignment="CENTER_RIGHT" maxHeight="400.0" maxWidth="400.0" minHeight="350.0" minWidth="400.0" prefHeight="600.0" prefWidth="800.0">
+        <BorderPane maxHeight="350.0" minHeight="350.0" minWidth="400.0" prefHeight="600.0" prefWidth="400.0" styleClass="mainPageBorderPane" HBox.hgrow="NEVER">
+            <center>
+                <HBox fx:id="myhbox" alignment="CENTER" maxHeight="300.0" maxWidth="400.0" minHeight="300.0" minWidth="400.0" prefHeight="300.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+                    <HBox alignment="CENTER" maxWidth="300.0" minHeight="250.0" minWidth="350.0" prefHeight="200.0" prefWidth="300.0" styleClass="leftSide">
+                        <children>
+                            <VBox maxWidth="350.0" minWidth="350.0" prefHeight="100.0" prefWidth="350.0">
+                                <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                </padding>
+                                <children>
+                                    <Text fx:id="total" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Összeg: ">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                              <VBox.margin>
+                                 <Insets top="10.0" />
+                              </VBox.margin>
+                                    </Text>
+                                    <Text fx:id="category" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Kategoria: ">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                              <VBox.margin>
+                                 <Insets top="10.0" />
+                              </VBox.margin>
+                                    </Text>
+                                    <Text fx:id="desc" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Leírás:">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                              <VBox.margin>
+                                 <Insets top="10.0" />
+                              </VBox.margin>
+                                    </Text>
+                                    <Text fx:id="user" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Felhasználó">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                              <VBox.margin>
+                                 <Insets top="10.0" />
+                              </VBox.margin>
+                                    </Text>
+                                    <Text fx:id="createdAt" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Létrehozva:">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                              <VBox.margin>
+                                 <Insets top="10.0" />
+                              </VBox.margin>
+                                    </Text>
+                                    <Text fx:id="startDate" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Kezdet: ">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                              <VBox.margin>
+                                 <Insets top="10.0" />
+                              </VBox.margin>
+                                    </Text>
+                                    <Text fx:id="endDate" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Vége:">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                              <VBox.margin>
+                                 <Insets top="10.0" />
+                              </VBox.margin>
+                                    </Text>
+                                    <Text fx:id="interval" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Gyakoriság:---">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                              <VBox.margin>
+                                 <Insets top="10.0" />
+                              </VBox.margin>
+                                    </Text>
+                           <HBox alignment="CENTER" prefHeight="20.0" prefWidth="200.0">
+                              <children>
+                                 <Button fx:id="deleteTransactionBtn" alignment="CENTER" mnemonicParsing="false" onAction="#deleteTransaction" text="Tranzakció Törlése" />
+                              </children>
+                              <VBox.margin>
+                                 <Insets top="20.0" />
+                              </VBox.margin>
+                           </HBox>
+                                </children>
+                            </VBox>
+                        </children>
+                        <HBox.margin>
+                            <Insets />
+                        </HBox.margin>
+                    </HBox>
+                </HBox>
+            </center>
+        </BorderPane>
+    </HBox>
+</VBox>

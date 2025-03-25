@@ -39,7 +39,6 @@ public class CardDetail {
 
         ListUsers();
 
-
     }
 
     public void ListUsers() throws IOException, InterruptedException {

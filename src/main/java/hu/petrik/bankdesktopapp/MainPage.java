@@ -132,6 +132,8 @@ public class MainPage {
     @FXML
     private AreaChart EthChart;
 
+    private static Transaction focusedTransaction;
+
     XYChart.Series<Number, Number> btcSeries = new XYChart.Series<Number, Number>();
     XYChart.Series<Number, Number> ethSeries = new XYChart.Series<Number, Number>();
     //duplicate card at user
@@ -614,6 +616,7 @@ public class MainPage {
                 line.setStyle("-fx-stroke:#ff0000 ");
             }
 
+
             if(eurSeries.getData().get(0).getYValue().intValue() > eurSeries.getData().get(eurSeries.getData().size()-1).getYValue().intValue())
             {
                 Node fill = eurSeries.getNode().lookup(".chart-series-area-fill"); // only for AreaChart
@@ -656,7 +659,7 @@ public class MainPage {
 
         UsdChart.getXAxis().setAutoRanging(false);
         ((NumberAxis)UsdChart.getXAxis()).setUpperBound(14.22);
-        ((NumberAxis)UsdChart.getXAxis()).setLowerBound(0);
+        ((NumberAxis)UsdChart.getXAxis()).setLowerBound(-0.2);
 
         EurChart.getYAxis().setAutoRanging(true);
         ((NumberAxis)EurChart.getYAxis()).setForceZeroInRange(false);
@@ -667,7 +670,7 @@ public class MainPage {
          */
         EurChart.getXAxis().setAutoRanging(false);
         ((NumberAxis)EurChart.getXAxis()).setUpperBound(14.22);
-        ((NumberAxis)EurChart.getXAxis()).setLowerBound(0);
+        ((NumberAxis)EurChart.getXAxis()).setLowerBound(-0.2);
 
         UsdChart.getData().add(usdSeries);
         EurChart.getData().add(eurSeries);
@@ -886,9 +889,44 @@ public class MainPage {
 
     }
 
+    public static Transaction getFocusedTransaction() {
+        return focusedTransaction;
+    }
+
+    public static void setFocusedTransaction(Transaction focusedTransaction) {
+        MainPage.focusedTransaction = focusedTransaction;
+    }
+
+    public ListView getExpenseList() {
+        return expenseList;
+    }
+
+    public void setExpenseList(ListView expenseList) {
+        this.expenseList = expenseList;
+    }
+
     @FXML
-    public void showTransactionDetail(Event event) {
+    public void showTransactionDetail(Event event) throws IOException {
+        focusedTransaction = transactionArray.get(transactionArray.size() -  expenseList.getFocusModel().getFocusedIndex()-1);
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        Parent root = FXMLLoader.load(getClass().getResource("transactionDetail.fxml"));
+        Scene popupScene = new Scene(root);
+        popupStage.setScene(popupScene);
+        popupStage.resizableProperty().setValue(Boolean.FALSE);
+        popupStage.show();
+
+        popupStage.setOnHidden(windowEvent->{
+            try {
+                refreshTransactions();
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         System.out.println(transactionArray.get(transactionArray.size() -  expenseList.getFocusModel().getFocusedIndex()-1));
+
+        System.out.println("asdddd");
     }
 
     @FXML

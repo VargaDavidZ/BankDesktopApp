@@ -9,8 +9,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Date;
+import java.util.Objects;
 
 
 public class RestApi {
@@ -39,10 +38,12 @@ public class RestApi {
 
     }
 
-    public User getOneUser(String userId) throws IOException, InterruptedException {
+    public User getOneUser(String userId, String authToken) throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/user/" + userId))
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Bearer " + authToken)
                 .build();
 
         HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -343,6 +344,62 @@ public class RestApi {
 
 
     }
+
+
+    public RepeatableExpense getRepeatableTransactions(String accId,String authToken) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:3000/repeatabletransaction/" + accId))
+                .header("Content-Type", "application/json")
+                .header("authorization", "Bearer "+ authToken)
+                .build();
+
+        ObjectMapper mapper = new ObjectMapper();
+        HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
+        return mapper.readValue(response.body(),RepeatableExpense.class);
+    }
+
+    public void deleteRepeatableTransactions(String repId,String authToken) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:3000/repeatabletransaction/" + repId))
+                .header("Content-Type", "application/json")
+                .header("authorization", "Bearer "+ authToken)
+                .method("DELETE", HttpRequest.BodyPublishers.ofString(""))
+                .build();
+
+        ObjectMapper mapper = new ObjectMapper();
+        HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
+
+    }
+
+    public void deleteTransaction(String transactionId, String inpType  ,String authToken) throws IOException, InterruptedException {
+        HttpRequest request;
+        //System.out.printf("%s\n", Expense.class.getSimpleName() + " asdadasdad");
+        if(Objects.equals(inpType, Expense.class.getSimpleName()))
+        {
+            request = HttpRequest.newBuilder()
+                    .uri(URI.create("http://localhost:3000/Expense/" + transactionId))
+                    .header("Content-Type", "application/json")
+                    .header("authorization", "Bearer "+ authToken)
+                    .method("DELETE", HttpRequest.BodyPublishers.ofString(""))
+                    .build();
+
+        }
+        else {
+            request = HttpRequest.newBuilder()
+                    .uri(URI.create("http://localhost:3000/Income/" + transactionId))
+                    .header("Content-Type", "application/json")
+                    .header("authorization", "Bearer "+ authToken)
+                    .method("DELETE", HttpRequest.BodyPublishers.ofString(""))
+                    .build();
+        }
+
+
+        ObjectMapper mapper = new ObjectMapper();
+        HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
+        System.out.println(response.body());
+
+    }
+
 
 
     public void createRepeatableTransaction(float total, String category, String description, String userId, String bankAccountId, int repeatAmount, String repeatMetric, LocalDate repeatStart, LocalDate repeatEnd, String title ,String authToken) throws IOException, InterruptedException {

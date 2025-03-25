@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="mainPage" maxHeight="400.0" maxWidth="800.0" minHeight="400.0" minWidth="400.0" prefHeight="400.0" prefWidth="800.0" stylesheets="@mainPage.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.CardDetail">
+<VBox fx:id="mainPage" maxHeight="400.0" maxWidth="800.0" minHeight="400.0" minWidth="400.0" prefHeight="400.0" prefWidth="800.0" stylesheets="@mainPage.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="hu.petrik.bankdesktopapp.CardDetail">
         <HBox alignment="CENTER_RIGHT" maxHeight="400.0" maxWidth="800.0" minHeight="400.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0">
             <BorderPane maxHeight="400.0" minHeight="400.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" styleClass="mainPageBorderPane" HBox.hgrow="NEVER">
                 <center>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="mainPage" maxHeight="350.0" maxWidth="400.0" minHeight="350.0" minWidth="400.0" prefHeight="350.0" prefWidth="800.0" stylesheets="@mainPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.RepeatableListController">
+    <HBox alignment="CENTER_RIGHT" maxHeight="400.0" maxWidth="400.0" minHeight="350.0" minWidth="400.0" prefHeight="600.0" prefWidth="800.0">
+      <children>
+         <ListView fx:id="repeatableListView" prefHeight="600.0" prefWidth="800.0" />
+      </children>
+    </HBox>
+</VBox>

@@ -44,7 +44,7 @@ public class TransactionDetail {
 
                     RepeatableExpense rep;
                     try {
-                        rep = restApi.getRepeatableTransactions(((Expense) MainPage.getFocusedTransaction()).getRepeatableTransactionId(), MainPage.getActiveUser().getAuthToken());
+                        rep = restApi.getRepeatableTransactionById(((Expense) MainPage.getFocusedTransaction()).getRepeatableTransactionId(), MainPage.getActiveUser().getAuthToken());
                     } catch (IOException | InterruptedException e) {
                         throw new RuntimeException(e);
                     }

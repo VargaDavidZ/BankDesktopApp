@@ -9,6 +9,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -275,7 +277,7 @@ public class RestApi {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.printf(response.body());
+
 
     }
 
@@ -292,7 +294,6 @@ public class RestApi {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.printf(response.body());
     }
 
     public void deleteCardFromUser(String accId, String authToken) throws IOException, InterruptedException {
@@ -308,7 +309,6 @@ public class RestApi {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.printf(response.body());
     }
 
     public void transfer(String userId, String senderId, String receiverId, int amount, String authToken) throws IOException, InterruptedException {
@@ -321,9 +321,6 @@ public class RestApi {
 
         HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
 
-
-        System.out.printf(response.body());
-
     }
 
     public User[] getAllUsers(String accId, String authToken) throws IOException, InterruptedException {
@@ -334,19 +331,14 @@ public class RestApi {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.printf("%s\n", response.body());
-
         ObjectMapper mapper = new ObjectMapper();
-
-        System.out.println("---------------------");
-        System.out.println(response.body());
         return mapper.readValue(response.body().toString(),User[].class);
 
 
     }
 
 
-    public RepeatableExpense getRepeatableTransactions(String accId,String authToken) throws IOException, InterruptedException {
+    public RepeatableExpense getRepeatableTransactionById(String accId, String authToken) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:3000/repeatabletransaction/" + accId))
                 .header("Content-Type", "application/json")
@@ -356,6 +348,19 @@ public class RestApi {
         ObjectMapper mapper = new ObjectMapper();
         HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
         return mapper.readValue(response.body(),RepeatableExpense.class);
+    }
+
+    public void stopRepeatableTransaction(String repId, String authToken) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:3000/repeatabletransaction/stop/" + repId))
+                .header("Content-Type", "application/json")
+                .header("authorization", "Bearer "+ authToken)
+                .method("DELETE", HttpRequest.BodyPublishers.ofString(""))
+                .build();
+
+        ObjectMapper mapper = new ObjectMapper();
+        HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
+
     }
 
     public void deleteRepeatableTransactions(String repId,String authToken) throws IOException, InterruptedException {
@@ -368,6 +373,22 @@ public class RestApi {
 
         ObjectMapper mapper = new ObjectMapper();
         HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
+
+    }
+
+
+
+
+    public Collection<? extends RepeatableTransaction> getAllRepeatableByAccId(String accId, String authToken) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:3000/accounts/allrepeat/" + accId))
+                .header("Content-Type", "application/json")
+                .header("authorization", "Bearer "+ authToken)
+                .build();
+
+        ObjectMapper mapper = new ObjectMapper();
+        HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
+        return List.of(mapper.readValue(response.body(), RepeatableTransaction[].class));
 
     }
 
@@ -396,7 +417,7 @@ public class RestApi {
 
         ObjectMapper mapper = new ObjectMapper();
         HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.body());
+
 
     }
 

@@ -13,16 +13,21 @@ public class RepeatableTransaction {
     private User User;
     private String userId;
     private Date createdAt;
-    private Date updatedAt;
+    private Date lastChange;
     private BankAccount bankAccount;
     private String accountId;
     private int repeatAmount;
     private String repeatMetric;
     private Date repeatStart;
     private Date repeatEnd;
+    private String name;
 
+    public RepeatableTransaction() {
 
-    public RepeatableTransaction(Float total, String category, String vendor, String description, hu.petrik.bankdesktopapp.User user, String userId, Date createdAt, Date updatedAt, BankAccount bankAccount, String accountId, int repeatAmount, String repeatMetric, Date repeatStart, Date repeatEnd) {
+    }
+
+    public RepeatableTransaction(String id , Float total, String category, String vendor, String description, hu.petrik.bankdesktopapp.User user, String userId, Date createdAt, Date lastChange, BankAccount bankAccount, String accountId, int repeatAmount, String repeatMetric, Date repeatStart, Date repeatEnd, String name) {
+        this.id = id;
         this.total = total;
         this.category = category;
         this.vendor = vendor;
@@ -30,13 +35,14 @@ public class RepeatableTransaction {
         User = user;
         this.userId = userId;
         this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.lastChange = lastChange;
         this.bankAccount = bankAccount;
         this.accountId = accountId;
         this.repeatAmount = repeatAmount;
         this.repeatMetric = repeatMetric;
         this.repeatStart = repeatStart;
         this.repeatEnd = repeatEnd;
+        this.name = name;
     }
 
 
@@ -45,6 +51,7 @@ public class RepeatableTransaction {
     }
 
 
+    @JsonSetter("id")
     public void setId(String id) {
         this.id = id;
     }
@@ -81,6 +88,11 @@ public class RepeatableTransaction {
         return description;
     }
 
+    @JsonSetter("name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @JsonSetter("description")
     public void setDescription(String description) {
         this.description = description;
@@ -110,12 +122,12 @@ public class RepeatableTransaction {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public Date getLastChange() {
+        return lastChange;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setLastChange(Date lastChange) {
+        this.lastChange = lastChange;
     }
 
     public BankAccount getBankAccount() {
@@ -164,5 +176,9 @@ public class RepeatableTransaction {
 
     public void setRepeatEnd(Date repeatEnd) {
         this.repeatEnd = repeatEnd;
+    }
+
+    public String getName() {
+        return name;
     }
 }

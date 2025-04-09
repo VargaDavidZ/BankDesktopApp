@@ -2,6 +2,7 @@
     -fx-border-width: 1px;
    // -fx-border-color: transparent transparent #ff8e47 transparent;
     -fx-background-color: #1c1d30;
+    -fx-background-radius: 12px 12px 0 0;
 
 }
 
@@ -23,10 +24,12 @@
     -fx-background-color: #25273E;
     -fx-border-color: white white transparent white;
     -fx-border-radius: 10px 10px 0 0;
+    -fx-background-radius: 12px 13px 0 0;
 }
 
 
 .innerBox{
     -fx-border-color: transparent white white white;
+    -fx-background-radius: 10px;
 }
 

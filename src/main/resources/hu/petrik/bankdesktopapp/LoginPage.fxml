@@ -10,7 +10,7 @@
 
 <!--Külső BorderPane-re kellett rakni egy VGROW="ALWAYS"-t hogy növekedjen minden irányba  -->
 
-<VBox fx:id="mainLoginBox" alignment="CENTER" maxHeight="400.0" maxWidth="300.0" minHeight="400.0" minWidth="300.0" prefWidth="300.0" spacing="20.0"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.MainController">
+<VBox fx:id="mainLoginBox" alignment="CENTER" maxHeight="400.0" maxWidth="300.0" minHeight="400.0" minWidth="300.0" prefWidth="300.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="hu.petrik.bankdesktopapp.MainController">
     <BorderPane maxHeight="Infinity" stylesheets="@loginDesign.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/">
         <center>
             <BorderPane styleClass="right-form">
@@ -18,7 +18,7 @@
                     <VBox alignment="CENTER" fillWidth="true" maxHeight="Infinity" prefWidth="400.0" spacing="20">
                         <TextField fx:id="emailInput" maxWidth="200.0" promptText="Email" styleClass="text-field" />
                         <PasswordField fx:id="passwordInput" maxWidth="Infinity" promptText="Password" styleClass="text-field" />
-                        <Button fx:id="loginBtn" maxWidth="Infinity" onAction="#loadSecondFxml" styleClass="login-button" text="Login" />
+                        <Button fx:id="loginBtn" maxWidth="Infinity" onAction="#loadSecondFxml" styleClass="login-button" text="Bejelentkezés" />
                   <Text fx:id="registerText" fill="#0082ff" onMouseClicked="#registerPage" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="registerText" text="Nincs profilod? Regisztrálj!" />
                   <Text fx:id="loginErrorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Helytelen Email vagy Jelszó!" visible="false">
                      <VBox.margin>

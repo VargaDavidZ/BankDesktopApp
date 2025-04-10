@@ -13,6 +13,12 @@ public class Eth {
 
     }
 
+    /**
+     * Constructs an instance of the Eth class with the specified date and Ethereum-related data.
+     *
+     * @param date the date corresponding to the Ethereum data
+     * @param eth a map containing Ethereum-related information, where the keys represent specific data attributes and the values are their associated float values
+     */
     public Eth(Date date, Map<String, Float> eth) {
         this.date = date;
         this.eth = eth;

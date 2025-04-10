@@ -23,7 +23,22 @@ public class Expense extends Transaction {
 
     }
 
-
+    /**
+     * Constructs an Expense object with the specified parameters.
+     *
+     * @param id the unique identifier of the expense
+     * @param total the total amount of the expense
+     * @param category the category of the expense
+     * @param vendor the vendor or location where the expense occurred
+     * @param description a description or note about the expense
+     * @param user the user associated with the expense
+     * @param userId the unique identifier of the user
+     * @param createdAt the date when the expense was created
+     * @param updatedAt the date when the expense was last updated
+     * @param bankAccount the bank account associated with the expense
+     * @param accountId the unique identifier of the bank account
+     * @param repeatableTransactionId the unique identifier for a repeatable transaction, if applicable
+     */
     public Expense(String id, Float total, String category, String vendor, String description, hu.petrik.bankdesktopapp.User user, String userId, Date createdAt, Date updatedAt, BankAccount bankAccount, String accountId, String repeatableTransactionId) {
         this.id = id;
         this.total = total;

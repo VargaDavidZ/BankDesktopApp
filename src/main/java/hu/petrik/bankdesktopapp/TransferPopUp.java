@@ -28,6 +28,11 @@ public class TransferPopUp {
     private static String accNum;
     private static String amount;
 
+    /**
+     * Closes the current window associated with the Cancel action.
+     *
+     * @param actionEvent the event triggered by the user action, typically associated with the cancel button click
+     */
     @javafx.fxml.FXML
     public void CancelUserAdd(ActionEvent actionEvent) {
         Stage stage = (Stage)closeWindowBtn.getScene().getWindow();
@@ -35,7 +40,14 @@ public class TransferPopUp {
 
     }
 
-
+    /**
+     * Handles the transfer amount button click event. This method retrieves input values for the account number
+     * and transfer amount, navigates to a new scene for transfer confirmation, and configures the window settings.
+     *
+     * @param actionEvent the event triggered by the user's action, typically associated with the transfer button click
+     * @throws IOException if an input or output exception occurs during the FXMLLoader operation
+     * @throws InterruptedException if the thread is interrupted during execution
+     */
     @javafx.fxml.FXML
     public void transferAmountBtn(ActionEvent actionEvent) throws IOException, InterruptedException {
 

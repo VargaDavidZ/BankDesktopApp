@@ -46,6 +46,11 @@ public class PopupWindow {
     @javafx.fxml.FXML
     private TextField title;
 
+    /**
+     * Initializes the necessary components for the popup window.
+     * - Populates the category selection input with predefined types (e.g., Shopping, Rent, Transport, etc.).
+     * - Calls the method to hide UI elements related to repeatable dependencies.
+     */
     //only show the correct category types for income/expense
     public void initialize() {
         categoryInput.getItems().setAll("Shopping", "Rent","Transport","Transaction" ,"Salary" ,"Other");
@@ -54,6 +59,11 @@ public class PopupWindow {
 
     }
 
+    /**
+     * Closes the popup window associated with the ongoing transaction cancellation.
+     *
+     * @param actionEvent the event object associated with the action of canceling the transaction
+     */
     @javafx.fxml.FXML
     public void CancelTransaction(ActionEvent actionEvent) {
         Stage stage = (Stage)closeBtn.getScene().getWindow();
@@ -61,8 +71,14 @@ public class PopupWindow {
     }
 
 
-
-
+    /**
+     * Adds a transaction (income or expense) based on user input and closes the popup window.
+     * Handles validation for missing or invalid inputs and delegates transaction creation to the API.
+     *
+     * @param actionEvent the event object associated with triggering the action
+     * @throws IOException if an input or output error occurs during the API call
+     * @throws InterruptedException if the thread executing the API request is interrupted
+     */
     @javafx.fxml.FXML
     public void AddTransaction(ActionEvent actionEvent) throws IOException, InterruptedException {
 
@@ -116,6 +132,11 @@ public class PopupWindow {
 
     }
 
+    /**
+     * Sets predefined expense categories to the category input field and makes the repeatable checkbox visible and managed.
+     *
+     * @param actionEvent the event object associated with the action triggering this method
+     */
     @javafx.fxml.FXML
     public void setExpenseCategories(ActionEvent actionEvent) {
         categoryInput.getItems().setAll("Shopping", "Rent","Transport","Transaction" ,"Other");
@@ -124,13 +145,23 @@ public class PopupWindow {
 
     }
 
+    /**
+     * Sets predefined income categories to the category input field and hides UI elements
+     * associated with repeatable dependencies.
+     *
+     * @param actionEvent the event object associated with triggering this method
+     */
     @javafx.fxml.FXML
     public void setIncomeCategories(ActionEvent actionEvent) {
         categoryInput.getItems().setAll("Transaction" ,"Salary" ,"Other");
         hideRepeatableDependencies();
     }
 
-
+    /**
+     * Hides UI components related to repeatable dependencies in the popup window.
+     * Sets these components to be invisible and unmanaged, ensuring that they do not occupy space in the layout.
+     * The affected components include the repeatable checkbox, metric input, title label, and date picker container.
+     */
     public void hideRepeatableDependencies(){
         repeatableCheckBox.setVisible(false);
         repeatableCheckBox.setManaged(false);
@@ -142,6 +173,10 @@ public class PopupWindow {
         datePickerContainer.setManaged(false);
     }
 
+    /**
+     * Displays the date picker container by making it visible and manageable in the user interface.
+     * This method ensures that the date pickers are part of the UI layout and can be interacted with by the user.
+     */
     public void showDatePickers(){
         datePickerContainer.setVisible(true);
         datePickerContainer.setManaged(true);

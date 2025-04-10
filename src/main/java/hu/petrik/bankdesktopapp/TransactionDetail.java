@@ -36,7 +36,19 @@ public class TransactionDetail {
     @javafx.fxml.FXML
     private Button deleteTransactionBtn;
 
-
+    /**
+     * Initializes the TransactionDetail UI with data about a focused transaction.
+     * Depending on whether the transaction is an Expense and is repeatable, it dynamically populates
+     * the UI fields such as total, creation date, category, description, user, and periodic details.
+     *
+     * If the transaction is a repeatable expense, it fetches and displays additional details
+     * including start date, end date, and repeat interval. For other transactions, only the basic
+     * details are displayed, and certain fields are hidden and unmanaged in the UI.
+     *
+     * This method executes its operations on the JavaFX application thread using `Platform.runLater`.
+     * It makes REST API calls to retrieve user and repeatable transaction details. In case of failure
+     * during these calls, the method throws a runtime exception.
+     */
     public void initialize(){
 
         Platform.runLater(()->{
@@ -178,6 +190,15 @@ public class TransactionDetail {
         this.desc = desc;
     }
 
+    /**
+     * Deletes the currently focused transaction by making an API call to the REST service.
+     *
+     * This method retrieves the ID and type of the focused transaction from the main page,
+     * and sends a request to delete it using the current user's authentication token.
+     * After the transaction is deleted or if an exception occurs, the UI window is closed.
+     *
+     * @param actionEvent The event triggered by the delete transaction button action.
+     */
     @javafx.fxml.FXML
     public void deleteTransaction(ActionEvent actionEvent) {
 

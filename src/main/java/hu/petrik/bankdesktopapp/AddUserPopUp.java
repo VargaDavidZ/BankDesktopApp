@@ -19,7 +19,15 @@ public class AddUserPopUp {
 
     RestApi restApi = new RestApi();
 
-
+    /**
+     * Adds a user to the currently active bank account by sending the user's email
+     * to the back-end service through the RestApi. Closes the popup window after the
+     * operation completes.
+     *
+     * @param actionEvent the ActionEvent triggered when the user clicks the associated button
+     * @throws IOException if an I/O error occurs during the HTTP request
+     * @throws InterruptedException if the HTTP request is interrupted
+     */
     @javafx.fxml.FXML
     public void AddUserToCard(ActionEvent actionEvent) throws IOException, InterruptedException {
         Stage stage = (Stage)closeWindowBtn.getScene().getWindow();
@@ -30,6 +38,11 @@ public class AddUserPopUp {
 
     }
 
+    /**
+     * Cancels the add user operation and closes the popup window.
+     *
+     * @param actionEvent the ActionEvent triggered when the user clicks the associated button
+     */
     @javafx.fxml.FXML
     public void CancelUserAdd(ActionEvent actionEvent) {
         Stage stage = (Stage)closeWindowBtn.getScene().getWindow();

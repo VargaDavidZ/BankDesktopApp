@@ -26,6 +26,26 @@ public class RepeatableTransaction {
 
     }
 
+    /**
+     * Constructs a new instance of the RepeatableTransaction class with the specified parameters.
+     *
+     * @param id the unique identifier of the transaction
+     * @param total the total amount of the transaction
+     * @param category the category assigned to the transaction
+     * @param vendor the vendor associated with the transaction
+     * @param description a description of the transaction
+     * @param user the user associated with the transaction
+     * @param userId the unique identifier of the user related to the transaction
+     * @param createdAt the creation date of the transaction
+     * @param lastChange the last modification date of the transaction
+     * @param bankAccount the bank account related to the transaction
+     * @param accountId the unique identifier of the related bank account
+     * @param repeatAmount the number of times the transaction should repeat
+     * @param repeatMetric the time metric for the repetition (e.g., days, weeks, months)
+     * @param repeatStart the starting date for the repetition
+     * @param repeatEnd the ending date for the repetition
+     * @param name the name of the transaction
+     */
     public RepeatableTransaction(String id , Float total, String category, String vendor, String description, hu.petrik.bankdesktopapp.User user, String userId, Date createdAt, Date lastChange, BankAccount bankAccount, String accountId, int repeatAmount, String repeatMetric, Date repeatStart, Date repeatEnd, String name) {
         this.id = id;
         this.total = total;

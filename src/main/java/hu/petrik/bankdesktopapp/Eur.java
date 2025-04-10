@@ -13,7 +13,12 @@ public class Eur {
 
     }
 
-
+    /**
+     * Constructs an instance of the Eur class with the specified date and Euro-related data.
+     *
+     * @param date the date corresponding to the Euro data
+     * @param eur a map containing Euro-related information, where the keys represent specific data attributes and the values are their associated float values
+     */
     public Eur(Date date, Map<String, Float> eur) {
         this.date = date;
         this.eur = eur;

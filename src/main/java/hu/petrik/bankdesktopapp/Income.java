@@ -24,6 +24,25 @@ public class Income extends Transaction {
 
     }
 
+    /**
+     * Constructs an instance of the Income class with specified parameters.
+     *
+     * @param id Unique identifier for the income.
+     * @param total Total amount of the income.
+     * @param category Category of the income.
+     * @param vendor Vendor associated with the income.
+     * @param description Description or notes about the income.
+     * @param user User associated with this income.
+     * @param userId Unique identifier of the user linked to this income.
+     * @param createdAt Date when the income entry was created.
+     * @param updatedAt Date when the income entry was last updated.
+     * @param bankAccount Bank account associated with this income.
+     * @param accountId Unique identifier for the linked bank account.
+     * @param repeatAmount Number of times the income is repeated.
+     * @param repeatMetric Time unit for repeating the income (e.g., daily, monthly).
+     * @param repeatStart Start date for repeating the income.
+     * @param repeatEnd End date for repeating the income.
+     */
     public Income(String id, Float total, String category, String vendor, String description, hu.petrik.bankdesktopapp.User user, String userId, Date createdAt, Date updatedAt, BankAccount bankAccount, String accountId, int repeatAmount, String repeatMetric, Date repeatStart, Date repeatEnd) {
         this.id = id;
         this.total = total;

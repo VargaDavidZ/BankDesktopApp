@@ -11,14 +11,24 @@ import java.util.Arrays;
 // ctrl+ctrl -> mvn javafx:jlink , mvn package - snapshot.jar
 /*
 
-create the jar file for the package --> https://www.youtube.com/watch?v=F8ahBtXkQzU
+
 
 jpackage --input target/ \
-        --name BankApp \
-        --main-jar BankDesktopApp.jar \
+        --name BankApp06 \
+        --main-jar Project.jar \
         --main-class hu.petrik.bankdesktopapp.Main_1 \
-        --type dmg \
-        --java-options '--enable-preview'
+        --type exe \
+        --module-path "C:\Program Files\Java\jdk-17\jmods"\
+        --add-modules javafx.controls,javafx.fxml \
+        --win-shortcut
+
+        jpackage --input target/ \
+        --name BankApp06 \
+        --main-jar Project.jar \
+        --main-class hu.petrik.bankdesktopapp.Main_1 \
+        --type exe \
+        --win-shortcut
+
 
 
 

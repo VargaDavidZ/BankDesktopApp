@@ -20,7 +20,15 @@ public class Confirmation {
         this.confirm = confirm;
     }
 
-
+    /**
+     * Handles the action of confirming a user request, such as removing or deleting a card
+     * associated with the user's active bank account. This method performs validation to
+     * check ownership of the bank account and communicates with a REST API to perform
+     * the corresponding operation. It also handles closing the current stage after confirmation
+     * or on encountering an exception.
+     *
+     * @param actionEvent the ActionEvent triggered when the confirmation button is clicked
+     */
     @javafx.fxml.FXML
     public void confirmAction(ActionEvent actionEvent) {
         Stage stage = (Stage)confirm.getScene().getWindow();

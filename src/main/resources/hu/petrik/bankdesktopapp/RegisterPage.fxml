@@ -6,10 +6,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="mainLoginBox" alignment="CENTER" maxHeight="400.0" maxWidth="300.0" minHeight="400.0" minWidth="300.0" prefWidth="300.0" spacing="20.0"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.bankdesktopapp.RegisterPage">
+<VBox fx:id="mainLoginBox" alignment="CENTER" maxHeight="400.0" maxWidth="300.0" minHeight="400.0" minWidth="300.0" prefWidth="300.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="hu.petrik.bankdesktopapp.RegisterPage">
     <BorderPane maxHeight="Infinity" stylesheets="@registerPage.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/">
         <center>
             <BorderPane styleClass="right-form">
@@ -21,10 +20,7 @@
                         <PasswordField fx:id="passwordInput" maxWidth="Infinity" promptText="Password" styleClass="text-field" />
                         <Button fx:id="registerBtn" maxWidth="Infinity" onAction="#registerAccount" styleClass="register-button" text="Register" />
                   <Button fx:id="backBtn" maxWidth="Infinity" onAction="#backToLogin" styleClass="register-button" text="Vissza" />
-                  <Text fx:id="errorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
+                  <Text fx:id="errorText" disable="true" fill="RED" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="245.4609375" VBox.vgrow="NEVER">
                      <VBox.margin>
                         <Insets top="-10.0" />
                      </VBox.margin>

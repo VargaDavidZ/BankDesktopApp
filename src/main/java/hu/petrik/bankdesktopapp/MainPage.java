@@ -363,7 +363,6 @@ public class MainPage {
      * @param event The logout action event.
      * @throws IOException If the login screen cannot be loaded.
      */
-
     @FXML
     public void logOut(ActionEvent event) throws IOException {
         activeUser = null;
@@ -383,7 +382,6 @@ public class MainPage {
      * @param actionEvent The action event triggering the pop-up.
      * @throws IOException If the pop-up cannot be opened.
      */
-
     @FXML
     public void popUpWindow(ActionEvent actionEvent) throws IOException {
 

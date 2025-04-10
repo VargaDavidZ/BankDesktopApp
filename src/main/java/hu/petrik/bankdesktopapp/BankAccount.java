@@ -27,7 +27,21 @@ public class BankAccount {
 
     }
 
-
+    /**
+     * Constructor for the BankAccount class.
+     * Initializes a new instance of a bank account with the specified details.
+     *
+     * @param id The unique identifier of the bank account.
+     * @param users An array of User objects associated with the bank account.
+     * @param userId An array of user IDs linked to the bank account.
+     * @param expenses An array of Expense objects associated with the bank account.
+     * @param income An array of Income objects associated with the bank account.
+     * @param total The total balance in the bank account.
+     * @param createdAt The date when the bank account was created.
+     * @param updatedAt The date when the bank account was last updated.
+     * @param currency The currency used in the bank account.
+     * @param ownerName The name of the owner of the bank account.
+     */
     public BankAccount(String id, User[] users, String[] userId, Expense[] expenses, hu.petrik.bankdesktopapp.Income[] income, float total, Date createdAt, Date updatedAt, String currency, String ownerName) {
         this.id = id;
         Users = users;

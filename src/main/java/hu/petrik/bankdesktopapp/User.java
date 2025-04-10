@@ -30,6 +30,24 @@ public class User {
 
     }
 
+    /**
+     * Constructs a User object with the specified attributes.
+     *
+     * @param id The unique identifier of the user.
+     * @param firstname The first name of the user.
+     * @param lastname The last name of the user.
+     * @param role The role assigned to the user.
+     * @param email The email address of the user.
+     * @param expense An array of expense details associated with the user.
+     * @param expenseId An array of expense IDs associated with the user.
+     * @param income An array of income details associated with the user.
+     * @param incomeId An array of income IDs associated with the user.
+     * @param createdAt The date and time when the user was created.
+     * @param updatedAt The date and time when the user's details were last updated.
+     * @param accounts An array of BankAccount objects associated with the user.
+     * @param bankaccountsId An array of bank account IDs linked to the user.
+     * @param authToken The authentication token for the user.
+     */
     public User(String id, String firstname, String lastname, String role, String email, String[] expense, String[] expenseId, String[] income, String[] incomeId, Date createdAt, Date updatedAt, BankAccount[] accounts, String[] bankaccountsId, String authToken) {
         this.id = id;
         Firstname = firstname;
@@ -98,17 +116,12 @@ public class User {
         return password;
     }
 
-
-
     @JsonSetter("password")
     public void setPassword(String password) {
         this.password = password;
     }
 
      */
-
-
-
 
 
     public String[] getExpense() {

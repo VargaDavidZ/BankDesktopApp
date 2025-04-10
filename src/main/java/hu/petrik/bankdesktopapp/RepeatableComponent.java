@@ -28,7 +28,13 @@ public class RepeatableComponent extends AnchorPane {
     private String repeatableId;
 
 
-
+    /**
+     * Initializes an instance of the RepeatableComponent class, setting up the UI and populating initial data
+     * based on the provided {@link RepeatableTransaction} object.
+     *
+     * @param repeatable the RepeatableTransaction object containing transaction details such as start date, end date,
+     *                   total amount, name, and ID, which are used to populate the component's UI elements.
+     */
     public RepeatableComponent(RepeatableTransaction repeatable) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("repeatableTransaction.fxml"));
         fxmlLoader.setRoot(this);

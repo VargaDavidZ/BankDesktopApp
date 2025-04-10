@@ -42,6 +42,14 @@ public class MainController {
     private Text loginErrorText;
 
 
+    /**
+     * Handles the login process and loads the MainPage.fxml if the login is successful.
+     * If the login fails, it displays the login error message.
+     *
+     * @param event the ActionEvent triggered by a button press or other user interaction
+     * @throws IOException if an input or output exception occurs during the loading of FXML
+     * @throws InterruptedException if the thread is interrupted during the process
+     */
     @FXML
     public void loadSecondFxml(ActionEvent event) throws IOException, InterruptedException {
 
@@ -60,7 +68,7 @@ public class MainController {
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.getScene().setRoot(root);
             stage.setHeight(625);
-            stage.setWidth(1000);
+            stage.setWidth(1015);
             stage.resizableProperty().setValue(Boolean.FALSE);
             stage.centerOnScreen();
             stage.show();
@@ -70,6 +78,13 @@ public class MainController {
 
     }
 
+    /**
+     * Handles the action of navigating to the registration page by loading the RegisterPage.fxml layout.
+     * Sets the current stage's scene root to the registration page and adjusts window properties.
+     *
+     * @param event the Event triggered by user interaction, such as a button press
+     * @throws IOException if an error occurs during the loading of the FXML file
+     */
     @FXML
     public void registerPage(Event event) throws IOException {
 

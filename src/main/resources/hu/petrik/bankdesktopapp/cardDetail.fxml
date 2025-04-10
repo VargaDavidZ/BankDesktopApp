@@ -61,7 +61,7 @@
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Felhasználók">
+                  <Text fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-underline: true;" text="Felhasználók">
                      <font>
                         <Font size="15.0" />
                      </font></Text>

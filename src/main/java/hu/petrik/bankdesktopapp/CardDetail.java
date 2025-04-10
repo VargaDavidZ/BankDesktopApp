@@ -31,6 +31,19 @@ public class CardDetail {
     @javafx.fxml.FXML
     private Text clipboardNotif;
 
+    /**
+     * Initializes the elements of the CardDetail view.
+     * <ul>
+     *  - Sets the total amount text by retrieving the value from the currently active bank account.
+     *  - Updates the account number display using the active bank account's ID.
+     *  - Displays the owner's name associated with the active bank account.
+     *  - Hides the clipboard notification text by default.
+     *  - Invokes the ListUsers method to populate the user list.
+     * </ul>
+     *
+     * @throws IOException if an I/O error occurs during the execution of ListUsers.
+     * @throws InterruptedException if the thread executing the ListUsers method is interrupted.
+     */
     public void initialize() throws IOException, InterruptedException {
         total.setText("Számla összeg: " + MainPage.getActiveBankAccount().getTotal());
         accNum.setText("Számlaszám: " + MainPage.getActiveBankAccount().getId());
@@ -41,6 +54,20 @@ public class CardDetail {
 
     }
 
+    /**
+     * Retrieves and displays the list of users associated with the active bank account.
+     *
+     * This method interacts with a REST API to fetch users linked to the currently active
+     * bank account by utilizing the bank account ID and the authentication token of the
+     * active user. After retrieving the user data, it populates the `userList` with the
+     * full names of the users (first name and last name).
+     *
+     * Clearing the existing items in the `userList` ensures that the list only contains
+     * the latest fetched data.
+     *
+     * @throws IOException if an I/O error occurs during the API request.
+     * @throws InterruptedException if the thread executing the API request is interrupted.
+     */
     public void ListUsers() throws IOException, InterruptedException {
         RestApi api = new RestApi();
         User[] users = api.getAllUsers(MainPage.getActiveBankAccount().getId(), MainPage.getActiveUser().getAuthToken());
@@ -52,7 +79,14 @@ public class CardDetail {
 
     }
 
-
+    /**
+     * Copies the ID of the currently active bank account to the system clipboard.
+     *
+     * The method retrieves the ID of the active bank account, places it in the clipboard,
+     * and makes the clipboard notification visible to indicate the completion of the action.
+     *
+     * @param event the event that triggered the invocation of this method
+     */
     @javafx.fxml.FXML
     public void copyAccId(Event event) {
         content.putString(MainPage.getActiveBankAccount().getId());

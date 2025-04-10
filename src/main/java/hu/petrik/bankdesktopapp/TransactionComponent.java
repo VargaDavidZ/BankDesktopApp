@@ -30,7 +30,15 @@ public class TransactionComponent extends AnchorPane {
 
     TranslateTransition translation;
 
-
+    /**
+     * Creates an instance of the TransactionComponent, initializing its display
+     * based on the provided Transaction details such as date, amount, and category.
+     * The component's UI is loaded from the FXML file and visually reflects
+     * whether the transaction is an income or an expense.
+     *
+     * @param inputTransaction The transaction object containing details such as
+     *                         creation date, total amount, category, and type.
+     */
     public TransactionComponent(Transaction inputTransaction) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("transactions.fxml"));
         fxmlLoader.setRoot(this);
@@ -63,6 +71,13 @@ public class TransactionComponent extends AnchorPane {
 
     }
 
+    /**
+     * Constructs an instance of the TransactionComponent using the provided Expense object.
+     * The UI of the component is loaded from the "transactions.fxml" file.
+     *
+     * @param inputExpense The Expense object containing details such as total amount, category,
+     *                     vendor, and date, which will be used to populate the transaction display.
+     */
     public TransactionComponent(Expense inputExpense) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("transactions.fxml"));
         fxmlLoader.setRoot(this);

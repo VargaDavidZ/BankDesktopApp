@@ -27,6 +27,23 @@ public class RepeatableExpense {
 
     }
 
+    /**
+     * Constructs an instance of the RepeatableExpense class with specified details for a repeatable expense entry.
+     *
+     * @param id the unique identifier for the expense
+     * @param total the total amount of the expense
+     * @param category the category to which the expense belongs
+     * @param description a textual description of the expense
+     * @param userId the identifier of the user associated with the expense
+     * @param accountId the identifier of the account associated with the expense
+     * @param repeatAmount the amount indicating the repeat interval of the expense
+     * @param repeatMetric the metric of the repeat interval (e.g., days, weeks, months)
+     * @param repeatStart the start date for the repeatable expense
+     * @param repeatEnd the end date for the repeatable expense
+     * @param name the name or title of the expense
+     * @param lastChange the date of the last modification to the expense
+     * @param createdAt the date the expense was created
+     */
     public RepeatableExpense(String id, String total, String category, String description, String userId, String accountId, String repeatAmount, String repeatMetric, Date repeatStart, Date repeatEnd, String name, Date lastChange, Date createdAt) {
         this.id = id;
         this.total = total;

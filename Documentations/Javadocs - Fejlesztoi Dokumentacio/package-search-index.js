@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"hu.petrik.bankdesktopapp","l":"hu.petrik.bankdesktopapp"}];updateSearchResults();

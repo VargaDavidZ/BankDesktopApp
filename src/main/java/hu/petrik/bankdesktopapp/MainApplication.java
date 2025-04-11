@@ -23,7 +23,7 @@ jpackage --input target/ \
         --win-shortcut
 
         jpackage --input target/ \
-        --name BankApp06 \
+        --name BankApp \
         --main-jar Project.jar \
         --main-class hu.petrik.bankdesktopapp.Main_1 \
         --type exe \

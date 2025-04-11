@@ -323,10 +323,18 @@ public class RestApi {
      * @throws InterruptedException if the thread executing the request is interrupted
      */
     public Eur getEur(int daysBack) throws IOException, InterruptedException {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(String.format("https://%s.currency-api.pages.dev/v1/currencies/eur.json",LocalDate.now().minusDays(daysBack)) ))
-                .build();
+        HttpRequest request;
+        if(daysBack == 0){
+            request = HttpRequest.newBuilder()
+                    .uri(URI.create(String.format("https://%s.currency-api.pages.dev/v1/currencies/eur.json",LocalDate.now().minusDays(daysBack)) ))
+                    .build();
 
+        }
+        else{
+            request = HttpRequest.newBuilder()
+                    .uri(URI.create(String.format("https://%s.currency-api.pages.dev/v1/currencies/eur.json",LocalDate.now().minusDays(daysBack)) ))
+                    .build();
+        }
         HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         ObjectMapper mapper = new ObjectMapper();
@@ -354,12 +362,20 @@ public class RestApi {
      * @throws InterruptedException if the operation is interrupted while waiting for the response
      */
     public Usd getUsd(int daysBack) throws IOException, InterruptedException {
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(String.format("https://%s.currency-api.pages.dev/v1/currencies/usd.json",LocalDate.now().minusDays(daysBack)) ))
-                .build();
+        HttpRequest request;
+       if(daysBack == 0){
+            request = HttpRequest.newBuilder()
+                   .uri(URI.create(String.format("https://currency-api.pages.dev/v1/currencies/usd.json") ))
+                   .build();
+       }
+       else{
+            request = HttpRequest.newBuilder()
+                   .uri(URI.create(String.format("https://%s.currency-api.pages.dev/v1/currencies/usd.json",LocalDate.now().minusDays(daysBack)) ))
+                   .build();
+       }
 
         HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -681,10 +697,19 @@ public class RestApi {
      * @throws InterruptedException if the operation is interrupted
      */
     public Btc getBtc(int daysBack) throws IOException, InterruptedException {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(String.format("https://%s.currency-api.pages.dev/v1/currencies/btc.json",LocalDate.now().minusDays(daysBack)) ))
-                .build();
-
+        HttpRequest request;
+        if (daysBack == 0)
+        {
+             request = HttpRequest.newBuilder()
+                    .uri(URI.create(String.format("https://currency-api.pages.dev/v1/currencies/btc.json") ))
+                    .build();
+        }
+        else{
+             request = HttpRequest.newBuilder()
+                    .uri(URI.create(String.format("https://%s.currency-api.pages.dev/v1/currencies/btc.json",LocalDate.now().minusDays(daysBack)) ))
+                    .build();
+        }
+        System.out.println(String.format("https://%s.currency-api.pages.dev/v1/currencies/btc.json",LocalDate.now().minusDays(daysBack)));
         HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         ObjectMapper mapper = new ObjectMapper();
@@ -708,9 +733,19 @@ public class RestApi {
      * @throws InterruptedException if the HTTP request operation is interrupted.
      */
     public Eth getEth(int daysBack) throws IOException, InterruptedException {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(String.format("https://%s.currency-api.pages.dev/v1/currencies/eth.json",LocalDate.now().minusDays(daysBack)) ))
-                .build();
+        HttpRequest request;
+        if(daysBack == 0)
+        {
+             request = HttpRequest.newBuilder()
+                    .uri(URI.create(String.format("https://currency-api.pages.dev/v1/currencies/eth.json") ))
+                    .build();
+        }
+        else{
+             request = HttpRequest.newBuilder()
+                    .uri(URI.create(String.format("https://%s.currency-api.pages.dev/v1/currencies/eth.json",LocalDate.now().minusDays(daysBack)) ))
+                    .build();
+        }
+
 
         HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
 

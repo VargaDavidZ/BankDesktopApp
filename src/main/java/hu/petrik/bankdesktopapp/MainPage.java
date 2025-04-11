@@ -141,6 +141,8 @@ public class MainPage {
 
     XYChart.Series<Number, Number> btcSeries = new XYChart.Series<Number, Number>();
     XYChart.Series<Number, Number> ethSeries = new XYChart.Series<Number, Number>();
+
+    private  ArrayList<Transaction> transactions = new ArrayList<>();
     //duplicate card at user
     //confirmation on delete and transfer
 
@@ -233,7 +235,6 @@ public class MainPage {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         //mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-        
         activeUser = mapper.readValue(activeUserInput,User.class);
 
     }
@@ -310,6 +311,7 @@ public class MainPage {
      */
 
     public void listTransactions() {
+        /*
         if(incomeFilter)
         {
             for (int i = 0; i < incomeList.size(); i++) {
@@ -328,6 +330,12 @@ public class MainPage {
 
                 transactionListView.getItems().add(0,new TransactionComponent(transactionArray.get(i)));
             }
+        }
+
+         */
+        for (int i = 0; i < transactionArray.size(); i++) {
+
+            transactionListView.getItems().add(0,new TransactionComponent(transactionArray.get(i)));
         }
 
 
@@ -491,6 +499,8 @@ public class MainPage {
         try
         {
             SetActiveAccount(bankAccounts[cardList.getFocusModel().getFocusedIndex()]);
+            transactionListView.getItems().clear();
+            listTransactions();
             focusedItem = cardList.getFocusModel().getFocusedIndex();
 
         }
@@ -1283,6 +1293,8 @@ public class MainPage {
         expenseFilter = true;
         incomeFilter = false;
 
+        transactions.clear();
+        transactionListView.getItems().clear();
         expenseList.sort(new Comparator<Transaction>() {
 
             @Override
@@ -1291,10 +1303,13 @@ public class MainPage {
             }
         });
 
-        transactionListView.getItems().clear();
+
+
+        transactions.addAll(transactionArray.stream().filter(transaction -> transaction.getClass().toString().contains("Expense")).toList());
         for (int i = 0; i < expenseList.size(); i++) {
+            System.out.println(expenseList.get(i));
             //System.out.println(transactionArray.get(i).getTotal());
-            transactionListView.getItems().add(0,new TransactionComponent(expenseList.get(i)));
+            transactionListView.getItems().add(0,new TransactionComponent(transactions.get(i)));
         }
 
         transactionListView.scrollTo(0);
@@ -1315,6 +1330,9 @@ public class MainPage {
         expenseFilter = false;
         incomeFilter = true;
 
+      transactions.clear();
+        System.out.println(  transactionArray.get(0).getClass().toString());
+        transactions.addAll(transactionArray.stream().filter(transaction -> transaction.getClass().toString().contains("Income")).toList());
         incomeList.sort(new Comparator<Transaction>() {
 
             @Override
@@ -1327,7 +1345,7 @@ public class MainPage {
 
         for (int i = 0; i < incomeList.size(); i++) {
             //System.out.println(transactionArray.get(i).getTotal());
-            transactionListView.getItems().add(0,new TransactionComponent(incomeList.get(i)));
+            transactionListView.getItems().add(0,new TransactionComponent(transactions.get(i)));
         }
 
         transactionListView.scrollTo(0);

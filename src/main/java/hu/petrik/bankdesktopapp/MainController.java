@@ -63,6 +63,7 @@ public class MainController {
         }
         else
         {
+
             setActiveUser(response);
             Parent root = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();

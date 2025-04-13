@@ -1295,15 +1295,6 @@ public class MainPage {
 
         transactions.clear();
         transactionListView.getItems().clear();
-        expenseList.sort(new Comparator<Transaction>() {
-
-            @Override
-            public int compare(Transaction o1, Transaction o2) {
-                return o1.getCreatedAt().compareTo(o2.getCreatedAt());
-            }
-        });
-
-
 
         transactions.addAll(transactionArray.stream().filter(transaction -> transaction.getClass().toString().contains("Expense")).toList());
         for (int i = 0; i < expenseList.size(); i++) {
@@ -1333,13 +1324,6 @@ public class MainPage {
       transactions.clear();
         System.out.println(  transactionArray.get(0).getClass().toString());
         transactions.addAll(transactionArray.stream().filter(transaction -> transaction.getClass().toString().contains("Income")).toList());
-        incomeList.sort(new Comparator<Transaction>() {
-
-            @Override
-            public int compare(Transaction o1, Transaction o2) {
-                return o1.getCreatedAt().compareTo(o2.getCreatedAt());
-            }
-        });
 
        transactionListView.getItems().clear();
 

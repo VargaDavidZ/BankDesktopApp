@@ -1298,7 +1298,7 @@ public class MainPage {
 
         transactions.addAll(transactionArray.stream().filter(transaction -> transaction.getClass().toString().contains("Expense")).toList());
         for (int i = 0; i < expenseList.size(); i++) {
-            System.out.println(expenseList.get(i));
+
             //System.out.println(transactionArray.get(i).getTotal());
             transactionListView.getItems().add(0,new TransactionComponent(transactions.get(i)));
         }
@@ -1322,7 +1322,7 @@ public class MainPage {
         incomeFilter = true;
 
       transactions.clear();
-        System.out.println(  transactionArray.get(0).getClass().toString());
+
         transactions.addAll(transactionArray.stream().filter(transaction -> transaction.getClass().toString().contains("Income")).toList());
 
        transactionListView.getItems().clear();
